@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -103,54 +104,36 @@ export default function Hero() {
         position: 'relative', overflow: 'hidden',
         background: '#000',
       }}>
-        <img
+        <Image
           src="/fotos/portada.png"
           alt="MAMOTIS"
+          fill
           style={{
-            width: '100%',
-            height: '100%',
             objectFit: 'cover',
             objectPosition: 'center center',
             mixBlendMode: 'multiply',
             filter: 'contrast(1.15) brightness(1.05) saturate(0.8)',
-            display: 'block',
           }}
         />
-
-        {/* Foco de luz dramático desde arriba — efecto vitrina */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: `
-            radial-gradient(ellipse 60% 50% at 50% 20%,
-              rgba(201,168,76,0.08) 0%,
-              transparent 70%)
-          `,
-          pointerEvents: 'none',
+          background: `radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,168,76,0.08) 0%, transparent 70%)`,
+          pointerEvents: 'none', zIndex: 2,
         }} />
-
-        {/* Vignette — oscurece los bordes */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: `
-            radial-gradient(ellipse 80% 80% at 50% 50%,
-              transparent 40%,
-              rgba(0,0,0,0.6) 100%)
-          `,
-          pointerEvents: 'none',
+          background: `radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%)`,
+          pointerEvents: 'none', zIndex: 2,
         }} />
-
-        {/* Degradado izquierda — fusión con el texto */}
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, var(--negro) 0%, transparent 35%)',
-          pointerEvents: 'none',
+          pointerEvents: 'none', zIndex: 2,
         }} />
-
-        {/* Degradado abajo */}
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, var(--negro) 0%, transparent 30%)',
-          pointerEvents: 'none',
+          pointerEvents: 'none', zIndex: 2,
         }} />
       </div>
 
