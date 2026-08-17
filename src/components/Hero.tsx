@@ -35,69 +35,127 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero-section" style={{
+    <section style={{
       position: 'relative', height: '100vh',
-      display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden',
+      display: 'grid', gridTemplateColumns: '1fr 1fr',
+      overflow: 'hidden',
     }}>
       <canvas ref={canvasRef} style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity: .5,
+        position: 'absolute', inset: 0,
+        pointerEvents: 'none', zIndex: 1, opacity: .5,
       }} />
+
       <div style={{
         position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: `linear-gradient(45deg,rgba(201,168,76,.018) 1px,transparent 1px),linear-gradient(-45deg,rgba(201,168,76,.012) 1px,transparent 1px)`,
+        backgroundImage: `
+          linear-gradient(45deg, rgba(201,168,76,.018) 1px, transparent 1px),
+          linear-gradient(-45deg, rgba(201,168,76,.012) 1px, transparent 1px)`,
         backgroundSize: '55px 55px',
       }} />
 
-      <div className="hero-left" style={{
+      {/* IZQUIERDA — texto */}
+      <div style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
         padding: '10rem 4rem 7rem 5rem', position: 'relative', zIndex: 2,
         background: 'linear-gradient(to right, var(--negro) 70%, transparent)',
       }}>
-        <h1 className="hero-h1" style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(3rem, 6.5vw, 7rem)', lineHeight: 1.04,
-          color: 'var(--crema)', marginBottom: '2.5rem',
+        <h1 style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontWeight: 300, fontStyle: 'italic',
+          fontSize: 'clamp(3rem, 6.5vw, 7rem)',
+          lineHeight: 1.04, color: 'var(--crema)', marginBottom: '2.5rem',
         }}>
-          Cada piel tiene<br />una vida anterior.<br />
-          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>Nosotras</em><br />le damos otra.
+          Cada piel tiene<br />
+          una vida anterior.<br />
+          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>Nosotras</em><br />
+          le damos otra.
         </h1>
 
-        <p className="hero-p" style={{
-          fontSize: '1.05rem', lineHeight: 1.95, opacity: .5,
-          maxWidth: '380px', marginBottom: '3.5rem',
+        <p style={{
+          fontSize: '1.05rem', lineHeight: 1.95,
+          opacity: .5, maxWidth: '380px', marginBottom: '3.5rem',
         }}>
-          Abrigos que vivieron una vida entera.<br />Transformados en piezas que vivirán otra.
+          Abrigos que vivieron una vida entera.<br />
+          Transformados en piezas que vivirán otra.
         </p>
 
-        <div className="hero-ctas" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
           <Link href="/coleccion" style={{
             display: 'inline-block', padding: '1.1rem 3rem',
             background: 'var(--oro)', fontFamily: "'DM Mono', monospace",
             fontSize: '.56rem', letterSpacing: '.22em',
             color: 'var(--negro)', textTransform: 'uppercase', textDecoration: 'none',
-          }}>Descubrir la colección</Link>
+          }}>
+            Descubrir la colección
+          </Link>
           <Link href="/#historia" style={{
             fontFamily: "'DM Mono', monospace", fontSize: '.54rem',
             letterSpacing: '.2em', color: 'var(--crema)',
             textDecoration: 'none', textTransform: 'uppercase', opacity: .4,
-          }}>Nuestra historia →</Link>
+          }}>
+            Nuestra historia →
+          </Link>
         </div>
       </div>
 
-      <div className="hero-right" style={{
-        position: 'relative', overflow: 'hidden', background: '#0f0c08',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      {/* DERECHA — foto con efecto vitrina */}
+      <div style={{
+        position: 'relative', overflow: 'hidden',
+        background: '#000',
       }}>
-        <div style={{ textAlign: 'center', opacity: .06 }}>
-          <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '18rem', color: 'var(--oro)', lineHeight: 1 }}>M</div>
-        </div>
+        <img
+          src="/foto productos/Foto portada prueba.png"
+          alt="MAMOTIS"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            mixBlendMode: 'multiply',
+            filter: 'contrast(1.15) brightness(1.05) saturate(0.8)',
+            display: 'block',
+          }}
+        />
+
+        {/* Foco de luz dramático desde arriba — efecto vitrina */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to right, var(--negro) 0%, transparent 40%), linear-gradient(to top, var(--negro) 0%, transparent 30%)',
+          background: `
+            radial-gradient(ellipse 60% 50% at 50% 20%,
+              rgba(201,168,76,0.08) 0%,
+              transparent 70%)
+          `,
+          pointerEvents: 'none',
+        }} />
+
+        {/* Vignette — oscurece los bordes */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `
+            radial-gradient(ellipse 80% 80% at 50% 50%,
+              transparent 40%,
+              rgba(0,0,0,0.6) 100%)
+          `,
+          pointerEvents: 'none',
+        }} />
+
+        {/* Degradado izquierda — fusión con el texto */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to right, var(--negro) 0%, transparent 35%)',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Degradado abajo */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to top, var(--negro) 0%, transparent 30%)',
+          pointerEvents: 'none',
         }} />
       </div>
 
-      <div className="hero-scroll" style={{
+      {/* SCROLL */}
+      <div style={{
         position: 'absolute', bottom: '2.5rem', left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex', flexDirection: 'column',
@@ -107,7 +165,10 @@ export default function Hero() {
           fontFamily: "'DM Mono', monospace", fontSize: '.48rem',
           letterSpacing: '.4em', textTransform: 'uppercase', writingMode: 'vertical-rl',
         }}>Scroll</span>
-        <div style={{ width: '1px', height: '55px', background: 'linear-gradient(to bottom, var(--oro), transparent)' }} />
+        <div style={{
+          width: '1px', height: '55px',
+          background: 'linear-gradient(to bottom, var(--oro), transparent)',
+        }} />
       </div>
     </section>
   );
