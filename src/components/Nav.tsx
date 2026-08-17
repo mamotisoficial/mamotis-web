@@ -11,14 +11,6 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  const linkStyle = {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: '0.56rem', letterSpacing: '0.22em',
-    color: 'var(--crema)', textDecoration: 'none',
-    textTransform: 'uppercase' as const, opacity: 0.45,
-    transition: 'opacity 0.3s, color 0.3s',
-  };
-
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
@@ -40,10 +32,11 @@ export default function Nav() {
           { label: 'Colección', href: '/coleccion' },
         ].map(({ label, href }) => (
           <li key={label}>
-            <Link href={href} style={linkStyle}
-              onMouseEnter={e => { const t = e.target as HTMLElement; t.style.opacity='1'; t.style.color='var(--oro)'; }}
-              onMouseLeave={e => { const t = e.target as HTMLElement; t.style.opacity='0.45'; t.style.color='var(--crema)'; }}
-            >{label}</Link>
+            <Link href={href} style={{
+              fontFamily: "'DM Mono', monospace", fontSize: '0.56rem',
+              letterSpacing: '0.22em', color: 'var(--crema)', textDecoration: 'none',
+              textTransform: 'uppercase', opacity: 0.45,
+            }}>{label}</Link>
           </li>
         ))}
       </ul>
@@ -52,11 +45,8 @@ export default function Nav() {
         fontFamily: "'DM Mono', monospace", fontSize: '0.54rem',
         letterSpacing: '0.18em', color: 'var(--oro)', textDecoration: 'none',
         textTransform: 'uppercase', border: '1px solid rgba(201,168,76,0.35)',
-        padding: '0.65rem 1.6rem', transition: 'background 0.3s, color 0.3s',
-      }}
-        onMouseEnter={e => { const t = e.target as HTMLElement; t.style.background='var(--oro)'; t.style.color='var(--negro)'; }}
-        onMouseLeave={e => { const t = e.target as HTMLElement; t.style.background='transparent'; t.style.color='var(--oro)'; }}
-      >Ver colección →</Link>
+        padding: '0.65rem 1.6rem',
+      }}>Ver colección →</Link>
     </nav>
   );
 }
