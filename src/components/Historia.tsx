@@ -2,11 +2,11 @@
 
 export default function Historia() {
   return (
-    <section id="historia" style={{
+    <section className="historia-section" id="historia" style={{
       padding: '9rem 5rem', display: 'grid',
       gridTemplateColumns: '1fr 1.15fr', gap: '7rem', alignItems: 'center',
     }}>
-      <div style={{
+      <div className="historia-image" style={{
         position: 'relative', aspectRatio: '3/4',
         border: '1px solid var(--borde)', overflow: 'hidden',
         background: '#0c0a07', display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -24,9 +24,9 @@ export default function Historia() {
           <span key={pos} style={{
             position: 'absolute', width: '26px', height: '26px',
             borderColor: 'var(--oro)', borderStyle: 'solid', opacity: .28,
-            ...(pos==='tl' ? {top:'-1px',left:'-1px',borderWidth:'1px 0 0 1px'} :
-               pos==='tr' ? {top:'-1px',right:'-1px',borderWidth:'1px 1px 0 0'} :
-               pos==='bl' ? {bottom:'-1px',left:'-1px',borderWidth:'0 0 1px 1px'} :
+            ...(pos==='tl'?{top:'-1px',left:'-1px',borderWidth:'1px 0 0 1px'}:
+               pos==='tr'?{top:'-1px',right:'-1px',borderWidth:'1px 1px 0 0'}:
+               pos==='bl'?{bottom:'-1px',left:'-1px',borderWidth:'0 0 1px 1px'}:
                {bottom:'-1px',right:'-1px',borderWidth:'0 1px 1px 0'}),
           }}/>
         ))}

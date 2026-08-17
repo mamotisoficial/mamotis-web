@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{
+    <footer className="footer-inner" style={{
       padding: '3rem 5rem',
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       borderTop: '1px solid var(--borde)',
@@ -12,7 +12,7 @@ export default function Footer() {
         fontSize: '1.2rem', letterSpacing: '.55em', color: 'var(--oro)',
       }}>MAMOTIS</span>
 
-      <div style={{ display: 'flex', gap: '2.5rem' }}>
+      <div className="footer-links" style={{ display: 'flex', gap: '2.5rem' }}>
         {[
           { l: 'La Marca', h: '/' },
           { l: 'Colección', h: '/coleccion' },
@@ -23,7 +23,6 @@ export default function Footer() {
             fontFamily: "'DM Mono', monospace", fontSize: '.5rem',
             letterSpacing: '.2em', color: 'var(--crema)',
             opacity: .3, textDecoration: 'none', textTransform: 'uppercase',
-            transition: 'opacity .3s',
           }}>{l}</Link>
         ))}
       </div>

@@ -1,6 +1,8 @@
 export default function Cita() {
   return (
-    <section style={{ padding: '11rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+    <section className="cita-section" style={{
+      padding: '11rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden',
+    }}>
       {[500, 800, 1100].map((size, i) => (
         <div key={i} style={{
           position: 'absolute', borderRadius: '50%',
@@ -14,7 +16,7 @@ export default function Cita() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <p style={{
           fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(2rem, 4.5vw, 4rem)', lineHeight: 1.3,
+          fontSize: 'clamp(1.6rem, 4.5vw, 4rem)', lineHeight: 1.3,
           maxWidth: '780px', margin: '0 auto 1.5rem', color: 'var(--crema)',
         }}>
           "No estás comprando un bolso.<br />
