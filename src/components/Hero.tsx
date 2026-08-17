@@ -63,7 +63,7 @@ export default function Hero() {
       {/* IZQUIERDA */}
       <div style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-        padding: '0 4rem 7rem 5rem', position: 'relative', zIndex: 2,
+        padding: '10rem 4rem 7rem 5rem', position: 'relative', zIndex: 2,
         background: 'linear-gradient(to right, var(--negro) 70%, transparent)',
       }}>
         <h1 style={{
