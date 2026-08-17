@@ -7,28 +7,14 @@
   --crema: #F0E6C8;
   --gris: #0e0e0e;
   --borde: rgba(201, 168, 76, 0.1);
-  --font-cormorant: 'Cormorant Garamond', serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   background: var(--negro);
   color: var(--crema);
-  font-family: var(--font-cormorant);
+  font-family: 'Cormorant Garamond', serif;
   overflow-x: hidden;
 }
-
-::selection {
-  background: var(--oro);
-  color: var(--negro);
-}
+::selection { background: var(--oro); color: var(--negro); }

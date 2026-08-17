@@ -17,11 +17,7 @@ export const metadata: Metadata = {
   description: "Bolsos únicos creados a partir de pieles rescatadas. Madrid.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
       <body className={`${dmMono.variable} antialiased`}>
