@@ -104,7 +104,7 @@ export default function Hero() {
         background: '#000',
       }}>
         <img
-          src="/foto productos/Foto portada prueba.png"
+          src="/fotos/portada.png"
           alt="MAMOTIS"
           style={{
             width: '100%',
