@@ -13,8 +13,8 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MAMOTIS — Arqueología del Lujo",
-  description: "Bolsos únicos creados a partir de pieles rescatadas. Madrid.",
+  title: "MAMOTIS",
+  description: "Cada piel tiene una vida anterior. Nosotras le damos otra.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
