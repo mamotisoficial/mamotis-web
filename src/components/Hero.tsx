@@ -1,11 +1,13 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
+  // Partículas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -35,10 +37,38 @@ export default function Hero() {
     return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(id); };
   }, []);
 
+  // Parallax mouse
+  useEffect(() => {
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let animId: number;
+
+    const onMove = (e: MouseEvent) => {
+      targetX = (e.clientX / innerWidth - 0.5) * 20;
+      targetY = (e.clientY / innerHeight - 0.5) * 12;
+    };
+    window.addEventListener('mousemove', onMove);
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.04;
+      currentY += (targetY - currentY) * 0.04;
+      setOffset({ x: currentX, y: currentY });
+      animId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(animId);
+    };
+  }, []);
+
   return (
-    <section style={{
-      position: 'relative', height: '100vh',
-      display: 'grid', gridTemplateColumns: '1fr 1fr',
+    <section id="hero-grid" style={{
+      position: 'relative',
+      height: '100vh',
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
       overflow: 'hidden',
     }}>
       <canvas ref={canvasRef} style={{
@@ -54,17 +84,20 @@ export default function Hero() {
         backgroundSize: '55px 55px',
       }} />
 
-      {/* IZQUIERDA — texto */}
+      {/* IZQUIERDA — texto centrado verticalmente */}
       <div style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-        padding: '10rem 4rem 7rem 5rem', position: 'relative', zIndex: 2,
-        background: 'linear-gradient(to right, var(--negro) 70%, transparent)',
+        display: 'flex', flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '8rem 4rem 6rem 5rem',
+        position: 'relative', zIndex: 2,
+        background: 'linear-gradient(to right, var(--negro) 75%, transparent)',
       }}>
         <h1 style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(3rem, 6.5vw, 7rem)',
-          lineHeight: 1.04, color: 'var(--crema)', marginBottom: '2.5rem',
+          fontSize: 'clamp(2.8rem, 5.5vw, 6rem)',
+          lineHeight: 1.08, color: 'var(--crema)',
+          marginBottom: '2.5rem',
         }}>
           Cada piel tiene<br />
           una vida anterior.<br />
@@ -73,24 +106,24 @@ export default function Hero() {
         </h1>
 
         <p style={{
-          fontSize: '1.05rem', lineHeight: 1.95,
-          opacity: .5, maxWidth: '380px', marginBottom: '3.5rem',
+          fontSize: '1rem', lineHeight: 1.95,
+          opacity: .5, maxWidth: '360px', marginBottom: '3rem',
         }}>
           Abrigos que vivieron una vida entera.<br />
           Transformados en piezas que vivirán otra.
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <Link href="/coleccion" style={{
-            display: 'inline-block', padding: '1.1rem 3rem',
+            display: 'inline-block', padding: '1rem 2.5rem',
             background: 'var(--oro)', fontFamily: "'DM Mono', monospace",
-            fontSize: '.56rem', letterSpacing: '.22em',
+            fontSize: '.54rem', letterSpacing: '.22em',
             color: 'var(--negro)', textTransform: 'uppercase', textDecoration: 'none',
           }}>
             Descubrir la colección
           </Link>
           <Link href="/#historia" style={{
-            fontFamily: "'DM Mono', monospace", fontSize: '.54rem',
+            fontFamily: "'DM Mono', monospace", fontSize: '.52rem',
             letterSpacing: '.2em', color: 'var(--crema)',
             textDecoration: 'none', textTransform: 'uppercase', opacity: .4,
           }}>
@@ -99,41 +132,59 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* DERECHA — foto con efecto vitrina */}
+      {/* DERECHA — huevo logo flotante */}
       <div style={{
-        position: 'relative', overflow: 'hidden',
-        background: '#000',
+        position: 'relative', zIndex: 2,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <Image
-          src="/fotos/portada.png"
-          alt="MAMOTIS"
-          fill
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            mixBlendMode: 'multiply',
-            filter: 'contrast(1.15) brightness(1.05) saturate(0.8)',
-          }}
-        />
+        {/* Glow de fondo detrás del huevo */}
         <div style={{
-          position: 'absolute', inset: 0,
-          background: `radial-gradient(ellipse 60% 50% at 50% 20%, rgba(201,168,76,0.08) 0%, transparent 70%)`,
-          pointerEvents: 'none', zIndex: 2,
+          position: 'absolute',
+          width: '400px', height: '400px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
+          animation: 'glowPulse 3s ease-in-out infinite',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Huevo con parallax y flotación */}
+        <div style={{
+          transform: `translate(${offset.x}px, ${offset.y}px)`,
+          transition: 'transform 0.1s linear',
+          animation: 'floatEgg 4s ease-in-out infinite',
+          position: 'relative',
+        }}>
+          <Image
+            src="/marca/logo-huevo.png"
+            alt="MAMOTIS"
+            width={320}
+            height={380}
+            style={{
+              objectFit: 'contain',
+              mixBlendMode: 'screen',
+              filter: 'brightness(1.1) drop-shadow(0 0 40px rgba(201,168,76,0.3))',
+              userSelect: 'none',
+            }}
+            preload
+          />
+        </div>
+
+        {/* Anillos decorativos */}
+        <div style={{
+          position: 'absolute',
+          width: '340px', height: '340px',
+          borderRadius: '50%',
+          border: '1px solid rgba(201,168,76,0.06)',
+          animation: 'rotSlow 30s linear infinite',
+          pointerEvents: 'none',
         }} />
         <div style={{
-          position: 'absolute', inset: 0,
-          background: `radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%)`,
-          pointerEvents: 'none', zIndex: 2,
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to right, var(--negro) 0%, transparent 35%)',
-          pointerEvents: 'none', zIndex: 2,
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, var(--negro) 0%, transparent 30%)',
-          pointerEvents: 'none', zIndex: 2,
+          position: 'absolute',
+          width: '460px', height: '460px',
+          borderRadius: '50%',
+          border: '1px solid rgba(201,168,76,0.04)',
+          animation: 'rotSlow 45s linear infinite reverse',
+          pointerEvents: 'none',
         }} />
       </div>
 
@@ -148,11 +199,26 @@ export default function Hero() {
           fontFamily: "'DM Mono', monospace", fontSize: '.48rem',
           letterSpacing: '.4em', textTransform: 'uppercase', writingMode: 'vertical-rl',
         }}>Scroll</span>
-        <div style={{
-          width: '1px', height: '55px',
-          background: 'linear-gradient(to bottom, var(--oro), transparent)',
-        }} />
+        <div style={{ width: '1px', height: '55px', background: 'linear-gradient(to bottom, var(--oro), transparent)' }} />
       </div>
+
+      <style>{`
+        @keyframes floatEgg {
+          0%, 100% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-18px) rotate(1deg); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.1); }
+        }
+        @keyframes rotSlow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+          #hero-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
