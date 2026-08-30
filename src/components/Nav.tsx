@@ -32,7 +32,7 @@ export default function Nav() {
           display: 'flex', alignItems: 'center', textDecoration: 'none',
         }}>
           <Image
-            src="/marca/logo-texto.png"
+            src="/marca/logo-texto-t.png"
             alt="Mamotis"
             width={140}
             height={48}
@@ -41,8 +41,6 @@ export default function Nav() {
               height: scrolled ? '32px' : '40px',
               width: 'auto',
               transition: 'height 0.4s ease',
-              mixBlendMode: 'screen',
-              filter: 'brightness(1.2)',
             }}
             preload
           />

@@ -155,14 +155,13 @@ export default function Hero() {
           position: 'relative',
         }}>
           <Image
-            src="/marca/logo-huevo.png"
+            src="/marca/logo-huevo-t.png"
             alt="MAMOTIS"
             width={320}
             height={380}
             style={{
               objectFit: 'contain',
-              mixBlendMode: 'screen',
-              filter: 'brightness(1.1) drop-shadow(0 0 40px rgba(201,168,76,0.3))',
+              filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.3))',
               userSelect: 'none',
             }}
             preload

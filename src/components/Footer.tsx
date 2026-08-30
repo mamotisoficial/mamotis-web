@@ -10,18 +10,18 @@ export default function Footer() {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
         <Image
-          src="/marca/logo-huevo.png"
+          src="/marca/logo-huevo-t.png"
           alt="Mamotis"
           width={44}
           height={44}
-          style={{ objectFit: 'contain', height: '40px', width: 'auto', opacity: 0.9, mixBlendMode: 'screen' }}
+          style={{ objectFit: 'contain', height: '40px', width: 'auto', opacity: 0.9 }}
         />
         <Image
-          src="/marca/logo-texto.png"
+          src="/marca/logo-texto-t.png"
           alt="Mamotis"
           width={110}
           height={38}
-          style={{ objectFit: 'contain', height: '26px', width: 'auto', opacity: 0.8, mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
+          style={{ objectFit: 'contain', height: '26px', width: 'auto', opacity: 0.8 }}
         />
       </div>
 
