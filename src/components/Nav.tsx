@@ -1,72 +1,17 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Nav() {
-  const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
-    let lastY = 0;
-
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 80);
-
-      // Mostrar nav si scrolleas hacia arriba o estás arriba del todo
-      if (y < 80 || y < lastY) {
-        setVisible(true);
-        clearTimeout(timeoutRef.current);
-        // Ocultar después de 3s de inactividad si estás scrolleado
-        if (y > 80) {
-          timeoutRef.current = setTimeout(() => setVisible(false), 3000);
-        }
-      }
-      lastY = y;
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      // Mostrar si el cursor está en el tercio superior
-      if (e.clientY < window.innerHeight * 0.15) {
-        setVisible(true);
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-          if (window.scrollY > 80) setVisible(false);
-        }, 3000);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 80);
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timeoutRef.current);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Animar la línea dorada cuando aparece
-  useEffect(() => {
-    const el = lineRef.current;
-    if (!el) return;
-
-    if (visible && scrolled) {
-      let raf = 0;
-      const start = performance.now();
-      const animate = (now: number) => {
-        const p = Math.min((now - start) / 600, 1);
-        el.style.transform = `scaleX(${p})`;
-        if (p < 1) raf = requestAnimationFrame(animate);
-      };
-      raf = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(raf);
-    }
-
-    el.style.transform = 'scaleX(0)';
-  }, [visible, scrolled]);
 
   return (
     <>
@@ -78,13 +23,8 @@ export default function Nav() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        background: scrolled
-          ? 'rgba(5,5,5,0.0)'
-          : 'linear-gradient(to bottom, rgba(5,5,5,0.95) 60%, transparent)',
-        backdropFilter: scrolled ? 'none' : 'none',
-        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.6s cubic-bezier(.76,0,.24,1), padding 0.4s ease, opacity 0.4s ease',
-        opacity: visible ? 1 : 0,
+        background: 'linear-gradient(to bottom, rgba(5,5,5,0.95) 60%, transparent)',
+        transition: 'padding 0.4s ease',
       }}>
 
         {/* LOGO */}
@@ -92,11 +32,11 @@ export default function Nav() {
           <Image
             src="/marca/logo-texto-t.png"
             alt="Mamotis"
-            width={160}
-            height={60}
+            width={190}
+            height={70}
             style={{
               objectFit: 'contain',
-              height: scrolled ? '42px' : '55px',
+              height: scrolled ? '50px' : '65px',
               width: 'auto',
               transition: 'height 0.4s ease, opacity 0.4s ease',
               opacity: scrolled ? 0.75 : 1,
@@ -166,28 +106,6 @@ export default function Nav() {
           }}
         >Ver colección →</Link>
       </nav>
-
-      {/* LÍNEA DE LUZ DORADA — aparece al scrollear */}
-      {scrolled && (
-        <div style={{
-          position: 'fixed',
-          top: visible ? '72px' : '-2px',
-          left: 0, right: 0,
-          height: '1px',
-          zIndex: 499,
-          overflow: 'hidden',
-          transition: 'top 0.6s cubic-bezier(.76,0,.24,1)',
-          pointerEvents: 'none',
-        }}>
-          <div ref={lineRef} style={{
-            height: '1px',
-            background: 'linear-gradient(to right, transparent 0%, rgba(201,168,76,0.6) 20%, rgba(232,201,106,0.8) 50%, rgba(201,168,76,0.6) 80%, transparent 100%)',
-            transform: 'scaleX(0)',
-            transformOrigin: 'left',
-            transition: 'none',
-          }} />
-        </div>
-      )}
 
       <style>{`
         li:hover .nav-underline {
