@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const links = [
   { label: 'La Marca', href: '/' },
@@ -28,10 +29,22 @@ export default function Nav() {
         transition: 'padding 0.4s ease',
       }}>
         <Link href="/" onClick={() => setMenuOpen(false)} style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: '1.35rem', letterSpacing: '0.55em',
-          color: 'var(--oro)', textDecoration: 'none', textTransform: 'uppercase',
-        }}>MAMOTIS</Link>
+          display: 'flex', alignItems: 'center', textDecoration: 'none',
+        }}>
+          <Image
+            src="/marca/logo-texto.png"
+            alt="Mamotis"
+            width={140}
+            height={48}
+            style={{
+              objectFit: 'contain',
+              height: scrolled ? '32px' : '40px',
+              width: 'auto',
+              transition: 'height 0.4s ease',
+            }}
+            preload
+          />
+        </Link>
 
         <ul className="nav-links" style={{ display: 'flex', gap: '3rem', listStyle: 'none' }}>
           {links.map(({ label, href }) => (

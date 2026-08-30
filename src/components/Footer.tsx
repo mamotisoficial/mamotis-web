@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,10 +8,22 @@ export default function Footer() {
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       borderTop: '1px solid var(--borde)',
     }}>
-      <span style={{
-        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-        fontSize: '1.2rem', letterSpacing: '.55em', color: 'var(--oro)',
-      }}>MAMOTIS</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+        <Image
+          src="/marca/logo-huevo.png"
+          alt="Mamotis"
+          width={44}
+          height={44}
+          style={{ objectFit: 'contain', height: '40px', width: 'auto', opacity: 0.9 }}
+        />
+        <Image
+          src="/marca/logo-texto.png"
+          alt="Mamotis"
+          width={110}
+          height={38}
+          style={{ objectFit: 'contain', height: '26px', width: 'auto', opacity: 0.7 }}
+        />
+      </div>
 
       <div className="footer-links" style={{ display: 'flex', gap: '2.5rem' }}>
         {[
