@@ -32,11 +32,11 @@ export default function Nav() {
           <Image
             src="/marca/logo-texto-t.png"
             alt="Mamotis"
-            width={190}
-            height={70}
+            width={230}
+            height={86}
             style={{
               objectFit: 'contain',
-              height: scrolled ? '50px' : '65px',
+              height: scrolled ? '60px' : '80px',
               width: 'auto',
               transition: 'height 0.4s ease, opacity 0.4s ease',
               opacity: scrolled ? 0.75 : 1,
