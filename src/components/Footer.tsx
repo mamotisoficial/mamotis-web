@@ -14,14 +14,14 @@ export default function Footer() {
           alt="Mamotis"
           width={44}
           height={44}
-          style={{ objectFit: 'contain', height: '40px', width: 'auto', opacity: 0.9 }}
+          style={{ objectFit: 'contain', height: '40px', width: 'auto', opacity: 0.9, mixBlendMode: 'screen' }}
         />
         <Image
           src="/marca/logo-texto.png"
           alt="Mamotis"
           width={110}
           height={38}
-          style={{ objectFit: 'contain', height: '26px', width: 'auto', opacity: 0.7 }}
+          style={{ objectFit: 'contain', height: '26px', width: 'auto', opacity: 0.8, mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
         />
       </div>
 

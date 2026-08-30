@@ -41,6 +41,8 @@ export default function Nav() {
               height: scrolled ? '32px' : '40px',
               width: 'auto',
               transition: 'height 0.4s ease',
+              mixBlendMode: 'screen',
+              filter: 'brightness(1.2)',
             }}
             preload
           />
