@@ -1,34 +1,29 @@
 'use client';
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 
-const items = [
-  { text: 'Renace', style: 'italic' },
-  { text: '·', style: 'normal' },
-  { text: 'Una sola', style: 'italic' },
-  { text: '·', style: 'normal' },
-  { text: 'Existió antes', style: 'italic' },
-  { text: '·', style: 'normal' },
-  { text: 'Irrepetible', style: 'italic' },
-  { text: '·', style: 'normal' },
-  { text: 'Vivió una vida', style: 'italic' },
-  { text: '·', style: 'normal' },
-  { text: 'Ahora vive otra', style: 'italic' },
-  { text: '·', style: 'normal' },
+const words = [
+  'Renace',
+  'Una sola',
+  'Existió antes',
+  'Irrepetible',
+  'Vivió una vida',
+  'Ahora vive otra',
 ];
 
 export default function Marquee() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const speedRef = useRef(0.4);
-  const targetSpeedRef = useRef(0.4);
+  const speedRef = useRef(0.5);
+  const targetSpeedRef = useRef(0.5);
   const posRef = useRef(0);
   const animRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
     const handleMouseMove = () => {
-      targetSpeedRef.current = 2.5;
+      targetSpeedRef.current = 2.8;
       clearTimeout(timeout);
-      timeout = setTimeout(() => { targetSpeedRef.current = 0.4; }, 300);
+      timeout = setTimeout(() => { targetSpeedRef.current = 0.5; }, 300);
     };
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -51,32 +46,81 @@ export default function Marquee() {
     };
   }, []);
 
-  const content = [...items, ...items, ...items].map((item, i) => (
-    <span key={i} style={{
-      fontFamily: item.style === 'italic' ? "'Cormorant Garamond',serif" : "'DM Mono',monospace",
-      fontWeight: 300, fontStyle: item.style as 'italic'|'normal',
-      fontSize: item.text === '·' ? '1rem' : 'clamp(1.8rem,3.5vw,3rem)',
-      color: item.text === '·' ? 'rgba(201,168,76,0.3)' : 'transparent',
-      WebkitTextStroke: item.text === '·' ? 'none' : '1px rgba(201,168,76,0.35)',
-      padding: item.text === '·' ? '0 1.2rem' : '0 2rem',
+  const content = [...words, ...words, ...words].flatMap((word, i) => [
+    <span key={`w-${i}`} style={{
+      fontFamily: "'Cormorant Garamond', serif",
+      fontWeight: 300,
+      fontStyle: 'italic',
+      fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
+      color: 'transparent',
+      WebkitTextStroke: '1px rgba(201,168,76,0.35)',
       whiteSpace: 'nowrap' as const,
+      padding: '0 1.5rem',
       userSelect: 'none' as const,
-      letterSpacing: item.style === 'italic' ? '0.05em' : '0.3em',
-      transition: 'color 0.3s',
+      letterSpacing: '0.04em',
+      transition: 'color 0.3s, -webkit-text-stroke 0.3s',
       cursor: 'default',
-    }}>{item.text}</span>
-  ));
+    }}
+      onMouseEnter={e => {
+        const t = e.currentTarget;
+        t.style.color = 'rgba(201,168,76,0.7)';
+        t.style.webkitTextStroke = '1px transparent';
+      }}
+      onMouseLeave={e => {
+        const t = e.currentTarget;
+        t.style.color = 'transparent';
+        t.style.webkitTextStroke = '1px rgba(201,168,76,0.35)';
+      }}
+    >{word}</span>,
+    <span key={`egg-${i}`} style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      padding: '0 0.8rem',
+      flexShrink: 0,
+      filter: 'drop-shadow(0 0 8px rgba(201,168,76,0.6)) drop-shadow(0 0 16px rgba(201,168,76,0.3))',
+      animation: 'eggGlow 2s ease-in-out infinite',
+      animationDelay: `${i * 0.3}s`,
+    }}>
+      <Image
+        src="/marca/logo-huevo-t.png"
+        alt=""
+        width={28}
+        height={32}
+        style={{ objectFit: 'contain', height: '28px', width: 'auto', opacity: 0.85 }}
+      />
+    </span>,
+  ]);
 
   return (
-    <div style={{ overflow:'hidden', borderTop:'1px solid rgba(201,168,76,0.1)',
-      borderBottom:'1px solid rgba(201,168,76,0.1)', padding:'1.8rem 0', position:'relative' }}>
-      <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'120px', zIndex:2,
-        background:'linear-gradient(to right, var(--negro), transparent)', pointerEvents:'none' }} />
-      <div style={{ position:'absolute', right:0, top:0, bottom:0, width:'120px', zIndex:2,
-        background:'linear-gradient(to left, var(--negro), transparent)', pointerEvents:'none' }} />
-      <div ref={trackRef} style={{ display:'flex', willChange:'transform' }}>
+    <div style={{
+      overflow: 'hidden',
+      borderTop: '1px solid rgba(201,168,76,0.1)',
+      borderBottom: '1px solid rgba(201,168,76,0.1)',
+      padding: '1.6rem 0',
+      position: 'relative',
+      background: 'var(--negro)',
+    }}>
+      <div style={{
+        position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
+        background: 'linear-gradient(to right, var(--negro), transparent)',
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
+        background: 'linear-gradient(to left, var(--negro), transparent)',
+        pointerEvents: 'none',
+      }} />
+
+      <div ref={trackRef} style={{ display: 'flex', alignItems: 'center', willChange: 'transform' }}>
         {content}
       </div>
+
+      <style>{`
+        @keyframes eggGlow {
+          0%,100% { filter: drop-shadow(0 0 6px rgba(201,168,76,0.5)) drop-shadow(0 0 12px rgba(201,168,76,0.2)); }
+          50% { filter: drop-shadow(0 0 12px rgba(201,168,76,0.9)) drop-shadow(0 0 24px rgba(201,168,76,0.5)); }
+        }
+      `}</style>
     </div>
   );
 }
