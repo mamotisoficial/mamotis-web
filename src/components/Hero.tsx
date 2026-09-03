@@ -44,15 +44,13 @@ export default function Hero() {
 
       <section id="hero" style={{
         minHeight: '100vh',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        textAlign: 'center',
+        display: 'grid',
+        gridTemplateColumns: '1.4fr 1fr',
         position: 'relative', zIndex: 1,
-        padding: '8rem 2rem 5rem',
-        gap: 0,
+        overflow: 'hidden',
       }}>
 
-        {/* Textura diagonal */}
+        {/* Textura */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           backgroundImage: `
@@ -61,109 +59,126 @@ export default function Hero() {
           backgroundSize: '60px 60px',
         }} />
 
-        {/* Glow central */}
-        <div style={{
-          position: 'absolute', width: '550px', height: '550px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-          pointerEvents: 'none',
-        }} />
-
-        {/* Anillos decorativos */}
-        {[520, 780, 1040].map((size, i) => (
-          <div key={i} style={{
-            position: 'absolute', borderRadius: '50%',
-            width: `${size}px`, height: `${size}px`,
-            border: `1px solid rgba(201,168,76,${0.04 - i*0.01})`,
-            top: '50%', left: '50%',
-            transform: 'translate(-50%,-50%)',
-            animation: i > 0 ? `rotS ${i===1?50:70}s linear infinite ${i===2?'reverse':''}` : undefined,
-            pointerEvents: 'none',
-          }} />
-        ))}
-
-        {/* HUEVO — protagonista */}
-        <div style={{
+        {/* IZQUIERDA — texto */}
+        <div className="hero-text" style={{
+          display: 'flex', flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '10rem 4rem 6rem 5rem',
           position: 'relative', zIndex: 2,
-          marginBottom: '2.5rem',
-          animation: 'fadeUpAnim 1.2s ease 0.3s both, floatAnim 5s ease-in-out 1.5s infinite',
-          filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.35)) drop-shadow(0 0 80px rgba(201,168,76,0.12))',
+          background: 'linear-gradient(to right, var(--negro) 80%, transparent)',
         }}>
-          <Image
-            src="/marca/logo-huevo-t.png"
-            alt="MAMOTIS"
-            width={180}
-            height={200}
-            className="hero-egg-img"
-            style={{ objectFit: 'contain', width: 'auto', height: '180px' }}
-            preload
-          />
+
+          <h1 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300, fontStyle: 'italic',
+            fontSize: 'clamp(2.8rem, 5vw, 5.5rem)',
+            lineHeight: 1.15,
+            color: 'var(--crema)',
+            marginBottom: '1.5rem',
+          }}>
+            Cada piel tiene<br />
+            una vida anterior.
+          </h1>
+
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300, fontStyle: 'italic',
+            fontSize: 'clamp(2.8rem, 5vw, 5.5rem)',
+            lineHeight: 1.15,
+            color: 'var(--oro)',
+            marginBottom: '3rem',
+          }}>
+            Nosotras le damos otra.
+          </h2>
+
+          <div style={{
+            width: '60px', height: '1px',
+            background: 'linear-gradient(to right, var(--oro), transparent)',
+            marginBottom: '2.5rem',
+            opacity: 0.6,
+          }} />
+
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300, fontStyle: 'italic',
+            fontSize: '1.15rem', lineHeight: 1.9,
+            opacity: 0.5, maxWidth: '380px',
+            marginBottom: '3.5rem',
+          }}>
+            Abrigos que vivieron una vida entera.<br />
+            Transformados en piezas que vivirán otra.
+          </p>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', flexWrap: 'wrap' }}>
+            <Link href="/coleccion" style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: 'italic', fontSize: '1.05rem',
+              letterSpacing: '0.06em',
+              color: 'var(--negro)', background: 'var(--oro)',
+              padding: '0.9rem 2.5rem', textDecoration: 'none',
+              display: 'inline-block',
+            }}>
+              Descubrir la colección
+            </Link>
+            <Link href="/#historia" style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: 'italic', fontSize: '1rem',
+              letterSpacing: '0.06em',
+              color: 'var(--crema)', opacity: 0.4,
+              textDecoration: 'none',
+            }}>
+              Nuestra historia →
+            </Link>
+          </div>
         </div>
 
-        {/* LÍNEA DORADA */}
-        <div style={{
-          height: '1px', width: '260px',
-          background: 'linear-gradient(to right, transparent, var(--oro), transparent)',
-          marginBottom: '2.8rem',
-          animation: 'lineGrow 1s ease 1s both',
-        }} />
-
-        {/* TAGLINE — con más presencia */}
-        <h1 style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-          letterSpacing: '0.04em',
-          color: 'var(--crema)',
-          lineHeight: 1.6,
-          maxWidth: '600px',
-          marginBottom: '1.2rem',
-          animation: 'fadeUpAnim 1s ease 1.2s both',
+        {/* DERECHA — huevo */}
+        <div className="hero-visual" style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          position: 'relative', zIndex: 2,
+          padding: '8rem 3rem',
         }}>
-          Cada piel tiene una vida anterior.<br />
-          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>Nosotras</em> le damos otra.
-        </h1>
+          {/* Glow detrás del huevo */}
+          <div style={{
+            position: 'absolute',
+            width: '320px', height: '320px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)',
+            pointerEvents: 'none',
+            animation: 'glowP 3s ease-in-out infinite',
+          }} />
 
-        {/* SUBTEXTO */}
-        <p style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: '0.52rem', letterSpacing: '0.42em',
-          color: 'var(--crema)', opacity: 0.35,
-          textTransform: 'uppercase',
-          marginBottom: '3.5rem',
-          animation: 'fadeUpAnim 1s ease 1.5s both',
-        }}>
-          Piel rescatada · Pieza única
-        </p>
-
-        {/* CTAs */}
-        <div style={{
-          display: 'flex', alignItems: 'center',
-          gap: '2.5rem', flexWrap: 'wrap', justifyContent: 'center',
-          animation: 'fadeUpAnim 1s ease 1.8s both',
-        }}>
-          <Link href="/coleccion" style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: 'italic', fontSize: '1.1rem',
-            letterSpacing: '0.08em',
-            color: 'var(--negro)', background: 'var(--oro)',
-            padding: '0.9rem 2.8rem', textDecoration: 'none',
-            display: 'inline-block',
-            transition: 'opacity .3s, transform .3s',
+          {/* Huevo flotante */}
+          <div style={{
+            position: 'relative', zIndex: 2,
+            animation: 'floatAnim 5s ease-in-out infinite',
+            filter: 'drop-shadow(0 0 30px rgba(201,168,76,0.3)) drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
           }}>
-            Descubrir la colección
-          </Link>
-          <Link href="/#historia" style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: 'italic', fontSize: '1rem',
-            letterSpacing: '0.08em',
-            color: 'var(--crema)', opacity: 0.45,
-            textDecoration: 'none',
-            transition: 'opacity .3s, color .3s',
-          }}>
-            Nuestra historia →
-          </Link>
+            <Image
+              src="/marca/logo-huevo-t.png"
+              alt="MAMOTIS"
+              width={220}
+              height={250}
+              className="hero-egg-img"
+              style={{ objectFit: 'contain', height: '260px', width: 'auto' }}
+              preload
+            />
+          </div>
+
+          {/* Anillos */}
+          <div style={{
+            position: 'absolute', borderRadius: '50%',
+            width: '300px', height: '300px',
+            border: '1px solid rgba(201,168,76,0.06)',
+            animation: 'rotS 35s linear infinite',
+            pointerEvents: 'none',
+          }} />
+          <div style={{
+            position: 'absolute', borderRadius: '50%',
+            width: '420px', height: '420px',
+            border: '1px solid rgba(201,168,76,0.03)',
+            animation: 'rotS 55s linear infinite reverse',
+            pointerEvents: 'none',
+          }} />
         </div>
 
         {/* SCROLL */}
@@ -172,8 +187,7 @@ export default function Hero() {
           transform: 'translateX(-50%)',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', gap: '0.8rem',
-          opacity: 0.3,
-          animation: 'fadeUpAnim 1s ease 2.5s both',
+          zIndex: 3, opacity: 0.3,
         }}>
           <span style={{
             fontFamily: "'DM Mono', monospace",
@@ -187,26 +201,35 @@ export default function Hero() {
         </div>
 
         <style>{`
-          @keyframes fadeUpAnim {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
           @keyframes floatAnim {
             0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-15px); }
           }
-          @keyframes lineGrow {
-            from { transform: scaleX(0); opacity: 0; }
-            to { transform: scaleX(1); opacity: 1; }
+          @keyframes glowP {
+            0%,100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
           }
           @keyframes rotS {
-            from { transform: translate(-50%,-50%) rotate(0); }
-            to { transform: translate(-50%,-50%) rotate(360deg); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
           }
           @media (max-width: 768px) {
-            #hero { padding: 7rem 1.5rem 5rem !important; }
-            #hero h1 { font-size: 1.6rem !important; }
-            .hero-egg-img { height: 140px !important; }
+            #hero {
+              grid-template-columns: 1fr !important;
+              grid-template-rows: auto auto;
+            }
+            #hero .hero-text {
+              padding: 9rem 2rem 3rem !important;
+              background: var(--negro) !important;
+              order: 2;
+            }
+            #hero .hero-visual {
+              order: 1;
+              padding: 4rem 2rem 1rem !important;
+            }
+            #hero .hero-egg-img {
+              height: 160px !important;
+            }
           }
         `}</style>
       </section>
