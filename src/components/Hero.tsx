@@ -17,8 +17,9 @@ export default function Hero() {
         alt="MAMOTIS"
         fill
         style={{
-          objectFit: 'cover',
-          objectPosition: '65% 35%',
+          objectFit: 'contain',
+          objectPosition: 'right center',
+          background: '#0a0806',
           filter: 'brightness(0.92) contrast(1.02) saturate(0.9)',
         }}
         preload
