@@ -1,13 +1,11 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  // Partículas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -20,7 +18,7 @@ export default function Hero() {
       const life = Math.random() * 300 + 80;
       return { x: Math.random()*innerWidth, y: Math.random()*innerHeight,
         sz: Math.random()*1.1+0.2, vx: (Math.random()-.5)*.18,
-        vy: -Math.random()*.28-.04, life, maxL: life };
+        vy: -Math.random()*.25-.04, life, maxL: life };
     });
     let id: number;
     const draw = () => {
@@ -29,7 +27,7 @@ export default function Hero() {
         p.x+=p.vx; p.y+=p.vy; p.life--;
         if (p.life<=0||p.y<-5) { p.x=Math.random()*canvas.width; p.y=canvas.height+5; p.life=Math.random()*300+80; p.maxL=p.life; }
         ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
-        ctx.fillStyle=`rgba(201,168,76,${(p.life/p.maxL)*.28})`; ctx.fill();
+        ctx.fillStyle=`rgba(201,168,76,${(p.life/p.maxL)*.25})`; ctx.fill();
       });
       id = requestAnimationFrame(draw);
     };
@@ -37,187 +35,181 @@ export default function Hero() {
     return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(id); };
   }, []);
 
-  // Parallax mouse
-  useEffect(() => {
-    let targetX = 0, targetY = 0;
-    let currentX = 0, currentY = 0;
-    let animId: number;
-
-    const onMove = (e: MouseEvent) => {
-      targetX = (e.clientX / innerWidth - 0.5) * 20;
-      targetY = (e.clientY / innerHeight - 0.5) * 12;
-    };
-    window.addEventListener('mousemove', onMove);
-
-    const animate = () => {
-      currentX += (targetX - currentX) * 0.04;
-      currentY += (targetY - currentY) * 0.04;
-      setOffset({ x: currentX, y: currentY });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(animId);
-    };
-  }, []);
-
   return (
-    <section id="hero-grid" style={{
-      position: 'relative',
-      height: '100vh',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      overflow: 'hidden',
-    }}>
+    <>
       <canvas ref={canvasRef} style={{
-        position: 'absolute', inset: 0,
-        pointerEvents: 'none', zIndex: 1, opacity: .5,
+        position: 'fixed', inset: 0,
+        pointerEvents: 'none', zIndex: 0, opacity: .5,
       }} />
 
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: `
-          linear-gradient(45deg, rgba(201,168,76,.018) 1px, transparent 1px),
-          linear-gradient(-45deg, rgba(201,168,76,.012) 1px, transparent 1px)`,
-        backgroundSize: '55px 55px',
-      }} />
-
-      {/* IZQUIERDA — texto centrado verticalmente */}
-      <div style={{
+      <section id="hero" style={{
+        minHeight: '100vh',
         display: 'flex', flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '8rem 4rem 6rem 5rem',
-        position: 'relative', zIndex: 2,
-        background: 'linear-gradient(to right, var(--negro) 75%, transparent)',
+        alignItems: 'center', justifyContent: 'center',
+        textAlign: 'center',
+        position: 'relative', zIndex: 1,
+        padding: '8rem 2rem 5rem',
+        gap: 0,
       }}>
-        <h1 style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(2.8rem, 5.5vw, 6rem)',
-          lineHeight: 1.08, color: 'var(--crema)',
-          marginBottom: '2.5rem',
-        }}>
-          Cada piel tiene<br />
-          una vida anterior.<br />
-          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>Nosotras</em><br />
-          le damos otra.
-        </h1>
 
-        <p style={{
-          fontSize: '1rem', lineHeight: 1.95,
-          opacity: .5, maxWidth: '360px', marginBottom: '3rem',
-        }}>
-          Abrigos que vivieron una vida entera.<br />
-          Transformados en piezas que vivirán otra.
-        </p>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link href="/coleccion" style={{
-            display: 'inline-block', padding: '1rem 2.5rem',
-            background: 'var(--oro)', fontFamily: "'DM Mono', monospace",
-            fontSize: '.54rem', letterSpacing: '.22em',
-            color: 'var(--negro)', textTransform: 'uppercase', textDecoration: 'none',
-          }}>
-            Descubrir la colección
-          </Link>
-          <Link href="/#historia" style={{
-            fontFamily: "'DM Mono', monospace", fontSize: '.52rem',
-            letterSpacing: '.2em', color: 'var(--crema)',
-            textDecoration: 'none', textTransform: 'uppercase', opacity: .4,
-          }}>
-            Nuestra historia →
-          </Link>
-        </div>
-      </div>
-
-      {/* DERECHA — huevo logo flotante */}
-      <div style={{
-        position: 'relative', zIndex: 2,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        {/* Glow de fondo detrás del huevo */}
+        {/* Textura diagonal */}
         <div style={{
-          position: 'absolute',
-          width: '400px', height: '400px',
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          backgroundImage: `
+            linear-gradient(45deg, rgba(201,168,76,.015) 1px, transparent 1px),
+            linear-gradient(-45deg, rgba(201,168,76,.01) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }} />
+
+        {/* Glow central */}
+        <div style={{
+          position: 'absolute', width: '550px', height: '550px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
-          animation: 'glowPulse 3s ease-in-out infinite',
+          background: 'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
+          top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
           pointerEvents: 'none',
         }} />
 
-        {/* Huevo con parallax y flotación */}
+        {/* Anillos decorativos */}
+        {[520, 780, 1040].map((size, i) => (
+          <div key={i} style={{
+            position: 'absolute', borderRadius: '50%',
+            width: `${size}px`, height: `${size}px`,
+            border: `1px solid rgba(201,168,76,${0.04 - i*0.01})`,
+            top: '50%', left: '50%',
+            transform: 'translate(-50%,-50%)',
+            animation: i > 0 ? `rotS ${i===1?50:70}s linear infinite ${i===2?'reverse':''}` : undefined,
+            pointerEvents: 'none',
+          }} />
+        ))}
+
+        {/* HUEVO — protagonista */}
         <div style={{
-          transform: `translate(${offset.x}px, ${offset.y}px)`,
-          transition: 'transform 0.1s linear',
-          animation: 'floatEgg 4s ease-in-out infinite',
-          position: 'relative',
+          position: 'relative', zIndex: 2,
+          marginBottom: '2.5rem',
+          animation: 'fadeUpAnim 1.2s ease 0.3s both, floatAnim 5s ease-in-out 1.5s infinite',
+          filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.35)) drop-shadow(0 0 80px rgba(201,168,76,0.12))',
         }}>
           <Image
             src="/marca/logo-huevo-t.png"
             alt="MAMOTIS"
-            width={320}
-            height={380}
-            style={{
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.3))',
-              userSelect: 'none',
-            }}
+            width={180}
+            height={200}
+            className="hero-egg-img"
+            style={{ objectFit: 'contain', width: 'auto', height: '180px' }}
             preload
           />
         </div>
 
-        {/* Anillos decorativos */}
+        {/* LÍNEA DORADA */}
         <div style={{
-          position: 'absolute',
-          width: '340px', height: '340px',
-          borderRadius: '50%',
-          border: '1px solid rgba(201,168,76,0.06)',
-          animation: 'rotSlow 30s linear infinite',
-          pointerEvents: 'none',
+          height: '1px', width: '260px',
+          background: 'linear-gradient(to right, transparent, var(--oro), transparent)',
+          marginBottom: '2.8rem',
+          animation: 'lineGrow 1s ease 1s both',
         }} />
+
+        {/* TAGLINE — con más presencia */}
+        <h1 style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontWeight: 300, fontStyle: 'italic',
+          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+          letterSpacing: '0.04em',
+          color: 'var(--crema)',
+          lineHeight: 1.6,
+          maxWidth: '600px',
+          marginBottom: '1.2rem',
+          animation: 'fadeUpAnim 1s ease 1.2s both',
+        }}>
+          Cada piel tiene una vida anterior.<br />
+          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>Nosotras</em> le damos otra.
+        </h1>
+
+        {/* SUBTEXTO */}
+        <p style={{
+          fontFamily: "'DM Mono', monospace",
+          fontSize: '0.52rem', letterSpacing: '0.42em',
+          color: 'var(--crema)', opacity: 0.35,
+          textTransform: 'uppercase',
+          marginBottom: '3.5rem',
+          animation: 'fadeUpAnim 1s ease 1.5s both',
+        }}>
+          Piel rescatada · Pieza única
+        </p>
+
+        {/* CTAs */}
         <div style={{
-          position: 'absolute',
-          width: '460px', height: '460px',
-          borderRadius: '50%',
-          border: '1px solid rgba(201,168,76,0.04)',
-          animation: 'rotSlow 45s linear infinite reverse',
-          pointerEvents: 'none',
-        }} />
-      </div>
+          display: 'flex', alignItems: 'center',
+          gap: '2.5rem', flexWrap: 'wrap', justifyContent: 'center',
+          animation: 'fadeUpAnim 1s ease 1.8s both',
+        }}>
+          <Link href="/coleccion" style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic', fontSize: '1.1rem',
+            letterSpacing: '0.08em',
+            color: 'var(--negro)', background: 'var(--oro)',
+            padding: '0.9rem 2.8rem', textDecoration: 'none',
+            display: 'inline-block',
+            transition: 'opacity .3s, transform .3s',
+          }}>
+            Descubrir la colección
+          </Link>
+          <Link href="/#historia" style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic', fontSize: '1rem',
+            letterSpacing: '0.08em',
+            color: 'var(--crema)', opacity: 0.45,
+            textDecoration: 'none',
+            transition: 'opacity .3s, color .3s',
+          }}>
+            Nuestra historia →
+          </Link>
+        </div>
 
-      {/* SCROLL */}
-      <div style={{
-        position: 'absolute', bottom: '2.5rem', left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', gap: '.8rem', zIndex: 3, opacity: .3,
-      }}>
-        <span style={{
-          fontFamily: "'DM Mono', monospace", fontSize: '.48rem',
-          letterSpacing: '.4em', textTransform: 'uppercase', writingMode: 'vertical-rl',
-        }}>Scroll</span>
-        <div style={{ width: '1px', height: '55px', background: 'linear-gradient(to bottom, var(--oro), transparent)' }} />
-      </div>
+        {/* SCROLL */}
+        <div style={{
+          position: 'absolute', bottom: '2.5rem', left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', gap: '0.8rem',
+          opacity: 0.3,
+          animation: 'fadeUpAnim 1s ease 2.5s both',
+        }}>
+          <span style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '0.44rem', letterSpacing: '0.45em',
+            textTransform: 'uppercase', writingMode: 'vertical-rl',
+          }}>Scroll</span>
+          <div style={{
+            width: '1px', height: '50px',
+            background: 'linear-gradient(to bottom, var(--oro), transparent)',
+          }} />
+        </div>
 
-      <style>{`
-        @keyframes floatEgg {
-          0%, 100% { transform: translateY(0px) rotate(-1deg); }
-          50% { transform: translateY(-18px) rotate(1deg); }
-        }
-        @keyframes glowPulse {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.1); }
-        }
-        @keyframes rotSlow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @media (max-width: 768px) {
-          #hero-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-    </section>
+        <style>{`
+          @keyframes fadeUpAnim {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes floatAnim {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+          }
+          @keyframes lineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+          }
+          @keyframes rotS {
+            from { transform: translate(-50%,-50%) rotate(0); }
+            to { transform: translate(-50%,-50%) rotate(360deg); }
+          }
+          @media (max-width: 768px) {
+            #hero { padding: 7rem 1.5rem 5rem !important; }
+            #hero h1 { font-size: 1.6rem !important; }
+            .hero-egg-img { height: 140px !important; }
+          }
+        `}</style>
+      </section>
+    </>
   );
 }
