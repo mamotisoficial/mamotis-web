@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,16 +28,20 @@ export default function Nav() {
       }}>
 
         {/* LOGO */}
-        <Link href="/" style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 400,
-          fontStyle: 'italic',
-          fontSize: '1.8rem',
-          letterSpacing: '0.05em',
-          color: '#C9A84C',
-          textDecoration: 'none',
-        }}>
-          Mamotis
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Image
+            src="/marca/mamotis-t.png"
+            alt="Mamotis"
+            width={220}
+            height={80}
+            style={{
+              objectFit: 'contain',
+              height: scrolled ? '55px' : '70px',
+              width: 'auto',
+              transition: 'height 0.4s ease, opacity 0.4s ease',
+              opacity: scrolled ? 0.75 : 1,
+            }}
+          />
         </Link>
 
         {/* LINKS */}
