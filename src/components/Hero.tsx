@@ -42,7 +42,7 @@ export default function Hero() {
       {/* Overlay derecha para difuminar el borde de la foto */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to left, rgba(5,5,5,0.85) 0%, transparent 15%)',
+        background: 'linear-gradient(to left, rgba(5,5,5,1) 0%, rgba(5,5,5,0.5) 8%, transparent 25%)',
         zIndex: 1,
       }} />
 
