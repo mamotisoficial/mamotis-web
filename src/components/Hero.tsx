@@ -39,6 +39,13 @@ export default function Hero() {
         zIndex: 1,
       }} />
 
+      {/* Overlay derecha para difuminar el borde de la foto */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to left, rgba(5,5,5,0.85) 0%, transparent 15%)',
+        zIndex: 1,
+      }} />
+
       {/* CONTENIDO — padding-top para respetar el nav */}
       <div className="hero-content" style={{
         position: 'relative', zIndex: 2,
