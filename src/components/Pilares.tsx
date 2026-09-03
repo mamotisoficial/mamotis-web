@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const pilares = [
   { num: '01', titulo: 'El origen', texto: 'Buscamos piel con historia — mercados vintage, armarios heredados, colecciones olvidadas. Cada pieza tiene nombre, tiene año.' },
@@ -7,186 +7,217 @@ const pilares = [
   { num: '03', titulo: 'Irrepetible', texto: 'Nunca dos iguales. Porque nunca hubo dos abrigos iguales. Tu bolso es único — como lo fue la mujer que llevó esa piel.' },
 ];
 
-function Pilar({ num, titulo, texto, delay }: { num: string, titulo: string, texto: string, delay: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const [count, setCount] = useState(0);
-  const [borderProgress, setBorderProgress] = useState(0);
-  const [hovered, setHovered] = useState(false);
-  const targetNum = parseInt(num);
+const POSICIONES = [16.6, 50, 83.3];
+
+export default function Pilares() {
+  const [actual, setActual] = useState(-1);
+  const autoRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const sectionRef = useRef<HTMLElement>(null);
+  const started = useRef(false);
+
+  const irA = useCallback((idx: number) => {
+    setActual(idx);
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(() => {
+      setActual(prev => (prev + 1) % 3);
+    }, 3000);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          setTimeout(() => irA(0), 300);
+        }
+      },
       { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      observer.disconnect();
+      clearInterval(autoRef.current);
+    };
+  }, [irA]);
 
-  // Contador numérico
-  useEffect(() => {
-    if (!visible) return;
-    const timeout = setTimeout(() => {
-      const duration = 800;
-      const startTime = performance.now();
-      const animate = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setCount(Math.round(eased * targetNum));
-        if (progress < 1) requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [visible, targetNum, delay]);
-
-  // Borde que se dibuja
-  useEffect(() => {
-    if (!visible) return;
-    const timeout = setTimeout(() => {
-      const duration = 1000;
-      const startTime = performance.now();
-      const animate = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        setBorderProgress(progress);
-        if (progress < 1) requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [visible, delay]);
-
-  const perimeter = 2 * (300 + 400);
-  const dashOffset = perimeter * (1 - borderProgress);
+  const pos = actual >= 0 ? POSICIONES[actual] : 0;
 
   return (
-    <div
-      ref={ref}
-      className="pilar-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: hovered ? '#0a0a0a' : 'var(--negro)',
-        padding: '5rem 3.5rem',
-        position: 'relative',
-        overflow: 'hidden',
-        transition: 'background .5s',
-        cursor: 'default',
-      }}
-    >
-      {/* SVG borde que se dibuja */}
-      <svg
-        style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%',
-          pointerEvents: 'none', zIndex: 1,
-          overflow: 'visible',
-        }}
-        preserveAspectRatio="none"
-      >
-        <rect
-          x="1" y="1"
-          width="calc(100% - 2px)" height="calc(100% - 2px)"
-          fill="none"
-          stroke={hovered ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.5)'}
-          strokeWidth="1"
-          strokeDasharray={perimeter}
-          strokeDashoffset={dashOffset}
-          style={{ transition: 'stroke 0.3s' }}
-        />
-      </svg>
+    <section ref={sectionRef} id="pilares" style={{ padding: '6rem 5rem', background: 'var(--negro)' }}>
 
-      {/* Línea superior que se ilumina al hover */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
-        background: 'linear-gradient(to right, transparent, var(--oro), transparent)',
-        transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
-        transition: 'transform .6s ease',
-        zIndex: 2,
-      }} />
+      {/* LÍNEA CON TIJERAS */}
+      <div style={{ position: 'relative', height: '52px', margin: '0 80px 4rem' }}>
 
-      {/* Número contador */}
-      <div style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontWeight: 300,
-        fontSize: 'clamp(4.2rem, 13vw, 7rem)',
-        lineHeight: 1,
-        color: 'transparent',
-        WebkitTextStroke: `1px rgba(201,168,76,${visible ? (hovered ? 0.45 : 0.18) : 0})`,
-        marginBottom: '1.5rem',
-        transition: 'opacity .5s, -webkit-text-stroke .5s',
-        opacity: visible ? 1 : 0,
-        position: 'relative', zIndex: 2,
-        fontVariantNumeric: 'tabular-nums',
-      }}>
-        {String(count).padStart(2, '0')}
+        {/* Línea base */}
+        <div style={{
+          position: 'absolute', top: '50%', left: 0, right: 0,
+          height: '1px', transform: 'translateY(-50%)',
+          background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.15), rgba(201,168,76,0.35), rgba(201,168,76,0.15), transparent)',
+        }} />
+
+        {/* Línea cortada */}
+        <div style={{
+          position: 'absolute', top: '50%', left: 0,
+          height: '1px', transform: 'translateY(-50%)',
+          width: actual >= 0 ? `${pos}%` : '0%',
+          background: 'linear-gradient(to right, var(--oro), rgba(201,168,76,0.6))',
+          boxShadow: '0 0 8px rgba(201,168,76,0.5)',
+          transition: 'width 1.2s cubic-bezier(.25,.46,.45,.94)',
+        }} />
+
+        {/* Puntos de parada */}
+        {POSICIONES.map((p, i) => (
+          <div key={i} style={{
+            position: 'absolute', top: '50%', left: `${p}%`,
+            transform: 'translate(-50%, -50%)',
+            width: actual >= i ? '10px' : '7px',
+            height: actual >= i ? '10px' : '7px',
+            borderRadius: '50%',
+            background: actual >= i ? 'var(--oro)' : 'var(--negro)',
+            border: `1px solid ${actual >= i ? 'var(--oro)' : 'rgba(201,168,76,0.3)'}`,
+            boxShadow: actual >= i ? '0 0 10px rgba(201,168,76,0.7)' : 'none',
+            transition: 'all 0.5s ease',
+            zIndex: 5,
+          }} />
+        ))}
+
+        {/* TIJERAS SVG */}
+        <div style={{
+          position: 'absolute', top: '50%',
+          left: actual >= 0 ? `${pos}%` : '0%',
+          transform: 'translate(-50%, -50%)',
+          transition: 'left 1.2s cubic-bezier(.25,.46,.45,.94)',
+          zIndex: 10,
+        }}>
+          <svg width="52" height="52" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style={{ filter: 'drop-shadow(0 0 8px rgba(201,168,76,0.5))', animation: 'tijerasGlow 3s ease-in-out infinite' }}>
+            <defs>
+              <linearGradient id="gt1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F0D97A"/>
+                <stop offset="50%" stopColor="#C9A84C"/>
+                <stop offset="100%" stopColor="#8B6914"/>
+              </linearGradient>
+              <linearGradient id="gt2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#F0D97A"/>
+                <stop offset="50%" stopColor="#C9A84C"/>
+                <stop offset="100%" stopColor="#8B6914"/>
+              </linearGradient>
+            </defs>
+
+            {/* Pivote */}
+            <circle cx="50" cy="50" r="5" fill="url(#gt1)" opacity="0.9"/>
+            <circle cx="50" cy="50" r="2.5" fill="#2a1800"/>
+            <circle cx="48.5" cy="48.5" r="1.2" fill="rgba(255,255,255,0.4)"/>
+
+            {/* Hoja superior */}
+            <g style={{ transformOrigin: '50px 50px', animation: actual >= 0 ? 'cutTop 0.6s ease-in-out' : 'none' }}>
+              <ellipse cx="28" cy="25" rx="14" ry="10" fill="none"
+                stroke="url(#gt1)" strokeWidth="2.5"
+                transform="rotate(-20, 28, 25)"/>
+              <circle cx="36" cy="32" r="2" fill="url(#gt1)" opacity="0.7"/>
+              <path d="M 36 32 L 50 50 L 85 42" stroke="url(#gt1)" strokeWidth="3" strokeLinecap="round" fill="none"/>
+              <path d="M 50 50 L 85 42" stroke="#F0D97A" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.6"/>
+              <path d="M 58 48 L 75 44" stroke="rgba(201,168,76,0.3)" strokeWidth="0.5" fill="none"/>
+            </g>
+
+            {/* Hoja inferior */}
+            <g style={{ transformOrigin: '50px 50px', animation: actual >= 0 ? 'cutBottom 0.6s ease-in-out' : 'none' }}>
+              <ellipse cx="28" cy="75" rx="14" ry="10" fill="none"
+                stroke="url(#gt2)" strokeWidth="2.5"
+                transform="rotate(20, 28, 75)"/>
+              <circle cx="36" cy="68" r="2" fill="url(#gt2)" opacity="0.7"/>
+              <path d="M 36 68 L 50 50 L 85 58" stroke="url(#gt2)" strokeWidth="3" strokeLinecap="round" fill="none"/>
+              <path d="M 50 50 L 85 58" stroke="#F0D97A" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.6"/>
+              <path d="M 58 52 L 75 56" stroke="rgba(201,168,76,0.3)" strokeWidth="0.5" fill="none"/>
+            </g>
+          </svg>
+        </div>
       </div>
 
-      {/* Título */}
-      <div style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontWeight: 300,
-        fontSize: '1.8rem',
-        color: 'var(--oro)',
-        marginBottom: '1.2rem',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(15px)',
-        transition: `opacity .8s ease ${delay + 300}ms, transform .8s ease ${delay + 300}ms`,
-        position: 'relative', zIndex: 2,
-      }}>
-        {titulo}
+      {/* CARDS */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2rem' }}>
+        {pilares.map((p, i) => (
+          <div key={i}
+            onClick={() => irA(i)}
+            style={{
+              padding: '2.5rem 2rem',
+              position: 'relative',
+              opacity: actual >= i ? 1 : 0.25,
+              transform: actual >= i ? 'translateY(0)' : 'translateY(10px)',
+              cursor: 'pointer',
+              borderTop: `1px solid ${actual >= i ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.08)'}`,
+              transition: 'all 0.6s ease',
+            }}>
+
+            {/* Línea izquierda animada */}
+            <div style={{
+              position: 'absolute', top: '2.5rem', left: 0,
+              width: '1px',
+              height: actual >= i ? '60px' : '0px',
+              background: 'linear-gradient(to bottom, var(--oro), transparent)',
+              transition: 'height 0.6s ease 0.3s',
+            }} />
+
+            <div style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 300, fontSize: '5.5rem', lineHeight: 1,
+              color: 'transparent',
+              WebkitTextStroke: `1px rgba(201,168,76,${actual >= i ? 0.35 : 0.1})`,
+              marginBottom: '1.2rem',
+              transition: '-webkit-text-stroke 0.5s',
+            }}>{p.num}</div>
+
+            <div style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 300, fontSize: '1.5rem',
+              color: 'var(--oro)', marginBottom: '1rem',
+              letterSpacing: '0.02em',
+            }}>{p.titulo}</div>
+
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: '0.95rem', lineHeight: 2, opacity: 0.55,
+            }}>{p.texto}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Texto */}
-      <p style={{
-        fontSize: '1.05rem',
-        lineHeight: 2,
-        opacity: visible ? 0.5 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(15px)',
-        transition: `opacity .8s ease ${delay + 500}ms, transform .8s ease ${delay + 500}ms`,
-        position: 'relative', zIndex: 2,
-      }}>
-        {texto}
-      </p>
+      {/* Controles */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '3.5rem' }}>
+        {pilares.map((p, i) => (
+          <button key={i} onClick={() => irA(i)} style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '0.48rem', letterSpacing: '0.3em',
+            color: actual === i ? 'var(--oro)' : 'var(--crema)',
+            opacity: actual === i ? 1 : 0.35,
+            textTransform: 'uppercase',
+            background: 'none',
+            border: `1px solid ${actual === i ? 'rgba(201,168,76,0.5)' : 'rgba(201,168,76,0.15)'}`,
+            padding: '0.5rem 1.4rem', cursor: 'pointer',
+            transition: 'all 0.3s ease',
+          }}>{p.num}</button>
+        ))}
+      </div>
 
-      {/* Glow de fondo al hover */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        background: 'radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 70%)',
-        opacity: hovered ? 1 : 0,
-        transition: 'opacity .5s',
-        pointerEvents: 'none',
-      }} />
-    </div>
-  );
-}
-
-export default function Pilares() {
-  return (
-    <>
       <style>{`
+        @keyframes tijerasGlow {
+          0%,100% { filter: drop-shadow(0 0 6px rgba(201,168,76,0.4)); }
+          50% { filter: drop-shadow(0 0 14px rgba(201,168,76,0.8)); }
+        }
+        @keyframes cutTop {
+          0%,100% { transform: rotate(0deg); }
+          50% { transform: rotate(-12deg); }
+        }
+        @keyframes cutBottom {
+          0%,100% { transform: rotate(0deg); }
+          50% { transform: rotate(12deg); }
+        }
         @media (max-width: 768px) {
-          #pilares-grid { grid-template-columns: 1fr !important; }
-          .pilar-card { padding: 3.4rem 1.8rem !important; }
-          .pilar-card p { font-size: 0.98rem !important; line-height: 1.85 !important; }
+          #pilares { padding: 4rem 2rem !important; }
+          #pilares > div:first-child { margin: 0 20px 3rem !important; }
+          #pilares > div:nth-child(2) { grid-template-columns: 1fr !important; }
         }
       `}</style>
-      <section
-        id="pilares-grid"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '1px',
-          background: 'rgba(201,168,76,0.07)',
-        }}
-      >
-        {pilares.map((p, i) => (
-          <Pilar key={i} {...p} delay={i * 150} />
-        ))}
-      </section>
-    </>
+    </section>
   );
 }
