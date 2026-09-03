@@ -19,7 +19,7 @@ export default function Nav() {
         position: 'fixed',
         top: 0, left: 0, right: 0,
         zIndex: 500,
-        padding: scrolled ? '1.2rem 5rem' : '1.8rem 5rem',
+        padding: scrolled ? '1.2rem 5rem 1.2rem 5rem' : '1.8rem 5rem 1.8rem 5rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -53,10 +53,11 @@ export default function Nav() {
           ].map(({ label, href }) => (
             <li key={label} style={{ position: 'relative' }}>
               <Link href={href} style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: '0.56rem', letterSpacing: '0.22em',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: 'italic', fontWeight: 300,
+                fontSize: '1.1rem', letterSpacing: '0.05em',
                 color: 'var(--crema)', textDecoration: 'none',
-                textTransform: 'uppercase', opacity: 0.5,
+                textTransform: 'none', opacity: 0.6,
                 transition: 'opacity 0.3s, color 0.3s',
                 paddingBottom: '4px',
                 display: 'block',
@@ -68,7 +69,7 @@ export default function Nav() {
                 }}
                 onMouseLeave={e => {
                   const t = e.currentTarget;
-                  t.style.opacity = '0.5';
+                  t.style.opacity = '0.6';
                   t.style.color = 'var(--crema)';
                 }}
               >{label}</Link>
@@ -85,25 +86,16 @@ export default function Nav() {
 
         {/* CTA */}
         <Link href="/coleccion" style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: '0.54rem', letterSpacing: '0.18em',
+          fontFamily: "'Cormorant Garamond', serif",
+          fontStyle: 'italic',
+          fontSize: '1rem', letterSpacing: '0.08em',
           color: 'var(--oro)', textDecoration: 'none',
-          textTransform: 'uppercase',
-          border: '1px solid rgba(201,168,76,0.35)',
-          padding: '0.65rem 1.6rem',
-          transition: 'background 0.3s, color 0.3s',
-          opacity: scrolled ? 0.7 : 1,
+          padding: 0,
+          transition: 'opacity 0.3s',
+          opacity: 0.8,
         }}
-          onMouseEnter={e => {
-            const t = e.currentTarget;
-            t.style.background = 'var(--oro)';
-            t.style.color = 'var(--negro)';
-          }}
-          onMouseLeave={e => {
-            const t = e.currentTarget;
-            t.style.background = 'transparent';
-            t.style.color = 'var(--oro)';
-          }}
+          onMouseEnter={e => { e.currentTarget.style.opacity = '1'; }}
+          onMouseLeave={e => { e.currentTarget.style.opacity = '0.8'; }}
         >Ver colección →</Link>
       </nav>
 
