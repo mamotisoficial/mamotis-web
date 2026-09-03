@@ -19,7 +19,7 @@ export default function Hero() {
         style={{
           objectFit: 'cover',
           objectPosition: '65% center',
-          filter: 'brightness(0.7) contrast(1.05) saturate(0.85)',
+          filter: 'brightness(0.88) contrast(1.02) saturate(0.9)',
         }}
         preload
       />
@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="hero-content" style={{
         position: 'relative', zIndex: 2,
         padding: '0 5rem',
-        paddingTop: '80px',
+        paddingTop: '120px',
         width: '100%',
         maxWidth: '700px',
         display: 'flex',
