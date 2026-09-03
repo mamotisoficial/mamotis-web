@@ -25,9 +25,16 @@ export default function Hero() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       pts.forEach(p => {
         p.x+=p.vx; p.y+=p.vy; p.life--;
-        if (p.life<=0||p.y<-5) { p.x=Math.random()*canvas.width; p.y=canvas.height+5; p.life=Math.random()*300+80; p.maxL=p.life; }
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
-        ctx.fillStyle=`rgba(201,168,76,${(p.life/p.maxL)*.25})`; ctx.fill();
+        if (p.life<=0||p.y<-5) {
+          p.x=Math.random()*canvas.width;
+          p.y=canvas.height+5;
+          p.life=Math.random()*300+80;
+          p.maxL=p.life;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
+        ctx.fillStyle=`rgba(201,168,76,${(p.life/p.maxL)*.25})`;
+        ctx.fill();
       });
       id = requestAnimationFrame(draw);
     };
@@ -45,12 +52,12 @@ export default function Hero() {
       <section id="hero" style={{
         minHeight: '100vh',
         display: 'grid',
-        gridTemplateColumns: '1.4fr 1fr',
+        gridTemplateColumns: '2fr 1fr',
         position: 'relative', zIndex: 1,
         overflow: 'hidden',
       }}>
 
-        {/* Textura */}
+        {/* Textura diagonal */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           backgroundImage: `
@@ -59,176 +66,153 @@ export default function Hero() {
           backgroundSize: '60px 60px',
         }} />
 
-        {/* IZQUIERDA — texto */}
+        {/* IZQUIERDA — texto protagonista */}
         <div className="hero-text" style={{
           display: 'flex', flexDirection: 'column',
           justifyContent: 'center',
-          padding: '10rem 4rem 6rem 5rem',
+          padding: '10rem 5rem 6rem 6rem',
           position: 'relative', zIndex: 2,
-          background: 'linear-gradient(to right, var(--negro) 80%, transparent)',
         }}>
 
+          {/* Frase principal — grande y con peso */}
           <h1 style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300, fontStyle: 'italic',
-            fontSize: 'clamp(2.8rem, 5vw, 5.5rem)',
-            lineHeight: 1.15,
+            fontSize: 'clamp(3.2rem, 5.5vw, 7rem)',
+            lineHeight: 1.12,
             color: 'var(--crema)',
-            marginBottom: '1.5rem',
+            marginBottom: '0.3rem',
+            letterSpacing: '-0.01em',
           }}>
             Cada piel tiene<br />
             una vida anterior.
           </h1>
 
-          <h2 style={{
+          <h1 style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300, fontStyle: 'italic',
-            fontSize: 'clamp(2.8rem, 5vw, 5.5rem)',
-            lineHeight: 1.15,
+            fontSize: 'clamp(3.2rem, 5.5vw, 7rem)',
+            lineHeight: 1.12,
             color: 'var(--oro)',
             marginBottom: '3rem',
+            letterSpacing: '-0.01em',
           }}>
             Nosotras le damos otra.
-          </h2>
+          </h1>
 
-          <div style={{
-            width: '60px', height: '1px',
-            background: 'linear-gradient(to right, var(--oro), transparent)',
-            marginBottom: '2.5rem',
-            opacity: 0.6,
-          }} />
-
+          {/* Subtexto editorial */}
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300, fontStyle: 'italic',
-            fontSize: '1.15rem', lineHeight: 1.9,
-            opacity: 0.5, maxWidth: '380px',
-            marginBottom: '3.5rem',
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '0.52rem',
+            letterSpacing: '0.45em',
+            color: 'var(--crema)',
+            opacity: 0.3,
+            textTransform: 'uppercase',
+            marginBottom: '4rem',
           }}>
-            Abrigos que vivieron una vida entera.<br />
-            Transformados en piezas que vivirán otra.
+            Piel rescatada · Pieza única
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', flexWrap: 'wrap' }}>
+          {/* CTAs */}
+          <div style={{
+            display: 'flex', alignItems: 'center',
+            gap: '3rem', flexWrap: 'wrap',
+          }}>
             <Link href="/coleccion" style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: 'italic', fontSize: '1.05rem',
+              fontStyle: 'italic',
+              fontSize: '1.15rem',
               letterSpacing: '0.06em',
-              color: 'var(--negro)', background: 'var(--oro)',
-              padding: '0.9rem 2.5rem', textDecoration: 'none',
+              color: 'var(--negro)',
+              background: 'var(--oro)',
+              padding: '1rem 3.5rem',
+              textDecoration: 'none',
               display: 'inline-block',
+              transition: 'opacity .3s, transform .3s',
             }}>
               Descubrir la colección
             </Link>
             <Link href="/#historia" style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: 'italic', fontSize: '1rem',
+              fontStyle: 'italic',
+              fontSize: '1.1rem',
               letterSpacing: '0.06em',
-              color: 'var(--crema)', opacity: 0.4,
+              color: 'var(--crema)',
+              opacity: 0.65,
               textDecoration: 'none',
+              transition: 'opacity .3s, color .3s',
             }}>
               Nuestra historia →
             </Link>
           </div>
         </div>
 
-        {/* DERECHA — huevo */}
+        {/* DERECHA — huevo pegado abajo a la derecha */}
         <div className="hero-visual" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
           position: 'relative', zIndex: 2,
-          padding: '8rem 3rem',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-end',
+          padding: '0 2rem 3rem 0',
         }}>
-          {/* Glow detrás del huevo */}
+          {/* Glow suave detrás */}
           <div style={{
             position: 'absolute',
-            width: '320px', height: '320px', borderRadius: '50%',
+            bottom: '3rem', right: '2rem',
+            width: '280px', height: '280px',
+            borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)',
             pointerEvents: 'none',
             animation: 'glowP 3s ease-in-out infinite',
           }} />
 
-          {/* Huevo flotante */}
+          {/* Huevo */}
           <div style={{
             position: 'relative', zIndex: 2,
             animation: 'floatAnim 5s ease-in-out infinite',
-            filter: 'drop-shadow(0 0 30px rgba(201,168,76,0.3)) drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
+            filter: 'drop-shadow(0 0 30px rgba(201,168,76,0.25)) drop-shadow(0 20px 50px rgba(0,0,0,0.6))',
           }}>
             <Image
               src="/marca/logo-huevo-t.png"
               alt="MAMOTIS"
-              width={220}
-              height={250}
+              width={280}
+              height={320}
               className="hero-egg-img"
-              style={{ objectFit: 'contain', height: '260px', width: 'auto' }}
+              style={{
+                objectFit: 'contain',
+                height: '320px',
+                width: 'auto',
+              }}
               preload
             />
           </div>
-
-          {/* Anillos */}
-          <div style={{
-            position: 'absolute', borderRadius: '50%',
-            width: '300px', height: '300px',
-            border: '1px solid rgba(201,168,76,0.06)',
-            animation: 'rotS 35s linear infinite',
-            pointerEvents: 'none',
-          }} />
-          <div style={{
-            position: 'absolute', borderRadius: '50%',
-            width: '420px', height: '420px',
-            border: '1px solid rgba(201,168,76,0.03)',
-            animation: 'rotS 55s linear infinite reverse',
-            pointerEvents: 'none',
-          }} />
-        </div>
-
-        {/* SCROLL */}
-        <div style={{
-          position: 'absolute', bottom: '2.5rem', left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', gap: '0.8rem',
-          zIndex: 3, opacity: 0.3,
-        }}>
-          <span style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: '0.44rem', letterSpacing: '0.45em',
-            textTransform: 'uppercase', writingMode: 'vertical-rl',
-          }}>Scroll</span>
-          <div style={{
-            width: '1px', height: '50px',
-            background: 'linear-gradient(to bottom, var(--oro), transparent)',
-          }} />
         </div>
 
         <style>{`
           @keyframes floatAnim {
             0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-14px); }
           }
           @keyframes glowP {
-            0%,100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-          }
-          @keyframes rotS {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            0%,100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
           }
           @media (max-width: 768px) {
             #hero {
               grid-template-columns: 1fr !important;
-              grid-template-rows: auto auto;
             }
             #hero .hero-text {
-              padding: 9rem 2rem 3rem !important;
-              background: var(--negro) !important;
-              order: 2;
+              padding: 9rem 2rem 2rem !important;
+              order: 1;
             }
             #hero .hero-visual {
-              order: 1;
-              padding: 4rem 2rem 1rem !important;
+              order: 2;
+              padding: 0 0 3rem !important;
+              justify-content: center !important;
+              align-items: center !important;
             }
             #hero .hero-egg-img {
-              height: 160px !important;
+              height: 180px !important;
             }
           }
         `}</style>
