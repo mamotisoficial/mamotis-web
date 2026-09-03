@@ -55,7 +55,7 @@ export default function FichaProducto({ producto: p }: { producto: Producto }) {
         <div style={{ width: '100%', height: '1px', background: 'var(--borde)', marginBottom: '2.5rem' }} />
         <div style={{ marginBottom: '2.5rem' }}>
           {attrs.map(({ label, value }) => (
-            <div key={label} style={{
+            <div key={label} className="ficha-attr" style={{
               display: 'grid', gridTemplateColumns: '140px 1fr',
               gap: '1rem', padding: '1rem 0', borderBottom: '1px solid rgba(201,168,76,.06)',
             }}>

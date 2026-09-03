@@ -28,7 +28,6 @@ function Pilar({ num, titulo, texto, delay }: { num: string, titulo: string, tex
   useEffect(() => {
     if (!visible) return;
     const timeout = setTimeout(() => {
-      let start = 0;
       const duration = 800;
       const startTime = performance.now();
       const animate = (now: number) => {
@@ -66,6 +65,7 @@ function Pilar({ num, titulo, texto, delay }: { num: string, titulo: string, tex
   return (
     <div
       ref={ref}
+      className="pilar-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -112,7 +112,7 @@ function Pilar({ num, titulo, texto, delay }: { num: string, titulo: string, tex
       <div style={{
         fontFamily: "'Cormorant Garamond', serif",
         fontWeight: 300,
-        fontSize: '7rem',
+        fontSize: 'clamp(4.2rem, 13vw, 7rem)',
         lineHeight: 1,
         color: 'transparent',
         WebkitTextStroke: `1px rgba(201,168,76,${visible ? (hovered ? 0.45 : 0.18) : 0})`,
@@ -170,6 +170,8 @@ export default function Pilares() {
       <style>{`
         @media (max-width: 768px) {
           #pilares-grid { grid-template-columns: 1fr !important; }
+          .pilar-card { padding: 3.4rem 1.8rem !important; }
+          .pilar-card p { font-size: 0.98rem !important; line-height: 1.85 !important; }
         }
       `}</style>
       <section

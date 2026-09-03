@@ -125,15 +125,21 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 768px) {
+          #hero > img {
+            object-fit: cover !important;
+            object-position: 65% 25% !important;
+          }
           #hero .hero-content {
-            padding: 0 1.8rem !important;
-            padding-top: 90px !important;
+            padding: 0 1.5rem !important;
+            padding-top: 84px !important;
             max-width: 100% !important;
           }
           #hero .hero-content h1,
           #hero .hero-content h2 {
-            font-size: 2rem !important;
+            font-size: 1.9rem !important;
           }
+          #hero .hero-content h2 { margin-bottom: 1.8rem !important; }
+          #hero .hero-content > div:last-child { gap: 1.1rem !important; }
         }
       `}</style>
     </section>

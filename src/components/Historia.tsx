@@ -144,12 +144,14 @@ export default function Historia() {
         @media (max-width: 768px) {
           #historia {
             grid-template-columns: 1fr !important;
-            padding: 5rem 2rem !important;
-            gap: 3rem !important;
+            padding: 4rem 1.5rem !important;
+            gap: 2.25rem !important;
           }
           #historia > div:first-child {
-            height: 300px !important;
+            height: 340px !important;
           }
+          #historia h2 { font-size: 1.7rem !important; margin-bottom: 1.6rem !important; }
+          #historia p { font-size: 0.98rem !important; line-height: 1.85 !important; padding-left: 1.4rem !important; }
         }
       `}</style>
     </>

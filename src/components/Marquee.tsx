@@ -47,11 +47,11 @@ export default function Marquee() {
   }, []);
 
   const content = [...words, ...words, ...words].flatMap((word, i) => [
-    <span key={`w-${i}`} style={{
+    <span key={`w-${i}`} className="mq-word" style={{
       fontFamily: "'Cormorant Garamond', serif",
       fontWeight: 300,
       fontStyle: 'italic',
-      fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
+      fontSize: 'clamp(1.6rem, 5.5vw, 2.8rem)',
       color: 'transparent',
       WebkitTextStroke: '1px rgba(201,168,76,0.35)',
       whiteSpace: 'nowrap' as const,
@@ -72,7 +72,7 @@ export default function Marquee() {
         t.style.webkitTextStroke = '1px rgba(201,168,76,0.35)';
       }}
     >{word}</span>,
-    <span key={`egg-${i}`} style={{
+    <span key={`egg-${i}`} className="mq-egg" style={{
       display: 'inline-flex',
       alignItems: 'center',
       padding: '0 2rem',
@@ -94,7 +94,7 @@ export default function Marquee() {
   ]);
 
   return (
-    <div style={{
+    <div className="marquee-bar" style={{
       overflow: 'hidden',
       borderTop: '1px solid rgba(201,168,76,0.1)',
       borderBottom: '1px solid rgba(201,168,76,0.1)',
@@ -102,12 +102,12 @@ export default function Marquee() {
       position: 'relative',
       background: 'var(--negro)',
     }}>
-      <div style={{
+      <div className="marquee-fade" style={{
         position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
         background: 'linear-gradient(to right, var(--negro), transparent)',
         pointerEvents: 'none',
       }} />
-      <div style={{
+      <div className="marquee-fade" style={{
         position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
         background: 'linear-gradient(to left, var(--negro), transparent)',
         pointerEvents: 'none',
@@ -116,6 +116,16 @@ export default function Marquee() {
       <div ref={trackRef} style={{ display: 'flex', alignItems: 'center', willChange: 'transform' }}>
         {content}
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .marquee-bar { padding: 1.1rem 0 !important; }
+          .marquee-fade { width: 42px !important; }
+          .mq-word { padding: 0 0.9rem !important; }
+          .mq-egg { padding: 0 1rem !important; }
+          .mq-egg img { height: 46px !important; }
+        }
+      `}</style>
     </div>
   );
 }

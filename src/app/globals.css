@@ -21,92 +21,69 @@ body {
 
 /* ═══════════════════════════════════
    RESPONSIVE — 768px breakpoint
+   (Nav / Hero / Historia / Pilares / Marquee llevan sus
+   propios <style> scopeados dentro de cada componente)
 ═══════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Nav */
-  .nav-container { padding: 1.4rem 1.5rem !important; }
-  .nav-links { display: none !important; }
-  .nav-cta { display: none !important; }
-  .nav-hamburger { display: block !important; }
-
-  /* Hero */
-  .hero-section { grid-template-columns: 1fr !important; }
-  .hero-left { padding: 8rem 1.5rem 4rem !important; }
-  .hero-right { display: none !important; }
-  .hero-scroll { display: none !important; }
-  .hero-h1 { font-size: clamp(2rem, 9vw, 2.8rem) !important; margin-bottom: 1.5rem !important; }
-  .hero-p { font-size: 0.9rem !important; line-height: 1.7 !important; margin-bottom: 2.5rem !important; }
-  .hero-ctas { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
-
-  /* Historia */
-  .historia-section {
-    grid-template-columns: 1fr !important;
-    padding: 5rem 1.5rem !important;
-    gap: 2.5rem !important;
-  }
-  .historia-image { display: none !important; }
-
-  /* Pilares */
-  .pilares-section { grid-template-columns: 1fr !important; }
-  .pilares-item { padding: 3rem 2rem !important; }
-
-  /* Cita */
+  /* ── Cita ── */
   .cita-section { padding: 6rem 1.5rem !important; }
+  .cita-section p:first-of-type { font-size: clamp(1.5rem, 6.5vw, 2.4rem) !important; }
 
-  /* Preview Colección */
-  .preview-section { padding: 3rem 1.5rem 5rem !important; }
+  /* ── Preview Colección ── */
+  .preview-section { padding: 4rem 1.5rem 5rem !important; }
   .preview-header {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 1rem !important;
-    margin-bottom: 2rem !important;
+    gap: 0.7rem !important;
+    margin-bottom: 2.2rem !important;
   }
   .preview-grid {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
     height: auto !important;
-    min-height: unset !important;
+    min-height: 0 !important;
   }
-  .preview-main { grid-row: auto !important; min-height: 65vw !important; }
-  .preview-item { min-height: 55vw !important; }
+  .preview-main { grid-row: auto !important; min-height: 60vw !important; }
+  .preview-item { min-height: 52vw !important; }
 
-  /* Footer */
-  .footer-inner {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 1.5rem !important;
-    padding: 2.5rem 1.5rem !important;
-    text-align: center !important;
-  }
-  .footer-links {
+  /* ── Footer ── */
+  footer { padding: 3rem 1.5rem 2.5rem !important; }
+  footer > div:first-child { margin-bottom: 2rem !important; }
+  footer > div:nth-child(2) {
     flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 1.2rem !important;
+    gap: 1.4rem !important;
+    margin-bottom: 2rem !important;
   }
 
-  /* Colección Hero */
-  .coleccion-hero { padding: 9rem 1.5rem 3rem !important; }
+  /* ── Colección — cabecera ── */
+  .coleccion-hero { padding: 8rem 1.5rem 3rem !important; }
 
-  /* Colección Grid */
+  /* ── Colección — rejilla ── */
   .coleccion-filters {
-    padding: 1.5rem !important;
-    gap: 0.8rem !important;
+    padding: 1.4rem 1.5rem !important;
+    gap: 1.1rem !important;
     flex-wrap: wrap !important;
   }
   .coleccion-count { display: none !important; }
   .coleccion-grid-inner { grid-template-columns: 1fr !important; }
 
-  /* Ficha Producto */
+  /* ── Ficha de producto ── */
   .ficha-grid {
     grid-template-columns: 1fr !important;
-    min-height: unset !important;
+    min-height: 0 !important;
   }
-  .ficha-image { min-height: 65vw !important; }
+  .ficha-image { min-height: 62vw !important; }
   .ficha-info {
     padding: 3rem 1.5rem 4rem !important;
     border-left: none !important;
     border-top: 1px solid rgba(201,168,76,0.1) !important;
     justify-content: flex-start !important;
+  }
+  .ficha-info h1 { font-size: 2rem !important; }
+  .ficha-attr {
+    grid-template-columns: 1fr !important;
+    gap: 0.25rem !important;
+    padding: 0.85rem 0 !important;
   }
 }

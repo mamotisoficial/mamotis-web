@@ -19,8 +19,8 @@ export default function Cita() {
           fontSize: 'clamp(1.6rem, 4.5vw, 4rem)', lineHeight: 1.3,
           maxWidth: '780px', margin: '0 auto 1.5rem', color: 'var(--crema)',
         }}>
-          "No estás comprando un bolso.<br />
-          Estás <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>continuando</em> una historia."
+          &ldquo;No estás comprando un bolso.<br />
+          Estás <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>continuando</em> una historia.&rdquo;
         </p>
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: '.52rem', letterSpacing: '.4em', opacity: .22 }}>
           — MAMOTIS
