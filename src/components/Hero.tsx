@@ -18,7 +18,7 @@ export default function Hero() {
         fill
         style={{
           objectFit: 'cover',
-          objectPosition: 'center right',
+          objectPosition: '70% center',
           filter: 'brightness(0.72) contrast(1.05) saturate(0.85)',
         }}
         preload

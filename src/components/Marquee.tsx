@@ -75,18 +75,18 @@ export default function Marquee() {
     <span key={`egg-${i}`} style={{
       display: 'inline-flex',
       alignItems: 'center',
-      padding: '0 0.8rem',
+      padding: '0 1.2rem',
       flexShrink: 0,
-      filter: 'drop-shadow(0 0 8px rgba(201,168,76,0.6)) drop-shadow(0 0 16px rgba(201,168,76,0.3))',
+      filter: 'drop-shadow(0 0 12px rgba(201,168,76,0.9)) drop-shadow(0 0 24px rgba(201,168,76,0.5)) drop-shadow(0 0 40px rgba(201,168,76,0.3))',
       animation: 'eggGlow 2s ease-in-out infinite',
       animationDelay: `${i * 0.3}s`,
     }}>
       <Image
         src="/marca/logo-huevo-t.png"
         alt=""
-        width={28}
-        height={32}
-        style={{ objectFit: 'contain', height: '28px', width: 'auto', opacity: 0.85 }}
+        width={40}
+        height={46}
+        style={{ objectFit: 'contain', height: '42px', width: 'auto', opacity: 0.85 }}
       />
     </span>,
   ]);
@@ -117,8 +117,8 @@ export default function Marquee() {
 
       <style>{`
         @keyframes eggGlow {
-          0%,100% { filter: drop-shadow(0 0 6px rgba(201,168,76,0.5)) drop-shadow(0 0 12px rgba(201,168,76,0.2)); }
-          50% { filter: drop-shadow(0 0 12px rgba(201,168,76,0.9)) drop-shadow(0 0 24px rgba(201,168,76,0.5)); }
+          0%,100% { filter: drop-shadow(0 0 10px rgba(201,168,76,0.7)) drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+          50% { filter: drop-shadow(0 0 18px rgba(201,168,76,1)) drop-shadow(0 0 36px rgba(201,168,76,0.7)) drop-shadow(0 0 60px rgba(201,168,76,0.4)); }
         }
       `}</style>
     </div>
