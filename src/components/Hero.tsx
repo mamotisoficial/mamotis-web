@@ -18,7 +18,7 @@ export default function Hero() {
         fill
         style={{
           objectFit: 'contain',
-          objectPosition: 'right center',
+          objectPosition: '75% center',
           background: '#0a0806',
           filter: 'brightness(0.92) contrast(1.02) saturate(0.9)',
         }}
