@@ -84,23 +84,9 @@ export default function Hero() {
         <div style={{
           width: '36px', height: '1px',
           background: 'var(--oro)',
-          marginBottom: '1rem',
+          marginBottom: '2.75rem',
           opacity: 0.6,
         }} />
-
-        <p style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: '0.46rem',
-          letterSpacing: '0.35em',
-          color: 'var(--crema)',
-          opacity: 0.38,
-          textTransform: 'uppercase',
-          marginBottom: '3rem',
-          lineHeight: 1.9,
-        }}>
-          Piezas únicas. Historias reales.<br />
-          Lujo con propósito.
-        </p>
 
         <div style={{
           display: 'flex',
@@ -147,9 +133,6 @@ export default function Hero() {
           #hero .hero-content h1,
           #hero .hero-content h2 {
             font-size: 2rem !important;
-          }
-          #hero .hero-content p {
-            display: none;
           }
         }
       `}</style>
