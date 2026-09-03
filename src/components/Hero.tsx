@@ -18,27 +18,33 @@ export default function Hero() {
         fill
         style={{
           objectFit: 'cover',
-          objectPosition: '70% center',
-          filter: 'brightness(0.72) contrast(1.05) saturate(0.85)',
+          objectPosition: '65% center',
+          filter: 'brightness(0.7) contrast(1.05) saturate(0.85)',
         }}
         preload
       />
 
+      {/* Overlay izquierda para legibilidad */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to right, rgba(5,5,5,0.82) 0%, rgba(5,5,5,0.5) 45%, rgba(5,5,5,0.05) 100%)',
-        zIndex: 1,
-      }} />
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 45%)',
+        background: 'linear-gradient(to right, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.6) 40%, rgba(5,5,5,0.1) 100%)',
         zIndex: 1,
       }} />
 
+      {/* Overlay abajo */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to top, rgba(5,5,5,0.65) 0%, transparent 40%)',
+        zIndex: 1,
+      }} />
+
+      {/* CONTENIDO — padding-top para respetar el nav */}
       <div className="hero-content" style={{
         position: 'relative', zIndex: 2,
         padding: '0 5rem',
-        maxWidth: '58%',
+        paddingTop: '80px',
+        width: '100%',
+        maxWidth: '700px',
         display: 'flex',
         flexDirection: 'column',
       }}>
@@ -46,10 +52,10 @@ export default function Hero() {
         <h1 style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(2.8rem, 5vw, 6rem)',
-          lineHeight: 1.1,
+          fontSize: 'clamp(2.4rem, 4.2vw, 5.2rem)',
+          lineHeight: 1.15,
           color: 'var(--crema)',
-          marginBottom: '0.15rem',
+          marginBottom: '0.1rem',
           letterSpacing: '-0.01em',
         }}>
           Cada piel tiene una vida anterior.
@@ -58,30 +64,30 @@ export default function Hero() {
         <h2 style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(2.8rem, 5vw, 6rem)',
-          lineHeight: 1.1,
+          fontSize: 'clamp(2.4rem, 4.2vw, 5.2rem)',
+          lineHeight: 1.15,
           color: 'var(--oro)',
-          marginBottom: '3rem',
+          marginBottom: '2.5rem',
           letterSpacing: '-0.01em',
         }}>
           Nosotras le damos otra.
         </h2>
 
         <div style={{
-          width: '40px', height: '1px',
+          width: '36px', height: '1px',
           background: 'var(--oro)',
-          marginBottom: '1.2rem',
+          marginBottom: '1rem',
           opacity: 0.6,
         }} />
 
         <p style={{
           fontFamily: "'DM Mono', monospace",
-          fontSize: '0.48rem',
-          letterSpacing: '0.38em',
+          fontSize: '0.46rem',
+          letterSpacing: '0.35em',
           color: 'var(--crema)',
-          opacity: 0.4,
+          opacity: 0.38,
           textTransform: 'uppercase',
-          marginBottom: '3.5rem',
+          marginBottom: '3rem',
           lineHeight: 1.9,
         }}>
           Piezas únicas. Historias reales.<br />
@@ -91,30 +97,32 @@ export default function Hero() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '2.5rem',
+          gap: '2rem',
           flexWrap: 'wrap',
         }}>
           <Link href="/coleccion" style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
-            fontSize: '1.05rem',
+            fontSize: '1rem',
             letterSpacing: '0.06em',
             color: 'var(--negro)',
             background: 'var(--oro)',
-            padding: '0.85rem 2.8rem',
+            padding: '0.8rem 2.5rem',
             textDecoration: 'none',
             display: 'inline-block',
+            whiteSpace: 'nowrap',
           }}>
             Descubrir la colección
           </Link>
           <Link href="/#historia" style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
-            fontSize: '1rem',
+            fontSize: '0.95rem',
             letterSpacing: '0.06em',
             color: 'var(--crema)',
             opacity: 0.55,
             textDecoration: 'none',
+            whiteSpace: 'nowrap',
           }}>
             Nuestra historia →
           </Link>
@@ -124,12 +132,16 @@ export default function Hero() {
       <style>{`
         @media (max-width: 768px) {
           #hero .hero-content {
-            max-width: 90% !important;
-            padding: 0 2rem !important;
+            padding: 0 1.8rem !important;
+            padding-top: 90px !important;
+            max-width: 100% !important;
           }
           #hero .hero-content h1,
           #hero .hero-content h2 {
-            font-size: 2.2rem !important;
+            font-size: 2rem !important;
+          }
+          #hero .hero-content p {
+            display: none;
           }
         }
       `}</style>
