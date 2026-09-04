@@ -101,7 +101,7 @@ export default function Historia() {
         <div>
           <span style={{
             fontFamily: "'DM Mono', monospace",
-            fontSize: '.52rem', letterSpacing: '.4em',
+            fontSize: '.58rem', letterSpacing: '.4em',
             color: 'var(--oro)', opacity: .5,
             textTransform: 'uppercase',
             marginBottom: '2rem', display: 'block',
@@ -110,7 +110,7 @@ export default function Historia() {
           <h2 style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300, fontStyle: 'italic',
-            fontSize: 'clamp(1.8rem, 2.8vw, 3rem)',
+            fontSize: 'clamp(2rem, 3vw, 3.4rem)',
             lineHeight: 1.25,
             marginBottom: '2.5rem',
           }}>
@@ -120,7 +120,7 @@ export default function Historia() {
 
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: '1rem', lineHeight: 2, opacity: .58,
+            fontSize: '1.1rem', lineHeight: 2, opacity: .58,
             borderLeft: '1px solid rgba(201,168,76,.2)',
             paddingLeft: '1.8rem', marginBottom: '1.5rem',
           }}>
@@ -130,7 +130,7 @@ export default function Historia() {
 
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: '1rem', lineHeight: 2, opacity: .58,
+            fontSize: '1.1rem', lineHeight: 2, opacity: .58,
             borderLeft: '1px solid rgba(201,168,76,.2)',
             paddingLeft: '1.8rem',
           }}>
