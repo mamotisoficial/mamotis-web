@@ -66,7 +66,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <span style={{ fontFamily:'var(--sans)', fontSize:9,
-            letterSpacing:'0.15em', color:'#352a18', textTransform:'uppercase' }}>
+            letterSpacing:'0.15em', color:'rgba(201,168,76,0.35)', textTransform:'uppercase' }}>
             © MAMOTIS 2026
           </span>
         </div>
@@ -83,10 +83,10 @@ export default function Footer() {
           ].map(([href, label]) => (
             <Link key={href} href={href}
               style={{ fontFamily:'var(--sans)', fontSize:9, letterSpacing:'0.15em',
-                textTransform:'uppercase', color:'#352a18', textDecoration:'none',
+                textTransform:'uppercase', color:'rgba(201,168,76,0.5)', textDecoration:'none',
                 transition:'color 0.2s' }}
-              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#7a6240'}
-              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='#352a18'}>
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='rgba(201,168,76,0.9)'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='rgba(201,168,76,0.5)'}>
               {label}
             </Link>
           ))}
