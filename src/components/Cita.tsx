@@ -28,13 +28,13 @@ export default function Cita() {
             <h2 style={{
               fontFamily: 'var(--serif)',
               fontSize: 'clamp(28px,3.5vw,50px)',
-              fontStyle: 'italic',
               fontWeight: 300,
-              lineHeight: 1.22,
+              lineHeight: 1.15,
               color: '#241b12',
               margin: '0 0 36px',
             }}>
-              Del pasado,<br />una nueva historia.
+              Del pasado,<br />
+              <em style={{ fontStyle:'italic', color:'#a07830' }}>una nueva historia.</em>
             </h2>
 
             {/* Dos columnas con borde izquierdo dorado */}

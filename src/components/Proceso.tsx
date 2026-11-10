@@ -11,8 +11,8 @@ export default function Proceso() {
     <section id="proceso" style={{ padding: '90px 0 100px', background: '#080604' }}>
       <div className="wrap">
         <div className="section-label">El proceso</div>
-        <h2 style={{ textAlign: 'center', font: `italic clamp(32px,4vw,52px) var(--serif)`, margin: '18px 0 56px', color: 'var(--cream)' }}>
-          Artesanía que transforma.
+        <h2 style={{ textAlign: 'center', fontFamily: 'var(--serif)', fontSize: 'clamp(32px,4vw,52px)', fontWeight: 300, lineHeight: 1.15, margin: '18px 0 56px', color: 'var(--cream)' }}>
+          Artesanía que<br /><em style={{ fontStyle:'italic', color:'var(--gold)' }}>transforma.</em>
         </h2>
 
         {/* Grid con flechas entre cards */}

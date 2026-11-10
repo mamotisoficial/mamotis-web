@@ -14,9 +14,9 @@ export default function Contacto() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: 50 }} className="contacto-grid">
           <div>
             <div className="section-label" style={{ justifyContent: 'flex-start', marginBottom: 24 }}>La experiencia MAMOTIS</div>
-            <h2 style={{ font: `italic clamp(36px,5vw,64px)/1.1 var(--serif)`, color: 'var(--cream)', margin: '0 0 20px' }}>
+            <h2 style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(36px,5vw,64px)', fontWeight: 300, lineHeight: 1.1, color: 'var(--cream)', margin: '0 0 20px' }}>
               Más que un bolso,<br />
-              <span style={{ color: 'var(--gold2)' }}>es una pieza con alma.</span>
+              <em style={{ fontStyle:'italic', color:'var(--gold2)' }}>es una pieza con alma.</em>
             </h2>
             <p style={{ font: `15px/1.9 var(--sans)`, color: '#b5aa97', margin: 0, maxWidth: 420, fontWeight: 300 }}>
               Que combina tradición, diseño y un compromiso real con el planeta. Escríbenos y te contamos qué tenemos disponible.

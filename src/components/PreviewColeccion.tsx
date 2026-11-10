@@ -15,8 +15,8 @@ export default function PreviewColeccion() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-end', gap: 24, marginBottom: 56 }} className="coleccion-header">
           <div>
             <div style={{ fontSize: 9, letterSpacing: '0.48em', textTransform: 'uppercase', color: '#a38b5c', marginBottom: 14 }}>La colección</div>
-            <h2 style={{ font: `italic clamp(32px,4.5vw,58px)/1.08 var(--serif)`, color: '#241b12', margin: 0 }}>
-              Bolsos únicos,<br />como tú.
+            <h2 style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(32px,4.5vw,58px)', fontWeight: 300, lineHeight: 1.1, color: '#241b12', margin: 0 }}>
+              Bolsos únicos,<br /><em style={{ fontStyle:'italic', color:'#a07830' }}>como tú.</em>
             </h2>
           </div>
           <Link href="/coleccion"

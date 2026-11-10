@@ -3,20 +3,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-// Huevo dorado exacto — forma del logo MAMOTIS
+// Huevo dorado MAMOTIS — forma oval perfecta con brillo
 const EggIcon = ({ size = 18 }: { size?: number }) => (
-  <svg viewBox="0 0 60 76" width={size} height={size * 1.27} aria-hidden="true" style={{ display:'inline-block', verticalAlign:'middle', flexShrink: 0 }}>
+  <svg viewBox="0 0 60 76" width={size} height={size * 1.27} aria-hidden="true"
+    style={{ display:'inline-block', verticalAlign:'middle', flexShrink: 0 }}>
     <defs>
-      <linearGradient id="eggG" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%"   stopColor="#8c6424"/>
-        <stop offset="40%"  stopColor="#f5d987"/>
-        <stop offset="70%"  stopColor="#d4a93c"/>
-        <stop offset="100%" stopColor="#8c6424"/>
+      <linearGradient id="eggGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+        <stop offset="0%"   stopColor="#6b4a18"/>
+        <stop offset="30%"  stopColor="#f0c84a"/>
+        <stop offset="55%"  stopColor="#e8b830"/>
+        <stop offset="80%"  stopColor="#c49020"/>
+        <stop offset="100%" stopColor="#7a5215"/>
       </linearGradient>
+      <radialGradient id="eggShine" cx="38%" cy="28%" r="35%">
+        <stop offset="0%"   stopColor="rgba(255,245,180,0.55)"/>
+        <stop offset="100%" stopColor="rgba(255,245,180,0)"/>
+      </radialGradient>
     </defs>
-    <path d="M30 3 C20 18 7 32 9 48 C11 65 21 73 30 73 C41 73 52 64 52 48 C52 32 40 18 30 3Z"
-      fill="url(#eggG)" stroke="#e7c66f" strokeWidth="0.8"/>
-    <path d="M18 42 Q30 32 43 43" fill="none" stroke="rgba(255,240,180,0.5)" strokeWidth="1.2"/>
+    <path d="M30 4 C22 14 8 28 8 46 C8 62 18 73 30 73 C42 73 52 62 52 46 C52 28 38 14 30 4Z"
+      fill="url(#eggGrad)"/>
+    <path d="M30 4 C22 14 8 28 8 46 C8 62 18 73 30 73 C42 73 52 62 52 46 C52 28 38 14 30 4Z"
+      fill="url(#eggShine)"/>
   </svg>
 );
 
@@ -43,8 +50,8 @@ export default function Nav() {
           font: `italic 14px var(--serif)`, letterSpacing: '0.08em',
         }}>
           {DOUBLE.map((t, i) => (
-            <span key={i} style={{ display:'flex', alignItems:'center', gap: 10 }}>
-              {t} <EggIcon size={13} />
+            <span key={i} style={{ display:'flex', alignItems:'center', gap: 12 }}>
+              {t} <EggIcon size={16} />
             </span>
           ))}
         </div>

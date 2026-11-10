@@ -128,3 +128,25 @@ img { display: block; max-width: 100%; }
     z-index: 100;
   }
 }
+
+/* ─── Tipografía global MAMOTIS ──────────────────────────── */
+/* Patrón: h2 con primera línea normal oscura + segunda línea italic dorada */
+.titulo-mamotis {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.titulo-mamotis em,
+.titulo-mamotis i {
+  font-style: italic;
+  color: #a07830;
+  display: block;
+}
+
+/* Cormorant como base para todos los headings */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 300;
+}

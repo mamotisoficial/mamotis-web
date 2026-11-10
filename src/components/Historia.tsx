@@ -61,14 +61,14 @@ export default function Historia() {
               <h3 style={{
                 fontFamily: 'var(--serif)',
                 fontSize: 'clamp(32px,3.4vw,54px)',
-                fontStyle: 'italic',
+                fontStyle: 'normal',
                 fontWeight: 300,
                 lineHeight: 1.18,
                 margin: '0 0 28px',
                 color: '#241b12',
               }}>
                 {lines[0]}<br />
-                <span style={{ color: '#a07830' }}>{lines[1]}</span>
+                <em style={{ fontStyle:'italic', color:'#a07830' }}>{lines[1]}</em>
               </h3>
 
               {/* Cuerpo */}
