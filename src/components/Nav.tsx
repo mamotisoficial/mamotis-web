@@ -3,17 +3,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-// Huevito SVG inline para el ribbon
-const EggSeed = () => (
-  <svg viewBox="0 0 70 90" style={{width:14,height:18,display:'inline-block',verticalAlign:'middle',flexShrink:0}} aria-hidden="true">
+// Huevo dorado exacto — forma del logo MAMOTIS
+const EggIcon = ({ size = 18 }: { size?: number }) => (
+  <svg viewBox="0 0 60 76" width={size} height={size * 1.27} aria-hidden="true" style={{ display:'inline-block', verticalAlign:'middle', flexShrink: 0 }}>
     <defs>
-      <linearGradient id="eggR" x1="0" x2="1">
-        <stop stopColor="#8c6424"/>
-        <stop offset=".45" stopColor="#c9a84c"/>
-        <stop offset="1" stopColor="#a77928"/>
+      <linearGradient id="eggG" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stopColor="#8c6424"/>
+        <stop offset="40%"  stopColor="#f5d987"/>
+        <stop offset="70%"  stopColor="#d4a93c"/>
+        <stop offset="100%" stopColor="#8c6424"/>
       </linearGradient>
     </defs>
-    <path d="M35 4 C23 22 9 38 11 55 C13 76 25 85 35 85 C48 85 60 75 60 56 C60 39 47 20 35 4Z" fill="url(#eggR)"/>
+    <path d="M30 3 C20 18 7 32 9 48 C11 65 21 73 30 73 C41 73 52 64 52 48 C52 32 40 18 30 3Z"
+      fill="url(#eggG)" stroke="#e7c66f" strokeWidth="0.8"/>
+    <path d="M18 42 Q30 32 43 43" fill="none" stroke="rgba(255,240,180,0.5)" strokeWidth="1.2"/>
   </svg>
 );
 
@@ -34,14 +37,14 @@ export default function Nav() {
         display: 'flex', alignItems: 'center', whiteSpace: 'nowrap',
       }}>
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 28,
+          display: 'flex', alignItems: 'center', gap: 24,
           minWidth: 'max-content',
           animation: 'marquee 42s linear infinite',
           font: `italic 14px var(--serif)`, letterSpacing: '0.08em',
         }}>
           {DOUBLE.map((t, i) => (
-            <span key={i} style={{display:'flex',alignItems:'center',gap:12}}>
-              {t} <EggSeed />
+            <span key={i} style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              {t} <EggIcon size={13} />
             </span>
           ))}
         </div>
@@ -51,58 +54,59 @@ export default function Nav() {
       <header style={{
         position: 'fixed', top: 38, left: 0, width: '100%', zIndex: 50,
         height: 72,
-        borderBottom: '1px solid rgba(255,255,255,0.10)',
-        background: 'rgba(8,6,4,0.82)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        background: 'rgba(8,6,4,0.88)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
       }}>
         <div style={{
           width: 'min(1320px,88vw)', margin: '0 auto',
           height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
           {/* Logo: huevo + script mamotis */}
-          <Link href="/" style={{display:'flex',alignItems:'center',gap:'0.8rem',textDecoration:'none'}}>
-            <div style={{width:32,height:38,position:'relative',flexShrink:0}}>
-              <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS emblema" fill style={{objectFit:'contain'}} />
+          <Link href="/" style={{ display:'flex', alignItems:'center', gap:'0.75rem', textDecoration:'none' }}>
+            <div style={{ width: 30, height: 36, position:'relative', flexShrink: 0 }}>
+              <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS emblema" fill style={{ objectFit:'contain' }} />
             </div>
-            <div style={{position:'relative',width:110,height:34}}>
+            <div style={{ position:'relative', width: 108, height: 32 }}>
               <Image src="/marca/mamotis-t.png" alt="Mamotis" fill
-                style={{objectFit:'contain',objectPosition:'left center',filter:'brightness(0.95) sepia(0.1)',opacity:0.92}} />
+                style={{ objectFit:'contain', objectPosition:'left center', opacity: 0.92 }} />
             </div>
           </Link>
 
           {/* Nav links */}
-          <nav className={`mamotis-nav${open?' nav-open':''}`} style={{display:'flex',gap:30,font:`13px var(--serif)`,color:'#e7dcc8'}}>
+          <nav className={`mamotis-nav${open?' nav-open':''}`}
+            style={{ display:'flex', gap: 28, font:`13px var(--serif)`, color:'#e7dcc8', fontWeight: 400 }}>
             {[['#inicio','Inicio'],['#historia','La historia'],['#proceso','El proceso'],['#coleccion','Colección'],['#filosofia','Filosofía'],['#contacto','Contacto']].map(([h,l])=>(
               <Link key={h} href={h} onClick={()=>setOpen(false)}
-                style={{transition:'color .2s',whiteSpace:'nowrap'}}
-                onMouseEnter={e=>e.currentTarget.style.color='var(--gold2)'}
-                onMouseLeave={e=>e.currentTarget.style.color=''}>
+                style={{ transition:'color .2s', whiteSpace:'nowrap', letterSpacing: '0.03em' }}
+                onMouseEnter={e => e.currentTarget.style.color='var(--gold2)'}
+                onMouseLeave={e => e.currentTarget.style.color=''}>
                 {l}
               </Link>
             ))}
           </nav>
 
-          <div style={{display:'flex',alignItems:'center',gap:16}}>
+          <div style={{ display:'flex', alignItems:'center', gap: 16 }}>
             <Link href="#coleccion"
-              style={{border:'1px solid #c6a65e',padding:'9px 16px',fontSize:9,letterSpacing:'0.16em',textTransform:'uppercase',whiteSpace:'nowrap'}}>
+              style={{ border:'1px solid rgba(201,168,76,0.6)', padding:'9px 16px', fontSize: 9, letterSpacing:'0.16em', textTransform:'uppercase', whiteSpace:'nowrap', color:'var(--cream)', transition:'.2s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold)'; (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.6)'; (e.currentTarget as HTMLElement).style.color = 'var(--cream)'; }}>
               Descubre las piezas
             </Link>
             <button onClick={()=>setOpen(o=>!o)} className="hamburger"
-              style={{display:'none',background:'none',border:0,color:'var(--cream)',fontSize:22,cursor:'pointer',lineHeight:1}}
+              style={{ display:'none', background:'none', border:0, color:'var(--cream)', fontSize: 22, cursor:'pointer', lineHeight: 1 }}
               aria-label="Menú">☰</button>
           </div>
         </div>
       </header>
 
-      {/* Spacer para contenido debajo del nav fijo */}
-      <div style={{height: 38 + 72}} />
+      {/* Spacer */}
+      <div style={{ height: 38 + 72 }} />
 
       <style>{`
         @keyframes marquee { to { transform: translateX(-50%); } }
-        @media(max-width:900px){
-          .mamotis-nav{ gap:16px!important; font-size:11px!important; }
-        }
+        @media(max-width:900px){ .mamotis-nav{ gap:14px!important; font-size:11px!important; } }
         @media(max-width:640px){
           .hamburger{ display:block!important; }
           .mamotis-nav{ display:none!important; }

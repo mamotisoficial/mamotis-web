@@ -10,7 +10,8 @@
   --gold2:  #e4c875;
   --muted:  #a99d87;
 
-  --serif:   var(--font-playfair), Georgia, serif;
+  /* Tipografía: Cormorant Garamond como serif principal */
+  --serif:   var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --display: 'Italiana', Georgia, serif;
   --sans:    var(--font-dm-sans), Arial, sans-serif;
 
@@ -53,7 +54,6 @@ img { display: block; max-width: 100%; }
   display: block;
   margin-bottom: 1rem;
 }
-.eyebrow-c { color: #aa8a42; }
 .section-label {
   display: flex;
   align-items: center;
@@ -68,22 +68,13 @@ img { display: block; max-width: 100%; }
 .section-label::after {
   content: "";
   height: 1px;
-  background: #d2c4a6;
+  background: rgba(201,168,76,0.25);
   flex: 1;
 }
 .on-crema  { background: var(--cream);  color: var(--txt-crema); }
 .on-negro  { background: var(--ink);    color: var(--txt-negro); }
-.on-negro2 { background: var(--ink2);   color: var(--txt-negro); }
 .serif { font-family: var(--serif); }
 .gold  { color: var(--gold2); }
-
-/* ─── Reveal (scroll animation) ─────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
 
 /* ─── Button ─────────────────────────────────────────────── */
 .btn-gold {
@@ -119,11 +110,6 @@ img { display: block; max-width: 100%; }
   animation: marquee 38s linear infinite;
   font: italic 15px var(--serif);
   letter-spacing: 0.09em;
-}
-.ribbon .seed {
-  font-style: normal;
-  color: #b48c37;
-  font-size: 17px;
 }
 @keyframes marquee { to { transform: translateX(-50%); } }
 

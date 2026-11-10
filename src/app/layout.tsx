@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { DM_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -8,11 +8,11 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
-const playfair = Playfair_Display({
-  weight: ["400", "500"],
+const cormorant = Cormorant_Garamond({
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
+      <body className={`${dmSans.variable} ${cormorant.variable} antialiased`}>
         {children}
       </body>
     </html>
