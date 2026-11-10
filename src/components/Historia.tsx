@@ -3,24 +3,23 @@ import Image from 'next/image';
 const ROWS = [
   {
     eyebrow: 'El origen',
-    fecha: 'C. 1960  —  DÉCADA PRODIGIOSA',
+    fecha: 'C. 1940  —  UNA ÉPOCA DE ESTILO',
     tituloA: 'Un abrigo comprado',
     tituloB: 'para toda la vida.',
-    body: 'Las mujeres de los años sesenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo — se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
+    body: 'Las mujeres de los años cuarenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo — se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
     img: '/historia/historia-01.jpg',
-    alt: 'Mujeres con abrigos de piel vintage, años 60',
-    // Panorámica 1774x887 — centrar verticalmente en la parte superior donde están las señoras
+    alt: 'Mujeres con abrigos de piel vintage, años 40',
     pos: 'center top',
     reverse: false,
   },
   {
     eyebrow: 'El pasado',
-    fecha: 'C. 1950  —  UNA ÉPOCA DE ESTILO',
+    fecha: 'C. 1940  —  ELEGANCIA QUE PERDURA',
     tituloA: 'Elegancia',
     tituloB: 'que perdura.',
     body: 'Más que una prenda, el abrigo de piel era un símbolo de distinción. Acompañaba a las mujeres en sus viajes, en sus logros, en los momentos que importaban. Su belleza y su calidad trascendían modas y generaciones.',
     img: '/historia/historia-02.jpg',
-    alt: 'Mujer elegante con abrigo de piel, años 50',
+    alt: 'Mujeres elegantes con abrigos de piel, años 40',
     pos: 'center top',
     reverse: true,
   },
@@ -30,9 +29,9 @@ const ROWS = [
     tituloA: 'La misma piel.',
     tituloB: 'Otra vida.',
     body: 'Nuestras artesanas transforman cada abrigo a mano, con respeto y lentitud. El resultado es un bolso que lleva dos historias dentro: la de quien lo llevó antes y la que tú escribirás.',
-    img: '/historia/historia-03.jpg',
-    alt: 'Artesana transformando abrigo en bolso MAMOTIS',
-    pos: 'center center',
+    img: '/historia/historia-senoras.jpg',
+    alt: 'Mujeres con abrigos de piel vintage, años 40',
+    pos: 'center top',
     reverse: false,
   },
 ];
@@ -64,7 +63,7 @@ export default function Historia() {
               fontWeight:300, fontStyle:'italic', lineHeight:1.08, margin:'0 0 36px', color:'#a07830' }}>
               {r.tituloB}
             </h3>
-            <p style={{ fontFamily:'var(--sans)', fontSize:16, lineHeight:2,
+            <p style={{ fontFamily:'var(--sans)', fontSize:17, lineHeight:2,
               color:'#5a4f42', margin:'0 0 40px', maxWidth:'100%', fontWeight:300 }}>
               {r.body}
             </p>
@@ -75,11 +74,11 @@ export default function Historia() {
             </div>
           </div>
 
-          {/* Foto — ocupa toda la columna sin padding extra */}
+          {/* Foto */}
           <div style={{
             order: r.reverse ? 1 : 2,
             position: 'relative',
-            minHeight: 'clamp(400px,50vw,600px)',
+            minHeight: 'clamp(400px,50vw,620px)',
             overflow: 'hidden',
             background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
           }} className="historia-foto-col">
@@ -90,7 +89,7 @@ export default function Historia() {
               style={{
                 objectFit: 'cover',
                 objectPosition: r.pos,
-                filter: 'sepia(0.15) contrast(1.05) brightness(0.97)',
+                filter: 'sepia(0.08) contrast(1.02) brightness(0.98)',
               }}
             />
           </div>
@@ -101,7 +100,7 @@ export default function Historia() {
         @media(max-width:720px){
           .historia-row{grid-template-columns:1fr!important;}
           .historia-row>div{order:unset!important;}
-          .historia-foto-col{min-height:260px!important;}
+          .historia-foto-col{min-height:280px!important;}
         }
       `}</style>
     </section>
