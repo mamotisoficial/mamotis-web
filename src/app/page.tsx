@@ -5,8 +5,8 @@ import Cita from '@/components/Cita';
 import Historia from '@/components/Historia';
 import Proceso from '@/components/Proceso';
 import PreviewColeccion from '@/components/PreviewColeccion';
-import Pilares from '@/components/Pilares';
 import Instagram from '@/components/Instagram';
+import Cierre from '@/components/Cierre';
 import Contacto from '@/components/Contacto';
 import Footer from '@/components/Footer';
 
@@ -21,8 +21,8 @@ export default function Home() {
         <Historia />
         <Proceso />
         <PreviewColeccion />
-        <Pilares />
         <Instagram />
+        <Cierre />
         <Contacto />
       </main>
       <Footer />
