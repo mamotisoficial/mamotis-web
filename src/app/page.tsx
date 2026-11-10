@@ -6,7 +6,6 @@ import Historia from '@/components/Historia';
 import Proceso from '@/components/Proceso';
 import PreviewColeccion from '@/components/PreviewColeccion';
 import Instagram from '@/components/Instagram';
-import Cierre from '@/components/Cierre';
 import Contacto from '@/components/Contacto';
 import Footer from '@/components/Footer';
 
@@ -22,7 +21,6 @@ export default function Home() {
         <Proceso />
         <PreviewColeccion />
         <Instagram />
-        <Cierre />
         <Contacto />
       </main>
       <Footer />

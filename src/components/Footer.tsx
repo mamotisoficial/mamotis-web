@@ -1,67 +1,77 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#050403', borderTop: '1px solid #2a1f10', padding: '50px 0 30px' }}>
+    <footer style={{ background:'#050403', borderTop:'1px solid #1e150a', padding:'28px 0' }}>
       <div className="wrap">
-        {/* Top row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 32, paddingBottom: 36, borderBottom: '1px solid #2a1f10' }} className="footer-top">
-          {/* Logo + tagline */}
-          <div>
-            <div style={{ font: `28px var(--display)`, letterSpacing: '0.3em', color: '#e4d4b4', marginBottom: 8 }}>MAMOTIS</div>
-            <p style={{ font: `italic 13px var(--serif)`, color: '#6f624d', margin: 0 }}>
-              Una segunda vida. Una pieza única.
-            </p>
+        <div style={{
+          display:'flex', alignItems:'center', justifyContent:'space-between',
+          gap:24, flexWrap:'wrap',
+        }} className="footer-inner">
+
+          {/* Logo + dominio */}
+          <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+            <div style={{ width:18, height:22, position:'relative', flexShrink:0 }}>
+              <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS" fill
+                style={{ objectFit:'contain', opacity:0.7 }} />
+            </div>
+            <span style={{ fontFamily:'var(--sans)', fontSize:10,
+              letterSpacing:'0.18em', color:'#5a4a30', textTransform:'uppercase' }}>
+              mamotis.es
+            </span>
           </div>
 
-          {/* Contact heading */}
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ font: `italic clamp(22px,3vw,32px)/1.3 var(--serif)`, color: '#e4d4b4', margin: '0 0 6px' }}>¿Hablamos?</p>
-            <p style={{ font: `13px/1.7 var(--sans)`, color: '#6f624d', margin: 0, maxWidth: 240, fontWeight: 300 }}>
-              Estamos aquí para ayudarte y acompañarte en tu próxima pieza única.
-            </p>
-          </div>
+          {/* Iconos sociales */}
+          <div style={{ display:'flex', alignItems:'center', gap:20 }}>
+            {/* TikTok */}
+            <Link href="https://tiktok.com/@mamotisoficial" target="_blank"
+              aria-label="TikTok"
+              style={{ color:'#4a3c26', transition:'color 0.2s' }}
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#c9a64c'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='#4a3c26'}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.19 8.19 0 0 0 4.78 1.52V7.21a4.85 4.85 0 0 1-1.01-.52z"/>
+              </svg>
+            </Link>
 
-          {/* Social buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
+            {/* Instagram */}
             <Link href="https://instagram.com/mamotisoficial" target="_blank"
-              style={{ display: 'flex', alignItems: 'center', gap: 12, border: '1px solid #3a2e1a', padding: '11px 20px', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#c4b494', minWidth: 220 }}>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              aria-label="Instagram"
+              style={{ color:'#4a3c26', transition:'color 0.2s' }}
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#c9a64c'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='#4a3c26'}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                stroke="currentColor" strokeWidth="1.8">
                 <rect x="2" y="2" width="20" height="20" rx="5"/>
                 <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
               </svg>
-              Síguenos en Instagram
             </Link>
-            <Link href="https://wa.me/34605764097" target="_blank"
-              style={{ display: 'flex', alignItems: 'center', gap: 12, border: '1px solid #3a2e1a', padding: '11px 20px', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#c4b494', minWidth: 220 }}>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
-                <path d="M9 10c0 5 3.5 7.5 6 8"/>
-              </svg>
-              Escríbenos por WhatsApp
-            </Link>
-          </div>
-        </div>
 
-        {/* Bottom row */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 24, fontSize: 9, letterSpacing: '0.2em', color: '#40321e', flexWrap: 'wrap', gap: 12 }} className="footer-bottom">
-          <span>© MAMOTIS 2026</span>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <Link href="#historia" style={{ color: '#40321e' }}>Historia</Link>
-            <Link href="#proceso" style={{ color: '#40321e' }}>El proceso</Link>
-            <Link href="#coleccion" style={{ color: '#40321e' }}>Colección</Link>
-            <Link href="#contacto" style={{ color: '#40321e' }}>Contacto</Link>
+            {/* WhatsApp */}
+            <Link href="https://wa.me/34605764097" target="_blank"
+              aria-label="WhatsApp"
+              style={{ color:'#4a3c26', transition:'color 0.2s' }}
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#c9a64c'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='#4a3c26'}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                stroke="currentColor" strokeWidth="1.8">
+                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
+              </svg>
+            </Link>
           </div>
+
+          {/* Copyright */}
+          <span style={{ fontFamily:'var(--sans)', fontSize:9,
+            letterSpacing:'0.15em', color:'#352a18', textTransform:'uppercase' }}>
+            © MAMOTIS 2026
+          </span>
         </div>
       </div>
-
       <style>{`
-        @media(max-width:640px){
-          .footer-top{grid-template-columns:1fr!important; text-align:center!important;}
-          .footer-top > div:last-child{align-items:center!important;}
-          .footer-top > div:last-child a{min-width:0!important; width:100%!important; justify-content:center!important;}
-          .footer-bottom{flex-direction:column!important; align-items:center!important; text-align:center!important;}
+        @media(max-width:580px){
+          .footer-inner{ justify-content:center!important; text-align:center; }
         }
       `}</style>
     </footer>
