@@ -6,9 +6,9 @@ export default function Ribbon() {
   return (
     <div style={{
       width: '100%', height: 42, overflow: 'hidden',
-      background: 'var(--cream)',
-      borderTop: '1px solid #d7c7a4',
-      borderBottom: '1px solid #d7c7a4',
+      background: '#0c0906',
+      borderTop: '1px solid rgba(201,168,76,0.12)',
+      borderBottom: '1px solid rgba(201,168,76,0.12)',
       display: 'flex', alignItems: 'center', whiteSpace: 'nowrap',
     }}>
       <div style={{
@@ -17,7 +17,7 @@ export default function Ribbon() {
         animation: 'ribbon-scroll 44s linear infinite',
         font: `italic 13px var(--serif)`,
         letterSpacing: '0.08em',
-        color: '#7a6040',
+        color: 'rgba(201,168,76,0.65)',
       }}>
         {DOUBLE.map((t, i) => (
           <span key={i} style={{ display:'flex', alignItems:'center', gap: 14 }}>
