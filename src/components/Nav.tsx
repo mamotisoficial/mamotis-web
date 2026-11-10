@@ -3,28 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-// Huevo dorado MAMOTIS — forma oval perfecta con brillo
+// Huevo MAMOTIS — logo PNG real, no SVG simulado
 const EggIcon = ({ size = 18 }: { size?: number }) => (
-  <svg viewBox="0 0 60 76" width={size} height={size * 1.27} aria-hidden="true"
-    style={{ display:'inline-block', verticalAlign:'middle', flexShrink: 0 }}>
-    <defs>
-      <linearGradient id="eggGrad" x1="20%" y1="0%" x2="80%" y2="100%">
-        <stop offset="0%"   stopColor="#6b4a18"/>
-        <stop offset="30%"  stopColor="#f0c84a"/>
-        <stop offset="55%"  stopColor="#e8b830"/>
-        <stop offset="80%"  stopColor="#c49020"/>
-        <stop offset="100%" stopColor="#7a5215"/>
-      </linearGradient>
-      <radialGradient id="eggShine" cx="38%" cy="28%" r="35%">
-        <stop offset="0%"   stopColor="rgba(255,245,180,0.55)"/>
-        <stop offset="100%" stopColor="rgba(255,245,180,0)"/>
-      </radialGradient>
-    </defs>
-    <path d="M30 4 C22 14 8 28 8 46 C8 62 18 73 30 73 C42 73 52 62 52 46 C52 28 38 14 30 4Z"
-      fill="url(#eggGrad)"/>
-    <path d="M30 4 C22 14 8 28 8 46 C8 62 18 73 30 73 C42 73 52 62 52 46 C52 28 38 14 30 4Z"
-      fill="url(#eggShine)"/>
-  </svg>
+  // eslint-disable-next-line @next/next/no-img-element
+  <img
+    src="/marca/logo-huevo-nuevo.png"
+    alt=""
+    aria-hidden="true"
+    width={Math.round(size * 0.8)}
+    height={Math.round(size)}
+    style={{ display:'inline-block', verticalAlign:'middle', flexShrink: 0, objectFit:'contain' }}
+  />
 );
 
 const SEEDS = ['Una sola','Existió antes','Irrepetible','Vivió una vida','Ahora vive otra','Renace'];

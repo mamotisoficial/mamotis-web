@@ -9,6 +9,8 @@ const ROWS = [
     body: 'Las mujeres de los años sesenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo — se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
     img: '/historia/historia-01.jpg',
     alt: 'Mujeres con abrigos de piel vintage, años 60',
+    // Panorámica 1774x887 — centrar verticalmente en la parte superior donde están las señoras
+    pos: 'center top',
     reverse: false,
   },
   {
@@ -19,6 +21,7 @@ const ROWS = [
     body: 'Más que una prenda, el abrigo de piel era un símbolo de distinción. Acompañaba a las mujeres en sus viajes, en sus logros, en los momentos que importaban. Su belleza y su calidad trascendían modas y generaciones.',
     img: '/historia/historia-02.jpg',
     alt: 'Mujer elegante con abrigo de piel, años 50',
+    pos: 'center top',
     reverse: true,
   },
   {
@@ -29,6 +32,7 @@ const ROWS = [
     body: 'Nuestras artesanas transforman cada abrigo a mano, con respeto y lentitud. El resultado es un bolso que lleva dos historias dentro: la de quien lo llevó antes y la que tú escribirás.',
     img: '/historia/historia-03.jpg',
     alt: 'Artesana transformando abrigo en bolso MAMOTIS',
+    pos: 'center center',
     reverse: false,
   },
 ];
@@ -52,11 +56,11 @@ export default function Historia() {
               {r.eyebrow}
             </div>
             <div style={{ width:40, height:1, background:'var(--gold)', opacity:0.6, marginBottom:34 }} />
-            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(30px,3.4vw,52px)',
+            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(28px,3.2vw,50px)',
               fontWeight:400, lineHeight:1.1, margin:'0 0 6px', color:'#241b12' }}>
               {r.tituloA}
             </h3>
-            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(30px,3.4vw,52px)',
+            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(28px,3.2vw,50px)',
               fontWeight:300, fontStyle:'italic', lineHeight:1.1, margin:'0 0 30px', color:'#a07830' }}>
               {r.tituloB}
             </h3>
@@ -71,18 +75,24 @@ export default function Historia() {
             </div>
           </div>
 
-          {/* Foto */}
+          {/* Foto — ocupa toda la columna sin padding extra */}
           <div style={{
             order: r.reverse ? 1 : 2,
+            position: 'relative',
+            minHeight: 'clamp(400px,50vw,600px)',
+            overflow: 'hidden',
             background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
-            display:'flex', alignItems:'center', justifyContent:'center',
-            padding:'clamp(28px,4vw,60px)',
           }} className="historia-foto-col">
-            <div style={{ position:'relative', width:'100%',
-              height:'clamp(360px,46vw,560px)', borderRadius:2, overflow:'hidden' }}>
-              <Image src={r.img} alt={r.alt} fill
-                style={{ objectFit:'cover', filter:'grayscale(0.7) contrast(1.05)' }} />
-            </div>
+            <Image
+              src={r.img}
+              alt={r.alt}
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: r.pos,
+                filter: 'sepia(0.15) contrast(1.05) brightness(0.97)',
+              }}
+            />
           </div>
 
         </div>
@@ -91,8 +101,7 @@ export default function Historia() {
         @media(max-width:720px){
           .historia-row{grid-template-columns:1fr!important;}
           .historia-row>div{order:unset!important;}
-          .historia-foto-col{padding:16px!important;}
-          .historia-foto-col>div{height:260px!important;}
+          .historia-foto-col{min-height:260px!important;}
         }
       `}</style>
     </section>
