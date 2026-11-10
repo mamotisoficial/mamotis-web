@@ -8,41 +8,42 @@ const CARDS = [
 
 export default function Proceso() {
   return (
-    <section id="proceso" style={{ padding:'90px 0 100px', background:'#09070504' }}>
+    <section id="proceso" style={{ padding:'90px 0 100px', background:'#090705' }}>
       <div className="wrap">
         <div className="section-label">El proceso</div>
-        <div style={{ textAlign:'center', marginTop:20, marginBottom:60 }}>
-          <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(32px,4vw,54px)',
-            fontWeight:400, lineHeight:1.1, color:'var(--cream)', margin:'0 0 8px', display:'inline' }}>
+        <div style={{ textAlign:'center', marginTop:20, marginBottom:64 }}>
+          <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,4.2vw,58px)',
+            fontWeight:400, lineHeight:1.08, color:'var(--cream)', margin:0, display:'inline' }}>
             Artesanía que{' '}
           </h2>
-          <h2 style={{ fontFamily:'var(--serif)', fontSize:'clamp(32px,4vw,54px)',
-            fontWeight:300, fontStyle:'italic', lineHeight:1.1, color:'var(--gold)', margin:0, display:'inline' }}>
+          <h2 style={{ fontFamily:'var(--serif)', fontSize:'clamp(34px,4.2vw,58px)',
+            fontWeight:300, fontStyle:'italic', lineHeight:1.08, color:'var(--gold)', margin:0, display:'inline' }}>
             transforma.
           </h2>
         </div>
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20 }} className="proceso-grid">
           {CARDS.map((c) => (
-            <article key={c.n} style={{ position:'relative', overflow:'hidden',
-              background:'#1a1108', borderRadius:2 }}>
-              <div style={{ position:'relative', width:'100%', height:300 }}>
+            <article key={c.n} style={{ overflow:'hidden', background:'#1a1108', borderRadius:2 }}>
+              {/* Foto sin gap — directamente encima del texto */}
+              <div style={{ position:'relative', width:'100%', height:280 }}>
                 <Image src={c.img} alt={c.title} fill
-                  style={{ objectFit:'cover', filter:'brightness(0.55)' }} />
-                <div style={{ position:'absolute', inset:'30% 0 0',
-                  background:'linear-gradient(transparent, rgba(6,4,2,0.95))' }} />
+                  style={{ objectFit:'cover', filter:'brightness(0.52)' }} />
+                <div style={{ position:'absolute', inset:'25% 0 0',
+                  background:'linear-gradient(transparent, #1a1108)' }} />
               </div>
-              <div style={{ padding:'24px 28px 28px' }}>
-                <div style={{ fontFamily:'var(--serif)', fontSize:52, fontStyle:'italic',
-                  fontWeight:300, color:'var(--gold)', lineHeight:1, opacity:0.85, marginBottom:12 }}>
+              {/* Texto pegado a la foto */}
+              <div style={{ padding:'20px 28px 32px' }}>
+                <div style={{ fontFamily:'var(--serif)', fontSize:54, fontStyle:'italic',
+                  fontWeight:300, color:'var(--gold)', lineHeight:1, opacity:0.85, marginBottom:14 }}>
                   {c.n}
                 </div>
-                <h3 style={{ fontFamily:'var(--display)', fontSize:20, fontWeight:400,
-                  letterSpacing:'0.05em', margin:'0 0 8px', color:'var(--cream)' }}>
+                <h3 style={{ fontFamily:'var(--display)', fontSize:22, fontWeight:400,
+                  letterSpacing:'0.04em', margin:'0 0 10px', color:'var(--cream)' }}>
                   {c.title}
                 </h3>
-                <p style={{ fontFamily:'var(--serif)', fontSize:14, fontStyle:'italic',
-                  color:'#c4b89a', margin:0, lineHeight:1.7 }}>
+                <p style={{ fontFamily:'var(--serif)', fontSize:16, fontStyle:'italic',
+                  color:'#c4b89a', margin:0, lineHeight:1.8 }}>
                   {c.desc}
                 </p>
               </div>
