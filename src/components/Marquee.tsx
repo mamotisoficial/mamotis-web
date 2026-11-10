@@ -1,131 +1,29 @@
-'use client';
-import { useRef, useEffect } from 'react';
-import Image from 'next/image';
-
-const words = [
-  'Renace',
-  'Una sola',
-  'Existió antes',
-  'Irrepetible',
-  'Vivió una vida',
-  'Ahora vive otra',
-];
-
 export default function Marquee() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const speedRef = useRef(0.5);
-  const targetSpeedRef = useRef(0.5);
-  const posRef = useRef(0);
-  const animRef = useRef<number | undefined>(undefined);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    const handleMouseMove = () => {
-      targetSpeedRef.current = 2.8;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => { targetSpeedRef.current = 0.5; }, 300);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-
-    const animate = () => {
-      speedRef.current += (targetSpeedRef.current - speedRef.current) * 0.05;
-      posRef.current -= speedRef.current;
-      const track = trackRef.current;
-      if (track) {
-        const w = track.scrollWidth / 2;
-        if (Math.abs(posRef.current) >= w) posRef.current = 0;
-        track.style.transform = `translateX(${posRef.current}px)`;
-      }
-      animRef.current = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
-  }, []);
-
-  const content = [...words, ...words, ...words].flatMap((word, i) => [
-    <span key={`w-${i}`} className="mq-word" style={{
-      fontFamily: "'Cormorant Garamond', serif",
-      fontWeight: 300,
-      fontStyle: 'italic',
-      fontSize: 'clamp(1.6rem, 5.5vw, 2.8rem)',
-      color: 'transparent',
-      WebkitTextStroke: '1px rgba(201,168,76,0.35)',
-      whiteSpace: 'nowrap' as const,
-      padding: '0 1.5rem',
-      userSelect: 'none' as const,
-      letterSpacing: '0.04em',
-      transition: 'color 0.3s, -webkit-text-stroke 0.3s',
-      cursor: 'default',
-    }}
-      onMouseEnter={e => {
-        const t = e.currentTarget;
-        t.style.color = 'rgba(201,168,76,0.7)';
-        t.style.webkitTextStroke = '1px transparent';
-      }}
-      onMouseLeave={e => {
-        const t = e.currentTarget;
-        t.style.color = 'transparent';
-        t.style.webkitTextStroke = '1px rgba(201,168,76,0.35)';
-      }}
-    >{word}</span>,
-    <span key={`egg-${i}`} className="mq-egg" style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      padding: '0 2rem',
-      flexShrink: 0,
-    }}>
-      <Image
-        src="/marca/logo-huevo-t.png"
-        alt=""
-        width={72}
-        height={82}
-        style={{
-          objectFit: 'contain',
-          height: '72px',
-          width: 'auto',
-          opacity: 1,
-        }}
-      />
-    </span>,
-  ]);
-
+  const words = ['Renace','Una sola','Existió antes','Irrepetible','Vivió una vida','Ahora vive otra'];
+  const eggSVG = (
+    <svg viewBox="0 0 50 62" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="25" cy="38" rx="17" ry="22" fill="#C9A84C" opacity=".6"/>
+      <path d="M14,10 L17,5 L21,9 L25,4 L29,8 L33,4 L37,9 L41,5 L44,10" stroke="#8B6820" strokeWidth="1.1" fill="none" strokeLinecap="round"/>
+      <ellipse cx="17" cy="28" rx="5" ry="9" fill="rgba(255,250,210,0.32)"/>
+    </svg>
+  );
+  const items = [...words, ...words];
   return (
-    <div className="marquee-bar" style={{
-      overflow: 'hidden',
-      borderTop: '1px solid rgba(201,168,76,0.1)',
-      borderBottom: '1px solid rgba(201,168,76,0.1)',
-      padding: '1.6rem 0',
-      position: 'relative',
-      background: 'var(--negro)',
-    }}>
-      <div className="marquee-fade" style={{
-        position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
-        background: 'linear-gradient(to right, var(--negro), transparent)',
-        pointerEvents: 'none',
-      }} />
-      <div className="marquee-fade" style={{
-        position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', zIndex: 2,
-        background: 'linear-gradient(to left, var(--negro), transparent)',
-        pointerEvents: 'none',
-      }} />
-
-      <div ref={trackRef} style={{ display: 'flex', alignItems: 'center', willChange: 'transform' }}>
-        {content}
+    <div className="on-crema" style={{ overflow: 'hidden', borderTop: '1px solid var(--borde-c)', borderBottom: '1px solid var(--borde-c)', padding: '1.5rem 0', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: '100px', background: 'linear-gradient(to right, var(--crema), transparent)', zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: '100px', background: 'linear-gradient(to left, var(--crema), transparent)', zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ display: 'flex', whiteSpace: 'nowrap', animation: 'marquee 34s linear infinite' }}>
+        {items.map((w, i) => (
+          <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '0' }}>
+            <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 300,
+              fontSize: '1.15rem', letterSpacing: '0.12em', color: 'var(--txt-crema2)', padding: '0 2rem' }}>
+              {w}
+            </span>
+            <span style={{ padding: '0 0.4rem' }}>{eggSVG}</span>
+          </span>
+        ))}
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .marquee-bar { padding: 1.1rem 0 !important; }
-          .marquee-fade { width: 42px !important; }
-          .mq-word { padding: 0 0.9rem !important; }
-          .mq-egg { padding: 0 1rem !important; }
-          .mq-egg img { height: 46px !important; }
-        }
-      `}</style>
+      <style>{`@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
     </div>
   );
 }

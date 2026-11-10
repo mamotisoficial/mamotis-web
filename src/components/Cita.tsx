@@ -1,31 +1,31 @@
+'use client';
+import { useEffect, useRef } from 'react';
+
 export default function Cita() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); io.disconnect(); } }, { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className="cita-section" style={{
-      padding: '11rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden',
-    }}>
-      {[500, 800, 1100].map((size, i) => (
-        <div key={i} style={{
-          position: 'absolute', borderRadius: '50%',
-          border: '1px solid rgba(201,168,76,.04)',
-          width: `${size}px`, height: `${size}px`,
-          top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-          animation: i > 0 ? `rotS ${i===1?40:65}s linear infinite ${i===2?'reverse':''}` : undefined,
-        }} />
-      ))}
-      <style>{`@keyframes rotS { from { transform: translate(-50%,-50%) rotate(0); } to { transform: translate(-50%,-50%) rotate(360deg); } }`}</style>
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <p style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(1.6rem, 4.5vw, 4rem)', lineHeight: 1.3,
-          maxWidth: '780px', margin: '0 auto 1.5rem', color: 'var(--crema)',
-        }}>
-          &ldquo;No estás comprando un bolso.<br />
-          Estás <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>continuando</em> una historia.&rdquo;
-        </p>
-        <p style={{ fontFamily: "'DM Mono', monospace", fontSize: '.52rem', letterSpacing: '.4em', opacity: .22 }}>
-          — MAMOTIS
-        </p>
-      </div>
+    <section ref={ref} className="on-negro reveal" style={{ padding: '10rem clamp(2rem,8vw,8rem)', textAlign: 'center' }}>
+      <span className="eyebrow eyebrow-n">— La historia —</span>
+      <blockquote style={{ fontFamily: 'var(--serif)', fontWeight: 300, fontStyle: 'italic',
+        fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', lineHeight: 1.2,
+        color: 'var(--crema)', marginBottom: '4rem', maxWidth: '900px', margin: '0 auto 4rem' }}>
+        "Hubo una época en que vestirse<br/>
+        era un <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>acto de poder.</em>"
+      </blockquote>
+      <p style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.18em',
+        lineHeight: 2.4, color: 'rgba(242,232,212,0.38)', maxWidth: '52ch', margin: '0 auto' }}>
+        Las mujeres lo sabían. Un abrigo de piel no era ropa — era una declaración.<br/>
+        Se compraba una vez. Se llevaba toda una vida. Se heredaba como un secreto.<br/><br/>
+        Hoy esos abrigos esperan, olvidados en armarios.<br/>
+        MAMOTIS los encuentra. Y les da otra vida.
+      </p>
     </section>
   );
 }

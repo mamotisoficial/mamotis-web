@@ -1,26 +1,39 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const LINKS = [
-  { label: 'La Marca', href: '/' },
   { label: 'Historia', href: '/#historia' },
   { label: 'Colección', href: '/coleccion' },
+  { label: 'Contacto', href: '/#contacto' },
 ];
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [prevY, setPrevY]         = useState(0);
+  const [hidden, setHidden]       = useState(false);
+  const ticking                   = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled(y > 60);
+        // ocultar al bajar, mostrar al subir
+        if (y > prevY && y > 200) setHidden(true);
+        else setHidden(false);
+        setPrevY(y);
+        ticking.current = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [prevY]);
 
-  // Bloquear el scroll del body con el menú abierto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -32,12 +45,17 @@ export default function Nav() {
         position: 'fixed',
         top: 0, left: 0, right: 0,
         zIndex: 500,
-        padding: scrolled ? '1.2rem 5rem' : '1.8rem 5rem',
+        padding: scrolled ? '0.9rem 5rem' : '1.6rem 5rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        background: 'linear-gradient(to bottom, rgba(5,5,5,0.95) 60%, transparent)',
-        transition: 'padding 0.4s ease',
+        background: scrolled
+          ? 'rgba(6,5,4,0.97)'
+          : 'linear-gradient(to bottom, rgba(6,5,4,0.92) 0%, transparent 100%)',
+        borderBottom: scrolled ? '1px solid rgba(201,168,76,0.08)' : 'none',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        transform: hidden && !menuOpen ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'padding 0.4s ease, background 0.4s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.4s',
       }}>
 
         {/* LOGO */}
@@ -45,42 +63,31 @@ export default function Nav() {
           <Image
             src="/marca/mamotis-t.png"
             alt="Mamotis"
-            width={220}
-            height={80}
+            width={220} height={80}
             style={{
               objectFit: 'contain',
-              height: scrolled ? '55px' : '70px',
+              height: scrolled ? '48px' : '64px',
               width: 'auto',
-              transition: 'height 0.4s ease, opacity 0.4s ease',
-              opacity: scrolled ? 0.75 : 1,
+              transition: 'height 0.4s ease',
             }}
           />
         </Link>
 
         {/* LINKS — escritorio */}
-        <ul className="nav-links" style={{ display: 'flex', gap: '3rem', listStyle: 'none' }}>
+        <ul style={{ display: 'flex', gap: '3rem', listStyle: 'none' }} className="nav-desktop-links">
           {LINKS.map(({ label, href }) => (
             <li key={label} style={{ position: 'relative' }}>
               <Link href={href} style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: 'var(--serif)',
                 fontStyle: 'italic', fontWeight: 300,
-                fontSize: '1.1rem', letterSpacing: '0.05em',
+                fontSize: '1.08rem', letterSpacing: '0.04em',
                 color: 'var(--crema)', textDecoration: 'none',
-                textTransform: 'none', opacity: 0.6,
+                opacity: 0.6,
                 transition: 'opacity 0.3s, color 0.3s',
-                paddingBottom: '4px',
-                display: 'block',
+                display: 'block', paddingBottom: '4px',
               }}
-                onMouseEnter={e => {
-                  const t = e.currentTarget;
-                  t.style.opacity = '1';
-                  t.style.color = 'var(--oro)';
-                }}
-                onMouseLeave={e => {
-                  const t = e.currentTarget;
-                  t.style.opacity = '0.6';
-                  t.style.color = 'var(--crema)';
-                }}
+                onMouseEnter={e => { const t = e.currentTarget as HTMLElement; t.style.opacity='1'; t.style.color='var(--oro)'; }}
+                onMouseLeave={e => { const t = e.currentTarget as HTMLElement; t.style.opacity='0.6'; t.style.color='var(--crema)'; }}
               >{label}</Link>
               <span style={{
                 position: 'absolute', bottom: 0, left: 0,
@@ -92,94 +99,72 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* CTA — escritorio */}
-        <Link href="/coleccion" className="nav-cta" style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontStyle: 'italic',
-          fontSize: '1rem', letterSpacing: '0.08em',
-          color: 'var(--oro)', textDecoration: 'none',
-          padding: 0,
+        {/* CTA escritorio */}
+        <a href="https://wa.me/34605764097" target="_blank" rel="noopener" className="nav-desktop-links" style={{
+          fontFamily: 'var(--serif)', fontStyle: 'italic',
+          fontSize: '1rem', letterSpacing: '0.06em',
+          color: 'var(--oro)', textDecoration: 'none', opacity: 0.8,
           transition: 'opacity 0.3s',
-          opacity: 0.8,
         }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '1'; }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '0.8'; }}
-        >Ver colección →</Link>
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity='1'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity='0.8'; }}
+        >Contactar →</a>
 
         {/* Hamburguesa — móvil */}
-        <button
-          className="nav-burger"
-          onClick={() => setMenuOpen(o => !o)}
+        <button className="nav-burger" onClick={() => setMenuOpen(o => !o)}
           aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          aria-expanded={menuOpen}
-          style={{
-            display: 'none',
-            flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end',
-            gap: '6px', width: '30px', height: '30px',
-            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            zIndex: 501,
-          }}
-        >
-          <span style={{
-            display: 'block', height: '1.5px', background: 'var(--oro)',
-            width: menuOpen ? '24px' : '26px',
-            transformOrigin: 'center',
-            transition: 'transform 0.3s ease, opacity 0.3s ease',
-            transform: menuOpen ? 'translateY(7.5px) rotate(45deg)' : 'none',
-          }} />
-          <span style={{
-            display: 'block', height: '1.5px', width: '26px', background: 'var(--oro)',
-            transition: 'opacity 0.2s ease',
-            opacity: menuOpen ? 0 : 1,
-          }} />
-          <span style={{
-            display: 'block', height: '1.5px', background: 'var(--oro)',
-            width: menuOpen ? '24px' : '20px',
-            transformOrigin: 'center',
-            transition: 'transform 0.3s ease, width 0.3s ease',
-            transform: menuOpen ? 'translateY(-7.5px) rotate(-45deg)' : 'none',
-          }} />
+          style={{ display: 'none', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end',
+            gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '4px', zIndex: 501 }}>
+          <span style={{ display: 'block', height: '1.5px', background: 'var(--oro)', width: '26px',
+            transition: 'transform 0.3s',
+            transform: menuOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
+          <span style={{ display: 'block', height: '1.5px', width: '26px', background: 'var(--oro)',
+            transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: 'block', height: '1.5px', background: 'var(--oro)', width: menuOpen ? '26px' : '18px',
+            transition: 'transform 0.3s, width 0.3s',
+            transform: menuOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none' }} />
         </button>
       </nav>
 
-      {/* Overlay menú — móvil */}
-      <div className="nav-overlay" style={{
-        position: 'fixed', inset: 0, zIndex: 490,
-        background: 'rgba(5,5,5,0.98)',
+      {/* Menú móvil — se desliza desde arriba */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0,
+        zIndex: 490,
+        background: 'rgba(6,5,4,0.99)',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        gap: '2.5rem',
-        opacity: menuOpen ? 1 : 0,
-        visibility: menuOpen ? 'visible' : 'hidden',
-        pointerEvents: menuOpen ? 'auto' : 'none',
-        transition: 'opacity 0.4s ease, visibility 0.4s ease',
-      }}>
-        {LINKS.map(({ label, href }) => (
+        gap: '3rem', height: '100vh',
+        transform: menuOpen ? 'translateY(0)' : 'translateY(-105%)',
+        transition: 'transform 0.55s cubic-bezier(0.76,0,0.24,1)',
+      }} className="nav-mobile-panel">
+        {LINKS.map(({ label, href }, i) => (
           <Link key={label} href={href} onClick={() => setMenuOpen(false)} style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: 'italic', fontWeight: 300,
-            fontSize: '2rem', letterSpacing: '0.03em',
+            fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 300,
+            fontSize: 'clamp(2rem, 7vw, 3rem)', letterSpacing: '0.03em',
             color: 'var(--crema)', textDecoration: 'none',
+            opacity: menuOpen ? 1 : 0,
+            transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+            transition: `opacity 0.4s ${0.1 + i*0.08}s ease, transform 0.4s ${0.1 + i*0.08}s ease`,
           }}>{label}</Link>
         ))}
-        <Link href="/coleccion" onClick={() => setMenuOpen(false)} style={{
-          marginTop: '1rem',
-          fontFamily: "'DM Mono', monospace",
-          fontSize: '0.56rem', letterSpacing: '0.22em',
-          color: 'var(--oro)', textDecoration: 'none', textTransform: 'uppercase',
-          border: '1px solid rgba(201,168,76,0.35)',
-          padding: '0.9rem 2.4rem',
-        }}>Ver colección →</Link>
+        <a href="https://wa.me/34605764097" target="_blank" rel="noopener"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            marginTop: '1.5rem',
+            fontFamily: 'var(--mono)', fontSize: '0.56rem',
+            letterSpacing: '0.3em', color: 'var(--oro)', textDecoration: 'none',
+            textTransform: 'uppercase',
+            border: '1px solid rgba(201,168,76,0.3)', padding: '1rem 2.8rem',
+            opacity: menuOpen ? 1 : 0,
+            transition: `opacity 0.4s 0.34s ease`,
+          }}>Contactar por WhatsApp</a>
       </div>
 
       <style>{`
         li:hover .nav-underline { width: 100% !important; }
-        @media (min-width: 769px) {
-          .nav-overlay { display: none !important; }
-        }
         @media (max-width: 768px) {
-          nav { padding: 1.1rem 1.4rem !important; }
-          .nav-links, .nav-cta { display: none !important; }
+          nav { padding: 1rem 1.4rem !important; }
+          .nav-desktop-links { display: none !important; }
           .nav-burger { display: flex !important; }
         }
       `}</style>
