@@ -36,28 +36,28 @@ export default function Historia() {
 
       {ROWS.map((r, i) => {
         const lines = r.titulo.split('\n');
+        const bgText = i % 2 === 1 ? '#ede4cf' : '#f1e8d3';
         return (
           <div key={i} style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            minHeight: 540,
+            gridTemplateColumns: r.reverse ? '1fr 1fr' : '1fr 1fr',
+            minHeight: 560,
           }} className="historia-row">
 
-            {/* Columna texto */}
+            {/* Columna TEXTO */}
             <div style={{
               order: r.reverse ? 2 : 1,
-              display: 'flex', flexDirection: 'column', justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
               padding: 'clamp(50px,7vw,100px) clamp(36px,6vw,100px)',
-              background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
+              background: bgText,
             }}>
-              {/* Eyebrow */}
               <div style={{ fontSize: 9, letterSpacing: '0.48em', textTransform: 'uppercase', color: '#a38b5c', marginBottom: 14 }}>
                 {r.eyebrow}
               </div>
-              {/* Línea dorada */}
               <div style={{ width: 42, height: 1, background: '#c9a64c', marginBottom: 32 }} />
 
-              {/* Título Cormorant */}
               <h3 style={{
                 fontFamily: 'var(--display)',
                 fontSize: 'clamp(32px,3.4vw,54px)',
@@ -68,36 +68,44 @@ export default function Historia() {
                 color: '#241b12',
               }}>
                 {lines[0]}<br />
-                <em style={{ fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300, color:'#a07830' }}>{lines[1]}</em>
+                <em style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 300, color: '#a07830' }}>
+                  {lines[1]}
+                </em>
               </h3>
 
-              {/* Cuerpo */}
               <p style={{ fontFamily: 'var(--sans)', fontSize: 14, lineHeight: 1.95, color: '#5a4f42', margin: '0 0 36px', maxWidth: 440, fontWeight: 300 }}>
                 {r.body}
               </p>
 
-              {/* Fecha con línea */}
               <div style={{ fontSize: 9, letterSpacing: '0.3em', color: '#a69a82', display: 'flex', alignItems: 'center', gap: 16 }}>
                 <span style={{ whiteSpace: 'nowrap' }}>{r.fecha}</span>
                 <div style={{ flex: 1, height: 1, background: '#d2c4a6' }} />
               </div>
             </div>
 
-            {/* Columna foto */}
+            {/* Columna FOTO — altura fija, foto contenida */}
             <div style={{
               order: r.reverse ? 1 : 2,
-              position: 'relative',
-              minHeight: 480,
-              overflow: 'hidden',
-              margin: 'clamp(24px,3.5vw,52px)',
-              borderRadius: 2,
-            }} className="historia-foto">
-              <Image
-                src={r.img}
-                alt={r.alt}
-                fill
-                style={{ objectFit: 'cover', filter: 'grayscale(0.85) contrast(1.05)' }}
-              />
+              background: bgText,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 'clamp(24px,3.5vw,52px)',
+            }} className="historia-foto-col">
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                height: 'clamp(340px,45vw,540px)',
+                borderRadius: 2,
+                overflow: 'hidden',
+              }}>
+                <Image
+                  src={r.img}
+                  alt={r.alt}
+                  fill
+                  style={{ objectFit: 'cover', filter: 'grayscale(0.75) contrast(1.05)' }}
+                />
+              </div>
             </div>
 
           </div>
@@ -106,9 +114,10 @@ export default function Historia() {
 
       <style>{`
         @media(max-width:640px){
-          .historia-row{ grid-template-columns:1fr!important; min-height:auto!important; }
-          .historia-row > div{ order:unset!important; }
-          .historia-foto{ min-height:280px!important; margin:16px!important; order:1!important; }
+          .historia-row { grid-template-columns: 1fr !important; }
+          .historia-row > div { order: unset !important; }
+          .historia-foto-col { padding: 16px !important; }
+          .historia-foto-col > div { height: 280px !important; }
         }
       `}</style>
     </section>
