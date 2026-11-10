@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import Cita from '@/components/Cita';
 import Historia from '@/components/Historia';
 import Proceso from '@/components/Proceso';
-import Coleccion from '@/components/Coleccion';
+import PreviewColeccion from '@/components/PreviewColeccion';
 import Pilares from '@/components/Pilares';
 import Contacto from '@/components/Contacto';
 import Footer from '@/components/Footer';
@@ -17,7 +17,7 @@ export default function Home() {
         <Cita />
         <Historia />
         <Proceso />
-        <Coleccion />
+        <PreviewColeccion />
         <Pilares />
         <Contacto />
       </main>
