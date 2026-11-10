@@ -29,7 +29,7 @@ export default function Proceso() {
                 <Image src={c.img} alt={c.title} fill
                   style={{ objectFit:'cover', filter:'brightness(0.52)' }} />
                 <div style={{ position:'absolute', inset:'30% 0 0',
-                  background:'linear-gradient(to bottom, transparent 50%, rgba(26,17,8,0.8) 80%, rgba(26,17,8,1) 100%)' }} />
+                  background:'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 80%, rgba(0,0,0,1) 100%)' }} />
               </div>
               <div style={{ padding:'18px 24px 28px' }}>
                 <div style={{ fontFamily:'var(--serif)', fontSize:48, fontStyle:'italic',
