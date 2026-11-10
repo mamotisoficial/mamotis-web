@@ -2,63 +2,113 @@ import Image from 'next/image';
 
 const ROWS = [
   {
-    eyebrow: 'C. 1960 — Década prodigiosa',
-    h3: ['Un abrigo comprado ', 'para toda la vida.'],
-    body: 'Las mujeres de los años sesenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo; se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
-    caption: 'UNA PRENDA CON HISTORIA · UNA MATERIA CON MEMORIA',
+    eyebrow: 'El origen',
+    fecha: 'C. 1960  —  DÉCADA PRODIGIOSA',
+    h3a: 'Un abrigo comprado',
+    h3b: 'para toda la vida.',
+    body: 'Las mujeres de los años sesenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo — se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
     img: '/historia/historia-01.jpg',
-    alt: 'Fotografía histórica de mujeres con abrigos vintage',
+    alt: 'Mujeres con abrigos de piel vintage, años 60',
+    // texto izquierda, foto derecha
+    reverse: false,
   },
   {
-    eyebrow: 'C. 1967 — La herencia',
-    h3: ['Guardado en un armario ', 'lleno de historia.'],
-    body: 'Muchos de estos abrigos llevan décadas en el mismo lugar. Su dueña original los dejó un día y nunca volvieron a usarse. Demasiado valiosos para tirar. Demasiado olvidados para usar. Cuando los encontramos, les damos voz.',
-    caption: 'PIELES VINTAGE RESCATADAS · NUEVOS COMIENZOS',
+    eyebrow: 'El origen',
+    fecha: 'C. 1950  —  UNA ÉPOCA DE ESTILO',
+    h3a: 'Elegancia',
+    h3b: 'que perdura.',
+    body: 'Más que una prenda, el abrigo de piel era un símbolo de distinción. Acompañaba a las mujeres en sus viajes, en sus logros, en los momentos que importaban. Su belleza y su calidad trascendían modas y generaciones.',
     img: '/historia/historia-02.jpg',
-    alt: 'Imagen de archivo de mujeres con prendas de piel',
+    alt: 'Mujer elegante con abrigo de piel, años 50',
+    // foto izquierda, texto derecha
+    reverse: true,
   },
   {
-    eyebrow: 'Hoy — La transformación',
-    h3: ['La misma piel. ', 'Otra vida.'],
+    eyebrow: 'El origen',
+    fecha: 'HOY  —  LA TRANSFORMACIÓN',
+    h3a: 'La misma piel.',
+    h3b: 'Otra vida.',
     body: 'Nuestras artesanas transforman cada abrigo a mano, con respeto y lentitud. El resultado es un bolso que lleva dos historias dentro: la de quien lo llevó antes. Y la que tú escribirás.',
-    caption: 'ARTESANÍA · REUTILIZACIÓN · PIEZAS ÚNICAS',
     img: '/historia/historia-03.jpg',
-    alt: 'Fotografía histórica de abrigos y moda vintage',
+    alt: 'Transformación artesanal de abrigo vintage en bolso',
+    reverse: false,
   },
 ];
 
 export default function Historia() {
   return (
-    <section id="historia" style={{ background: '#f1e8d3', color: '#241b12', paddingTop: 32 }}>
-      <div className="wrap">
-        <div className="section-label" style={{ color: '#a38b5c' }}>El origen</div>
-      </div>
-
+    <section id="historia" style={{ background: '#f1e8d3', color: '#241b12' }}>
       {ROWS.map((r, i) => (
-        <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 470, alignItems: 'stretch', marginTop: 55 }} className="historia-row">
-          <div style={{ minHeight: 420, overflow: 'hidden', order: i % 2 === 0 ? 0 : 2 }} className="historia-img">
-            <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 420 }}>
-              <Image src={r.img} alt={r.alt} fill style={{ objectFit: 'cover', filter: 'grayscale(1)', transition: 'transform .8s' }} />
+        <div key={i} style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          minHeight: 520,
+        }} className="historia-row">
+
+          {/* Texto */}
+          <div style={{
+            order: r.reverse ? 2 : 1,
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: 'clamp(40px,6vw,90px) clamp(32px,7vw,110px)',
+            background: '#f1e8d3',
+          }}>
+            {/* Eyebrow */}
+            <div style={{ fontSize: 10, letterSpacing: '0.42em', textTransform: 'uppercase', color: '#a38b5c', marginBottom: 16 }}>
+              {r.eyebrow}
+            </div>
+            {/* Línea dorada */}
+            <div style={{ width: 48, height: 1, background: '#a38b5c', marginBottom: 36 }} />
+
+            {/* Título dos líneas */}
+            <h3 style={{ font: `italic clamp(32px,3.2vw,52px)/1.15 var(--serif)`, margin: '0 0 28px', color: '#241b12' }}>
+              {r.h3a}<br />
+              <span style={{ color: '#ae8737' }}>{r.h3b}</span>
+            </h3>
+
+            {/* Cuerpo */}
+            <p style={{ font: `15px/1.9 var(--sans)`, color: '#5a4f42', margin: '0 0 36px', maxWidth: 460 }}>
+              {r.body}
+            </p>
+
+            {/* Fecha al pie */}
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', color: '#a69a82', display: 'flex', alignItems: 'center', gap: 16 }}>
+              <span>{r.fecha}</span>
+              <div style={{ flex: 1, height: 1, background: '#d2c4a6' }} />
             </div>
           </div>
-          <div style={{ padding: 'clamp(35px,6vw,100px) clamp(32px,6vw,100px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <span className="eyebrow eyebrow-c" style={{ color: '#aa8a42', fontSize: 9 }}>{r.eyebrow}</span>
-            <h3 style={{ font: `italic clamp(30px,3vw,43px)/1.2 var(--serif)`, margin: '18px 0 22px' }}>
-              {r.h3[0]}<span style={{ color: '#b89548' }}>{r.h3[1]}</span>
-            </h3>
-            <p style={{ font: `15px/1.9 var(--sans)`, color: '#655a4b', margin: 0, borderLeft: '2px solid #d9c89f', paddingLeft: 22 }}>{r.body}</p>
-            <div style={{ fontSize: 9, letterSpacing: '0.16em', color: '#a69a82', marginTop: 26 }}>{r.caption}</div>
+
+          {/* Foto */}
+          <div style={{
+            order: r.reverse ? 1 : 2,
+            position: 'relative',
+            minHeight: 480,
+            overflow: 'hidden',
+            margin: 'clamp(20px,3vw,48px)',
+            borderRadius: 2,
+          }} className="historia-foto">
+            <Image
+              src={r.img}
+              alt={r.alt}
+              fill
+              style={{ objectFit: 'cover', filter: 'grayscale(1)' }}
+            />
           </div>
+
         </div>
       ))}
 
       <style>{`
         @media(max-width:640px){
-          .historia-row{grid-template-columns:1fr!important;margin-top:35px!important;min-height:auto!important}
-          .historia-row .historia-img{order:0!important;min-height:260px!important;height:260px}
+          .historia-row{
+            grid-template-columns:1fr!important;
+            min-height:auto!important;
+          }
+          .historia-row > div:first-child{ order:2!important; }
+          .historia-row > div:last-child{ order:1!important; }
+          .historia-foto{ min-height:280px!important; margin:16px!important; }
         }
         @media(max-width:900px){
-          .historia-row{min-height:360px!important}
+          .historia-row{ min-height:400px!important; }
         }
       `}</style>
     </section>
