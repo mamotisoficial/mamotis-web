@@ -38,7 +38,7 @@ export default function Nav() {
         {/* LOGO — huevo + texto */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', textDecoration: 'none' }}>
           <div style={{ width: '36px', height: '38px', position: 'relative', mixBlendMode: 'screen', flexShrink: 0 }}>
-            <Image src="/marca/logo-huevo-t.png" alt="MAMOTIS" fill style={{ objectFit: 'contain' }} />
+            <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS" fill style={{ objectFit: 'contain' }} />
           </div>
           <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 300,
             fontSize: '1.4rem', color: 'var(--crema)', letterSpacing: '0.04em', lineHeight: 1 }}>

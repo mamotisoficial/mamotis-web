@@ -95,7 +95,7 @@ export default function Hero() {
           mixBlendMode: 'screen',
         }}>
           <Image
-            src="/marca/logo-huevo-t.png"
+            src="/marca/logo-huevo-nuevo.png"
             alt="MAMOTIS"
             width={500}
             height={500}
