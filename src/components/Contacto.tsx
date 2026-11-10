@@ -12,7 +12,7 @@ export default function Contacto() {
 
   return (
     <section id="contacto" ref={ref} className="on-negro reveal" style={{
-      padding:'11rem clamp(2rem,8vw,8rem)', textAlign:'center', position:'relative', overflow:'hidden',
+      padding:'7rem clamp(2rem,8vw,8rem)', textAlign:'center', position:'relative', overflow:'hidden',
       borderTop:'1px solid var(--borde-n)',
     }}>
       <div style={{ position:'absolute',inset:0,background:'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 70%)',pointerEvents:'none' }}/>

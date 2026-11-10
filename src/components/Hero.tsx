@@ -10,30 +10,23 @@ export default function Hero() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
     let raf: number;
-    const pts = Array.from({ length: 55 }, () => ({
+    const pts = Array.from({ length: 40 }, () => ({
       x: Math.random() * 1400, y: Math.random() * 900,
-      r: Math.random() * 1.1 + 0.3,
-      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
-      a: Math.random() * 0.5 + 0.1,
+      r: Math.random() * 1.4 + 0.4,
+      vx: (Math.random() - 0.5) * 0.14, vy: (Math.random() - 0.5) * 0.14,
+      a: Math.random() * 0.4 + 0.08,
     }));
-    function resize() {
-      canvas!.width = canvas!.offsetWidth;
-      canvas!.height = canvas!.offsetHeight;
-    }
+    function resize() { canvas!.width = canvas!.offsetWidth; canvas!.height = canvas!.offsetHeight; }
     resize();
     window.addEventListener('resize', resize, { passive: true });
     function draw() {
       ctx.clearRect(0, 0, canvas!.width, canvas!.height);
       pts.forEach(p => {
         p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = canvas!.width;
-        if (p.x > canvas!.width) p.x = 0;
-        if (p.y < 0) p.y = canvas!.height;
-        if (p.y > canvas!.height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201,168,76,${p.a})`;
-        ctx.fill();
+        if (p.x < 0) p.x = canvas!.width; if (p.x > canvas!.width) p.x = 0;
+        if (p.y < 0) p.y = canvas!.height; if (p.y > canvas!.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(201,168,76,${p.a})`; ctx.fill();
       });
       raf = requestAnimationFrame(draw);
     }
@@ -43,82 +36,95 @@ export default function Hero() {
 
   return (
     <section style={{
-      height: '100vh', minHeight: '640px', position: 'relative',
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      background: 'var(--negro)', textAlign: 'center', overflow: 'hidden',
+      minHeight: '100vh', position: 'relative',
+      display: 'grid', gridTemplateColumns: '1fr 1fr',
+      alignItems: 'center',
+      background: 'var(--negro)', overflow: 'hidden',
     }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.35, zIndex: 0 }} />
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.25, zIndex: 0 }} />
 
-      {/* gradientes */}
+      {/* gradiente lateral derecho */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1,
-        background: 'radial-gradient(ellipse 60% 55% at 50% 50%, transparent 25%, rgba(6,5,4,0.55) 100%)' }} />
-      <div style={{ position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, rgba(6,5,4,0.4) 0%, transparent 20%, transparent 70%, rgba(6,5,4,1) 100%)' }} />
+        background: 'linear-gradient(to right, rgba(6,5,4,0.6) 0%, transparent 50%, rgba(6,5,4,0.3) 100%)' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%', zIndex: 1,
+        background: 'linear-gradient(to top, var(--negro), transparent)' }} />
 
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {/* Huevo PNG real */}
-        <div style={{
-          width: 'min(260px,42vw)', marginBottom: '3rem',
-          animation: 'heroFloat 7s ease-in-out infinite',
-          filter: 'drop-shadow(0 0 60px rgba(201,168,76,0.28)) drop-shadow(0 28px 80px rgba(0,0,0,0.9))',
-          position: 'relative',
-        }}>
-          <Image
-            src="/marca/logo-huevo-t.png"
-            alt="MAMOTIS — el huevo"
-            width={260}
-            height={320}
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-            priority
-          />
-        </div>
-
-        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem',
-          letterSpacing: '0.55em', textTransform: 'uppercase',
-          color: 'var(--oro)', opacity: 0.5, marginBottom: '2rem', display: 'block' }}>
+      {/* IZQUIERDA — texto */}
+      <div style={{ position: 'relative', zIndex: 2, padding: 'clamp(6rem,10vw,10rem) clamp(2.5rem,6vw,7rem)', paddingTop: 'max(8rem, 15vh)' }}>
+        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.5em',
+          textTransform: 'uppercase', color: 'var(--oro)', opacity: 0.65,
+          display: 'block', marginBottom: '3rem' }}>
           Madrid · Artesanía de lujo
         </span>
 
         <h1 style={{ fontFamily: 'var(--serif)', fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(3.4rem,8.5vw,9rem)', lineHeight: 0.92,
-          letterSpacing: '-0.01em', color: 'var(--crema)', marginBottom: '2.5rem' }}>
-          Un bolso que<br/>
-          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>existió</em> antes<br/>
-          de ti.
+          fontSize: 'clamp(4rem, 7.5vw, 9.5rem)', lineHeight: 0.9,
+          letterSpacing: '-0.02em', color: 'var(--crema)', marginBottom: '3.5rem', margin: '0 0 3.5rem' }}>
+          Un bolso<br/>
+          que <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>existió</em><br/>
+          antes de ti.
         </h1>
 
-        <p style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem',
-          letterSpacing: '0.28em', textTransform: 'uppercase',
-          color: 'rgba(242,232,212,0.35)', lineHeight: 2.2 }}>
-          Piel vintage rescatada · Piezas únicas · Hecho a mano
+        <p style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)',
+          lineHeight: 1.9, color: 'rgba(242,232,212,0.6)', maxWidth: '36ch', marginBottom: '4rem' }}>
+          Piel vintage rescatada. Transformada a mano en Madrid.<br/>
+          Piezas únicas que llevan dos historias dentro.
         </p>
+
+        <a href="#historia" style={{ display: 'inline-flex', alignItems: 'center', gap: '1.2rem',
+          fontFamily: 'var(--mono)', fontSize: '0.62rem', letterSpacing: '0.35em',
+          textTransform: 'uppercase', color: 'var(--oro)', textDecoration: 'none',
+          borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '4px',
+          transition: 'opacity 0.3s' }}
+          onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
+          Descubrir la historia
+          <svg width="20" height="8" viewBox="0 0 20 8" fill="none" style={{ marginBottom: '1px' }}>
+            <path d="M0 4h18M14 1l4 3-4 3" stroke="currentColor" strokeWidth="1"/>
+          </svg>
+        </a>
+      </div>
+
+      {/* DERECHA — huevo enorme */}
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '0 clamp(1rem,4vw,4rem)', paddingTop: 'max(5rem, 10vh)' }}>
+        <div style={{
+          width: 'min(560px, 52vw)',
+          animation: 'heroFloat 8s ease-in-out infinite',
+          filter: 'drop-shadow(0 40px 120px rgba(0,0,0,0.9)) drop-shadow(0 0 80px rgba(201,168,76,0.15))',
+          mixBlendMode: 'screen',
+        }}>
+          <Image
+            src="/marca/logo-huevo-t.png"
+            alt="MAMOTIS"
+            width={500}
+            height={500}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+            priority
+          />
+        </div>
       </div>
 
       {/* scroll indicator */}
       <div style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-        zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem',
+        zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem',
         fontFamily: 'var(--mono)', fontSize: '0.46rem', letterSpacing: '0.42em',
-        color: 'rgba(242,232,212,0.28)', textTransform: 'uppercase' }}>
-        <div style={{ width: '1px', height: '44px',
-          background: 'linear-gradient(to bottom, var(--oro), transparent)',
-          animation: 'scrollLine 2.2s ease-in-out infinite' }} />
-        <span>Descubrir</span>
+        color: 'rgba(242,232,212,0.22)', textTransform: 'uppercase' }}>
+        <div style={{ width: '1px', height: '50px',
+          background: 'linear-gradient(to bottom, transparent, var(--oro), transparent)',
+          animation: 'scrollPulse 2.4s ease-in-out infinite' }} />
       </div>
 
       <style>{`
-        @keyframes heroFloat {
-          0%,100% { transform: translateY(0) rotate(-.4deg); }
-          50%      { transform: translateY(-22px) rotate(.4deg); }
+        @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-28px) rotate(.5deg); } }
+        @keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+        @media (max-width: 768px) {
+          section[style*="grid-template-columns"] {
+            grid-template-columns: 1fr !important;
+            min-height: auto !important;
+          }
         }
-        @keyframes scrollLine {
-          0%   { transform: scaleY(0); transform-origin: top; opacity:1; }
-          50%  { transform: scaleY(1); transform-origin: top; opacity:1; }
-          100% { transform: scaleY(1); transform-origin: bottom; opacity:0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          * { animation: none !important; }
-        }
+        @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
       `}</style>
     </section>
   );

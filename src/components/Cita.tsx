@@ -11,7 +11,7 @@ export default function Cita() {
   }, []);
 
   return (
-    <section ref={ref} className="on-negro reveal" style={{ padding: '10rem clamp(2rem,8vw,8rem)', textAlign: 'center' }}>
+    <section ref={ref} className="on-negro reveal" style={{ padding: '7rem clamp(2rem,8vw,8rem)', textAlign: 'center' }}>
       <span className="eyebrow eyebrow-n">— La historia —</span>
       <blockquote style={{ fontFamily: 'var(--serif)', fontWeight: 300, fontStyle: 'italic',
         fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', lineHeight: 1.2,

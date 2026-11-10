@@ -49,7 +49,7 @@ function HistoriaCard({ card, index }: { card: typeof CARDS[0], index: number })
   return (
     <div ref={ref} className="reveal historia-card" style={{
       display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem',
-      alignItems: 'center', padding: '7rem 0',
+      alignItems: 'center', padding: '5rem 0',
       borderBottom: '1px solid var(--borde-c)',
       direction: card.reverse ? 'rtl' : 'ltr',
     }}>
@@ -94,7 +94,7 @@ function HistoriaCard({ card, index }: { card: typeof CARDS[0], index: number })
 
 export default function Historia() {
   return (
-    <section id="historia" className="on-crema" style={{ padding: '8rem clamp(2rem,8vw,8rem)' }}>
+    <section id="historia" className="on-crema" style={{ padding: '6rem clamp(2rem,8vw,8rem)' }}>
       {/* separador título */}
       <div style={{ display:'flex',alignItems:'center',gap:'2.5rem',marginBottom:'6rem' }}>
         <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
