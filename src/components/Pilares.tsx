@@ -1,49 +1,68 @@
 const PILLARS = [
   {
-    icon: <svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M16 2 C16 2 10 10 10 18 C10 24 13 30 16 30 C19 30 22 24 22 18 C22 10 16 2 16 2Z"/><path d="M16 10 L16 24" strokeOpacity=".4"/><path d="M11 20 Q16 17 21 20" strokeOpacity=".4"/></svg>,
+    num: '01',
     title: 'Sostenibilidad',
     titleB: 'con conciencia.',
-    body: 'Rescatamos materiales nobles y les damos una segunda vida. Nada se pierde.',
+    body: 'Rescatamos materiales nobles y les damos una segunda vida. Nada se pierde, todo se transforma.',
   },
   {
-    icon: <svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M6 26 L16 6 L26 26"/><path d="M9 20 L23 20"/><circle cx="16" cy="6" r="1.5" fill="currentColor"/></svg>,
+    num: '02',
     title: 'Artesanía',
     titleB: 'hecha a mano.',
-    body: 'Cada bolso se crea de forma manual, lenta y cuidada, por manos expertas.',
+    body: 'Cada bolso se crea de forma manual, lenta y cuidada, por manos expertas que respetan la piel.',
   },
   {
-    icon: <svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M16 3 L19.5 12 L29 13.4 L22.5 19.6 L24.1 29 L16 24.6 L7.9 29 L9.5 19.6 L3 13.4 L12.5 12 Z"/></svg>,
+    num: '03',
     title: 'Exclusividad',
     titleB: 'irrepetible.',
-    body: 'Piezas únicas en el mundo. Con historia propia. Que no se fabrican, se encuentran.',
+    body: 'Piezas únicas en el mundo. Con historia propia. Que no se fabrican — se encuentran.',
   },
 ];
 
 export default function Pilares() {
   return (
-    <section id="filosofia" style={{ padding:'90px 0 100px', background:'#0c0906' }}>
-      <div className="wrap">
-        <div className="section-label">Nuestra filosofía</div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', marginTop:64, gap:0 }}
+    <section id="filosofia" style={{ background:'#0c0906', padding:'100px 0 110px' }}>
+      <div style={{ width:'min(1320px,90vw)', margin:'0 auto' }}>
+
+        {/* Cabecera editorial */}
+        <div style={{ marginBottom:72, maxWidth:600 }}>
+          <div style={{ fontSize:10, letterSpacing:'0.5em', textTransform:'uppercase',
+            color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:20 }}>
+            La experiencia MAMOTIS
+          </div>
+          <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,4vw,58px)',
+            fontWeight:400, lineHeight:1.08, color:'var(--cream)', margin:'0 0 10px' }}>
+            Cada pieza,
+          </h2>
+          <h2 style={{ fontFamily:'var(--serif)', fontSize:'clamp(34px,4vw,58px)',
+            fontWeight:300, fontStyle:'italic', lineHeight:1.08, color:'var(--gold)', margin:0 }}>
+            una historia única.
+          </h2>
+        </div>
+
+        {/* Tres pilares en fila */}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:0 }}
           className="pilares-grid">
           {PILLARS.map((p, i) => (
             <article key={i} style={{
-              padding:'8px 48px 8px',
+              padding:'40px 44px 44px',
+              borderTop:'1px solid rgba(201,168,76,0.18)',
               borderRight: i < 2 ? '1px solid rgba(201,168,76,0.12)' : 'none',
-              textAlign:'center',
             }} className="pilar">
-              <div style={{ color:'var(--gold)', marginBottom:20, display:'flex', justifyContent:'center' }}>
-                {p.icon}
+              {/* Número */}
+              <div style={{ fontFamily:'var(--serif)', fontSize:52, fontStyle:'italic',
+                fontWeight:300, color:'var(--gold)', lineHeight:1, opacity:0.7, marginBottom:28 }}>
+                {p.num}
               </div>
-              <h3 style={{ fontFamily:'var(--display)', fontSize:22, fontWeight:400,
-                color:'var(--cream)', margin:'0 0 4px' }}>
+              <h3 style={{ fontFamily:'var(--display)', fontSize:24, fontWeight:400,
+                color:'var(--cream)', margin:'0 0 4px', letterSpacing:'0.02em' }}>
                 {p.title}
               </h3>
-              <h3 style={{ fontFamily:'var(--serif)', fontSize:22, fontWeight:300,
-                fontStyle:'italic', color:'var(--gold)', margin:'0 0 18px' }}>
+              <h3 style={{ fontFamily:'var(--serif)', fontSize:24, fontWeight:300,
+                fontStyle:'italic', color:'var(--gold)', margin:'0 0 24px' }}>
                 {p.titleB}
               </h3>
-              <p style={{ fontFamily:'var(--sans)', fontSize:14, lineHeight:1.85,
+              <p style={{ fontFamily:'var(--sans)', fontSize:16, lineHeight:1.9,
                 color:'#9a8e7a', margin:0, fontWeight:300 }}>
                 {p.body}
               </p>
@@ -54,7 +73,7 @@ export default function Pilares() {
       <style>{`
         @media(max-width:720px){
           .pilares-grid{grid-template-columns:1fr!important;}
-          .pilar{border-right:none!important;border-bottom:1px solid rgba(201,168,76,0.12);padding:28px 24px!important;}
+          .pilar{border-right:none!important;border-bottom:1px solid rgba(201,168,76,0.12);padding:32px 24px!important;}
           .pilar:last-child{border-bottom:none!important;}
         }
       `}</style>
