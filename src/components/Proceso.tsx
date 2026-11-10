@@ -30,7 +30,7 @@ export default function Proceso() {
                 <Image src={c.img} alt={c.title} fill
                   style={{ objectFit:'cover', filter:'brightness(0.52)' }} />
                 <div style={{ position:'absolute', inset:'25% 0 0',
-                  background:'linear-gradient(transparent, #1a1108)' }} />
+                  background:'linear-gradient(to bottom, transparent 55%, rgba(26,17,8,0.75) 80%, rgba(26,17,8,0.95) 100%)' }} />
               </div>
               {/* Texto pegado a la foto */}
               <div style={{ padding:'20px 28px 32px' }}>
