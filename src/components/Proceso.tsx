@@ -8,42 +8,40 @@ const CARDS = [
 
 export default function Proceso() {
   return (
-    <section id="proceso" style={{ padding:'90px 0 100px', background:'#090705' }}>
+    <section id="proceso" style={{ padding:'72px 0 80px', background:'#090705' }}>
       <div className="wrap">
         <div className="section-label">El proceso</div>
-        <div style={{ textAlign:'center', marginTop:20, marginBottom:64 }}>
-          <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,4.2vw,58px)',
+        <div style={{ textAlign:'center', marginTop:16, marginBottom:48 }}>
+          <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(32px,4.2vw,54px)',
             fontWeight:400, lineHeight:1.08, color:'var(--cream)', margin:0, display:'inline' }}>
             Artesanía que{' '}
           </h2>
-          <h2 style={{ fontFamily:'var(--serif)', fontSize:'clamp(34px,4.2vw,58px)',
+          <h2 style={{ fontFamily:'var(--serif)', fontSize:'clamp(32px,4.2vw,54px)',
             fontWeight:300, fontStyle:'italic', lineHeight:1.08, color:'var(--gold)', margin:0, display:'inline' }}>
             transforma.
           </h2>
         </div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20 }} className="proceso-grid">
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }} className="proceso-grid">
           {CARDS.map((c) => (
             <article key={c.n} style={{ overflow:'hidden', background:'#1a1108', borderRadius:2 }}>
-              {/* Foto sin gap — directamente encima del texto */}
-              <div style={{ position:'relative', width:'100%', height:280 }}>
+              <div style={{ position:'relative', width:'100%', height:260 }}>
                 <Image src={c.img} alt={c.title} fill
                   style={{ objectFit:'cover', filter:'brightness(0.52)' }} />
-                <div style={{ position:'absolute', inset:'25% 0 0',
-                  background:'linear-gradient(to bottom, transparent 55%, rgba(26,17,8,0.75) 80%, rgba(26,17,8,0.95) 100%)' }} />
+                <div style={{ position:'absolute', inset:'30% 0 0',
+                  background:'linear-gradient(to bottom, transparent 50%, rgba(26,17,8,0.8) 80%, rgba(26,17,8,1) 100%)' }} />
               </div>
-              {/* Texto pegado a la foto */}
-              <div style={{ padding:'20px 28px 32px' }}>
-                <div style={{ fontFamily:'var(--serif)', fontSize:54, fontStyle:'italic',
-                  fontWeight:300, color:'var(--gold)', lineHeight:1, opacity:0.85, marginBottom:14 }}>
+              <div style={{ padding:'18px 24px 28px' }}>
+                <div style={{ fontFamily:'var(--serif)', fontSize:48, fontStyle:'italic',
+                  fontWeight:300, color:'var(--gold)', lineHeight:1, opacity:0.85, marginBottom:10 }}>
                   {c.n}
                 </div>
-                <h3 style={{ fontFamily:'var(--display)', fontSize:22, fontWeight:400,
-                  letterSpacing:'0.04em', margin:'0 0 10px', color:'var(--cream)' }}>
+                <h3 style={{ fontFamily:'var(--display)', fontSize:20, fontWeight:400,
+                  letterSpacing:'0.04em', margin:'0 0 8px', color:'var(--cream)' }}>
                   {c.title}
                 </h3>
-                <p style={{ fontFamily:'var(--serif)', fontSize:16, fontStyle:'italic',
-                  color:'#c4b89a', margin:0, lineHeight:1.8 }}>
+                <p style={{ fontFamily:'var(--serif)', fontSize:15, fontStyle:'italic',
+                  color:'#c4b89a', margin:0, lineHeight:1.7 }}>
                   {c.desc}
                 </p>
               </div>
@@ -53,7 +51,7 @@ export default function Proceso() {
       </div>
       <style>{`
         @media(max-width:720px){
-          .proceso-grid{grid-template-columns:1fr!important; gap:14px!important;}
+          .proceso-grid{grid-template-columns:1fr!important; gap:12px!important;}
         }
       `}</style>
     </section>

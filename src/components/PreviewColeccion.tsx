@@ -21,15 +21,14 @@ const BOLSOS = [
   '/bolsos/bolso-014.jpeg',
 ];
 
-// Duplicamos para loop infinito
 const DOUBLE = [...BOLSOS, ...BOLSOS];
 
 export default function PreviewColeccion() {
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const posRef = useRef(0);
-  const SPEED = 0.5; // px por frame
-  const ITEM_W = 300; // ancho tarjeta + gap
+  const SPEED = 0.5;
+  const ITEM_W = 268; // card 252px + gap 16px
 
   useEffect(() => {
     const half = BOLSOS.length * ITEM_W;
@@ -46,37 +45,37 @@ export default function PreviewColeccion() {
   }, []);
 
   return (
-    <section id="coleccion" style={{ background:'var(--cream)', padding:'90px 0 100px', overflow:'hidden' }}>
+    <section id="coleccion" style={{ background:'var(--cream)', padding:'64px 0 72px', overflow:'hidden' }}>
       {/* Header */}
-      <div style={{ width:'min(1320px,90vw)', margin:'0 auto 52px' }}>
+      <div style={{ width:'min(1320px,90vw)', margin:'0 auto 40px' }}>
         <div style={{ fontSize:9, letterSpacing:'0.5em', textTransform:'uppercase',
-          color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:16 }}>
+          color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:12 }}>
           La colección
         </div>
-        <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,4.5vw,58px)',
+        <h2 style={{ fontFamily:'var(--display)', fontSize:'clamp(30px,4vw,52px)',
           fontWeight:400, lineHeight:1.08, color:'#241b12', margin:0 }}>
-          La colección
+          Piezas únicas
         </h2>
       </div>
 
-      {/* Carrusel auto-animado */}
+      {/* Carrusel */}
       <div style={{ overflow:'hidden', width:'100%' }}>
         <div ref={trackRef} style={{ display:'flex', gap:16, width:'max-content', willChange:'transform' }}>
           {DOUBLE.map((src, i) => (
-            <div key={i} style={{ flexShrink:0, width:284, height:340,
+            <div key={i} style={{ flexShrink:0, width:252, height:310,
               position:'relative', overflow:'hidden', background:'#e4d9c4', borderRadius:2 }}>
               <Image src={src} alt={`MAMOTIS bolso ${i + 1}`} fill
-                style={{ objectFit:'cover' }} sizes="284px" />
+                style={{ objectFit:'cover' }} sizes="252px" />
             </div>
           ))}
         </div>
       </div>
 
-      {/* CTA Instagram */}
-      <div style={{ width:'min(1320px,90vw)', margin:'48px auto 0', textAlign:'center' }}>
+      {/* CTA */}
+      <div style={{ width:'min(1320px,90vw)', margin:'36px auto 0', textAlign:'center' }}>
         <Link href="https://instagram.com/mamotisoficial" target="_blank" style={{
           display:'inline-flex', alignItems:'center', gap:10,
-          border:'1px solid rgba(160,120,48,0.5)', padding:'14px 32px',
+          border:'1px solid rgba(160,120,48,0.5)', padding:'13px 28px',
           fontSize:9, letterSpacing:'0.22em', textTransform:'uppercase',
           color:'#7a5c28', fontFamily:'var(--sans)', textDecoration:'none',
         }}>

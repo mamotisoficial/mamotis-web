@@ -40,35 +40,35 @@ export default function Historia() {
   return (
     <section id="historia" style={{ background: '#f1e8d3' }}>
       {ROWS.map((r, i) => (
-        <div key={i} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:620 }}
+        <div key={i} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:560 }}
           className="historia-row">
 
           {/* Texto */}
           <div style={{
             order: r.reverse ? 2 : 1,
             display:'flex', flexDirection:'column', justifyContent:'center',
-            padding:'clamp(50px,7vw,100px) clamp(36px,6vw,100px)',
+            padding:'clamp(44px,6vw,88px) clamp(32px,5vw,88px)',
             background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
           }}>
             <div style={{ fontSize:10, letterSpacing:'0.5em', textTransform:'uppercase',
-              color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:16 }}>
+              color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:14 }}>
               {r.eyebrow}
             </div>
-            <div style={{ width:40, height:1, background:'var(--gold)', opacity:0.6, marginBottom:36 }} />
-            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,3.8vw,58px)',
-              fontWeight:400, lineHeight:1.08, margin:'0 0 8px', color:'#241b12' }}>
+            <div style={{ width:36, height:1, background:'var(--gold)', opacity:0.6, marginBottom:28 }} />
+            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(28px,3.5vw,52px)',
+              fontWeight:400, lineHeight:1.08, margin:'0 0 6px', color:'#241b12' }}>
               {r.tituloA}
             </h3>
-            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(34px,3.8vw,58px)',
-              fontWeight:300, fontStyle:'italic', lineHeight:1.08, margin:'0 0 36px', color:'#a07830' }}>
+            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(28px,3.5vw,52px)',
+              fontWeight:300, fontStyle:'italic', lineHeight:1.08, margin:'0 0 28px', color:'#a07830' }}>
               {r.tituloB}
             </h3>
-            <p style={{ fontFamily:'var(--sans)', fontSize:17, lineHeight:2,
-              color:'#5a4f42', margin:'0 0 40px', maxWidth:'100%', fontWeight:300 }}>
+            <p style={{ fontFamily:'var(--sans)', fontSize:16, lineHeight:1.9,
+              color:'#5a4f42', margin:'0 0 32px', maxWidth:'100%', fontWeight:300 }}>
               {r.body}
             </p>
             <div style={{ fontSize:9, letterSpacing:'0.3em', color:'#b8a888',
-              display:'flex', alignItems:'center', gap:16 }}>
+              display:'flex', alignItems:'center', gap:14 }}>
               <span style={{ whiteSpace:'nowrap' }}>{r.fecha}</span>
               <div style={{ flex:1, height:1, background:'#d2c4a6' }} />
             </div>
@@ -78,29 +78,21 @@ export default function Historia() {
           <div style={{
             order: r.reverse ? 1 : 2,
             position: 'relative',
-            minHeight: 'clamp(400px,50vw,620px)',
+            minHeight: 'clamp(320px,45vw,560px)',
             overflow: 'hidden',
-            background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
           }} className="historia-foto-col">
-            <Image
-              src={r.img}
-              alt={r.alt}
-              fill
-              style={{
-                objectFit: 'cover',
-                objectPosition: r.pos,
-                filter: 'sepia(0.08) contrast(1.02) brightness(0.98)',
-              }}
-            />
+            <Image src={r.img} alt={r.alt} fill
+              style={{ objectFit:'cover', objectPosition:r.pos,
+                filter:'sepia(0.08) contrast(1.02) brightness(0.98)' }} />
           </div>
 
         </div>
       ))}
       <style>{`
         @media(max-width:720px){
-          .historia-row{grid-template-columns:1fr!important;}
+          .historia-row{grid-template-columns:1fr!important; min-height:auto!important;}
           .historia-row>div{order:unset!important;}
-          .historia-foto-col{min-height:280px!important;}
+          .historia-foto-col{min-height:260px!important;}
         }
       `}</style>
     </section>
