@@ -10,7 +10,7 @@ export default function Hero() {
       overflow: 'hidden',
       background: '#e8e0d4',
     }}>
-      {/* La imagen ya tiene el diseño completo: fondo lino, bolso, huevo, texto MAMOTIS */}
+      {/* Imagen principal — ocupa todo el ancho */}
       <div style={{ position: 'relative', width: '100%', aspectRatio: '1755 / 896' }}>
         <Image
           src="/fotos/Hero copia.png"
@@ -21,21 +21,29 @@ export default function Hero() {
         />
       </div>
 
-      {/* CTA flotante abajo izquierda */}
+      {/* Botón "Descubrir colección" alineado con el bloque de texto izquierdo */}
+      {/* El texto en la imagen ocupa ~43% del ancho, centrado verticalmente en la mitad inferior */}
       <div style={{
         position: 'absolute',
-        bottom: '10%',
-        left: '5%',
+        bottom: '8%',
+        left: '6%',
         zIndex: 2,
       }}>
         <Link href="#coleccion" style={{
           display: 'inline-flex', alignItems: 'center', gap: 14,
-          border: '1px solid rgba(160,120,48,0.6)', padding: '13px 24px',
-          fontSize: 9, letterSpacing: '0.28em', textTransform: 'uppercase',
-          color: '#7a5c28', fontFamily: 'var(--sans)', textDecoration: 'none',
-          background: 'rgba(232,224,212,0.5)',
+          border: '1.5px solid #a07830',
+          padding: '14px 28px',
+          fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
+          color: '#7a5520',
+          fontFamily: 'var(--sans)',
+          fontWeight: 400,
+          textDecoration: 'none',
+          background: 'rgba(232,224,212,0.6)',
           backdropFilter: 'blur(4px)',
-        }}>
+          transition: 'background 0.25s, color 0.25s',
+        }}
+          onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background='rgba(160,120,48,0.12)'; el.style.color='#5a3d10'; }}
+          onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background='rgba(232,224,212,0.6)'; el.style.color='#7a5520'; }}>
           Descubrir colección →
         </Link>
       </div>
