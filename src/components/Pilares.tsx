@@ -49,7 +49,7 @@ export default function Pilares() {
               <div style={{ color: 'var(--gold)', marginBottom: 14, display: 'flex', justifyContent: 'center' }}>
                 {p.icon}
               </div>
-              <h3 style={{ font: `italic 26px var(--serif)`, color: 'var(--gold)', margin: '0 0 14px' }}>{p.title}</h3>
+              <h3 style={{ fontFamily: 'var(--display)', fontSize: 26, fontStyle: 'normal', fontWeight: 400, color: 'var(--gold)', margin: '0 0 14px' }}>{p.title}</h3>
               <p style={{ font: `14px/1.85 var(--sans)`, color: '#b5aa97', margin: 0, fontWeight: 300 }}>{p.body}</p>
             </article>
           ))}

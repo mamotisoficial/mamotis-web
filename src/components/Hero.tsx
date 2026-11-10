@@ -56,10 +56,10 @@ export default function Hero() {
 
           {/* Titular principal — Cormorant italic, grande, peso ligero */}
           <h1 style={{
-            fontFamily: 'var(--serif)',
+            fontFamily: 'var(--display)',
             fontSize: 'clamp(40px, 5.2vw, 74px)',
-            fontStyle: 'italic',
-            fontWeight: 300,
+            fontStyle: 'normal',
+            fontWeight: 400,
             lineHeight: 1.12,
             letterSpacing: '-0.01em',
             color: '#f0e8d4',

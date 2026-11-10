@@ -59,16 +59,16 @@ export default function Historia() {
 
               {/* Título Cormorant */}
               <h3 style={{
-                fontFamily: 'var(--serif)',
+                fontFamily: 'var(--display)',
                 fontSize: 'clamp(32px,3.4vw,54px)',
                 fontStyle: 'normal',
-                fontWeight: 300,
+                fontWeight: 400,
                 lineHeight: 1.18,
                 margin: '0 0 28px',
                 color: '#241b12',
               }}>
                 {lines[0]}<br />
-                <em style={{ fontStyle:'italic', color:'#a07830' }}>{lines[1]}</em>
+                <em style={{ fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300, color:'#a07830' }}>{lines[1]}</em>
               </h3>
 
               {/* Cuerpo */}

@@ -26,15 +26,15 @@ export default function Cita() {
             <div style={{ width:40, height:1, background:'#c9a64c', marginBottom:36 }} />
 
             <h2 style={{
-              fontFamily: 'var(--serif)',
+              fontFamily: 'var(--display)',
               fontSize: 'clamp(28px,3.5vw,50px)',
-              fontWeight: 300,
+              fontWeight: 400,
               lineHeight: 1.15,
               color: '#241b12',
               margin: '0 0 36px',
             }}>
               Del pasado,<br />
-              <em style={{ fontStyle:'italic', color:'#a07830' }}>una nueva historia.</em>
+              <em style={{ fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300, color:'#a07830' }}>una nueva historia.</em>
             </h2>
 
             {/* Dos columnas con borde izquierdo dorado */}
