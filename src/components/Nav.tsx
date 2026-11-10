@@ -78,7 +78,7 @@ export default function Nav() {
             }}
               onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='var(--gold)'; el.style.color='var(--gold)'; }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='rgba(201,168,76,0.45)'; el.style.color='rgba(201,168,76,0.9)'; }}>
-              Escribir
+              WhatsApp
             </Link>
             <button onClick={() => setOpen(o => !o)} className="hamburger" aria-label="Menú"
               style={{ display:'none', background:'none', border:0,

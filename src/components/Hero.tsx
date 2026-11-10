@@ -21,12 +21,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* Botón "Descubrir colección" alineado con el bloque de texto izquierdo */}
-      {/* El texto en la imagen ocupa ~43% del ancho, centrado verticalmente en la mitad inferior */}
+      {/* Botón centrado bajo el bloque de texto izquierdo (~25% del ancho total) */}
       <div style={{
         position: 'absolute',
         bottom: '8%',
-        left: '6%',
+        left: '25%',
+        transform: 'translateX(-50%)',
         zIndex: 2,
       }}>
         <Link href="#coleccion" style={{
