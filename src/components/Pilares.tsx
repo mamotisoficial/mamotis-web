@@ -49,7 +49,7 @@ export default function Pilares() {
             <span style={{ fontFamily:'var(--serif)',fontStyle:'italic',fontSize:'4.5rem',fontWeight:300,
               color:'transparent',WebkitTextStroke:'1px rgba(201,168,76,0.4)',display:'block',lineHeight:1,marginBottom:'1.8rem' }}>{n}</span>
             <div style={{ fontFamily:'var(--serif)',fontStyle:'italic',fontSize:'1.6rem',color:'var(--oro)',marginBottom:'1.2rem' }}>{t}</div>
-            <p style={{ fontSize:'1.1rem',lineHeight:2.2,color:'var(--txt-crema2)' }}>{p}</p>
+            <p style={{ fontSize:'1.1rem',lineHeight:2.2,color:'var(--txt-crema)',opacity:0.75 }}>{p}</p>
           </div>
         ))}
       </div>

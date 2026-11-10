@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* ─── Design tokens ──────────────────────────────────────── */
 :root {
   --negro:  #060504;
   --negro2: #0d0a07;
@@ -8,66 +9,56 @@
   --crema:  #F2E8D4;
   --crema2: #EDE0C4;
   --crema3: #E5D4AE;
-  --txt-negro:  rgba(242,232,212,0.85);
-  --txt-negro2: rgba(242,232,212,0.44);
-  --txt-crema:  #2A1E0E;
-  --txt-crema2: rgba(42,30,14,0.55);
+
+  /* Texto sobre negro */
+  --txt-negro:  rgba(242,232,212,0.88);
+  --txt-negro2: rgba(242,232,212,0.46);
+
+  /* Texto sobre crema — CONTRASTE FUERTE */
+  --txt-crema:  #1A0E04;
+  --txt-crema2: rgba(26,14,4,0.75);
+
+  /* Bordes */
   --borde-n: rgba(201,168,76,0.12);
-  --borde-c: rgba(42,30,14,0.10);
+  --borde-c: rgba(42,30,14,0.18);
+
+  /* Tipografías */
   --serif: 'Cormorant Garamond', Georgia, serif;
   --mono:  'DM Mono', 'Courier New', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
-body {
-  background: var(--negro);
-  color: var(--txt-negro);
-  font-family: var(--serif);
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-::selection { background: var(--oro); color: var(--negro); }
-
-/* ── secciones crema ── */
+/* ─── Context helpers ────────────────────────────────────── */
 .on-crema  { background: var(--crema);  color: var(--txt-crema); }
 .on-crema2 { background: var(--crema2); color: var(--txt-crema); }
 .on-negro  { background: var(--negro);  color: var(--txt-negro); }
 .on-negro2 { background: var(--negro2); color: var(--txt-negro); }
 
-/* ── eyebrow ── */
+/* ─── Eyebrows ───────────────────────────────────────────── */
 .eyebrow {
-  font-family: var(--mono); font-size: 0.55rem;
-  letter-spacing: 0.5em; text-transform: uppercase;
-  display: block; margin-bottom: 2rem;
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.8rem;
+  line-height: 2;
 }
-.eyebrow-n { color: var(--oro); opacity: 0.5; }
-.eyebrow-c { color: var(--txt-crema); opacity: 0.38; }
+.eyebrow-n { color: var(--oro); opacity: 0.65; }
+.eyebrow-c { color: var(--txt-crema); opacity: 0.5; }
 
-/* ── reveal animation ── */
+/* ─── Reveal (scroll animation) ─────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
-.reveal.visible { opacity: 1; transform: none; }
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
 
-/* ── Responsive global ── */
-@media (max-width: 768px) {
-  footer { padding: 3rem 1.5rem 2.5rem !important; }
-  footer .footer-top { grid-template-columns: 1fr 1fr !important; }
-  footer .footer-bottom { flex-direction: column; gap: 0.8rem; }
-  .coleccion-hero { padding: 8rem 1.5rem 3rem !important; }
-  .coleccion-filters { padding: 1.4rem 1.5rem !important; gap: 1.1rem !important; flex-wrap: wrap !important; }
-  .coleccion-count { display: none !important; }
-  .coleccion-grid-inner { grid-template-columns: 1fr !important; }
-  .ficha-grid { grid-template-columns: 1fr !important; min-height: 0 !important; }
-  .ficha-image { min-height: 62vw !important; }
-  .ficha-info { padding: 3rem 1.5rem 4rem !important; border-left: none !important; border-top: 1px solid rgba(201,168,76,0.1) !important; justify-content: flex-start !important; }
-  .ficha-info h1 { font-size: 2rem !important; }
-  .ficha-attr { grid-template-columns: 1fr !important; gap: 0.25rem !important; padding: 0.85rem 0 !important; }
-}
-@media (max-width: 540px) {
-  footer .footer-top { grid-template-columns: 1fr !important; }
-}
+/* ─── Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+img  { max-width: 100%; display: block; }
