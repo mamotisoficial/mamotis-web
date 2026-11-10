@@ -41,7 +41,7 @@ export default function Historia() {
   return (
     <section id="historia" style={{ background: '#f1e8d3' }}>
       {ROWS.map((r, i) => (
-        <div key={i} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:560 }}
+        <div key={i} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:620 }}
           className="historia-row">
 
           {/* Texto */}
@@ -51,21 +51,21 @@ export default function Historia() {
             padding:'clamp(50px,7vw,100px) clamp(36px,6vw,100px)',
             background: i % 2 === 1 ? '#ede4cf' : '#f1e8d3',
           }}>
-            <div style={{ fontSize:9, letterSpacing:'0.5em', textTransform:'uppercase',
-              color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:14 }}>
+            <div style={{ fontSize:10, letterSpacing:'0.5em', textTransform:'uppercase',
+              color:'var(--gold)', fontFamily:'var(--sans)', marginBottom:16 }}>
               {r.eyebrow}
             </div>
-            <div style={{ width:40, height:1, background:'var(--gold)', opacity:0.6, marginBottom:34 }} />
-            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(28px,3.2vw,50px)',
-              fontWeight:400, lineHeight:1.1, margin:'0 0 6px', color:'#241b12' }}>
+            <div style={{ width:40, height:1, background:'var(--gold)', opacity:0.6, marginBottom:36 }} />
+            <h3 style={{ fontFamily:'var(--display)', fontSize:'clamp(34px,3.8vw,58px)',
+              fontWeight:400, lineHeight:1.08, margin:'0 0 8px', color:'#241b12' }}>
               {r.tituloA}
             </h3>
-            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(28px,3.2vw,50px)',
-              fontWeight:300, fontStyle:'italic', lineHeight:1.1, margin:'0 0 30px', color:'#a07830' }}>
+            <h3 style={{ fontFamily:'var(--serif)', fontSize:'clamp(34px,3.8vw,58px)',
+              fontWeight:300, fontStyle:'italic', lineHeight:1.08, margin:'0 0 36px', color:'#a07830' }}>
               {r.tituloB}
             </h3>
-            <p style={{ fontFamily:'var(--sans)', fontSize:14, lineHeight:1.95,
-              color:'#5a4f42', margin:'0 0 36px', maxWidth:430, fontWeight:300 }}>
+            <p style={{ fontFamily:'var(--sans)', fontSize:16, lineHeight:2,
+              color:'#5a4f42', margin:'0 0 40px', maxWidth:'100%', fontWeight:300 }}>
               {r.body}
             </p>
             <div style={{ fontSize:9, letterSpacing:'0.3em', color:'#b8a888',
