@@ -4,8 +4,9 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer style={{ background:'#050403', borderTop:'1px solid #1e150a', padding:'28px 0' }}>
+    <footer style={{ background:'#050403', borderTop:'1px solid #1e150a', padding:'28px 0 20px' }}>
       <div className="wrap">
+        {/* Fila principal */}
         <div style={{
           display:'flex', alignItems:'center', justifyContent:'space-between',
           gap:24, flexWrap:'wrap',
@@ -69,7 +70,29 @@ export default function Footer() {
             © MAMOTIS 2026
           </span>
         </div>
+
+        {/* Fila legal */}
+        <div style={{
+          display:'flex', alignItems:'center', justifyContent:'center',
+          gap:24, marginTop:16, flexWrap:'wrap',
+        }}>
+          {[
+            ['/aviso-legal','Aviso Legal'],
+            ['/privacidad','Privacidad'],
+            ['/cookies','Cookies'],
+          ].map(([href, label]) => (
+            <Link key={href} href={href}
+              style={{ fontFamily:'var(--sans)', fontSize:9, letterSpacing:'0.15em',
+                textTransform:'uppercase', color:'#352a18', textDecoration:'none',
+                transition:'color 0.2s' }}
+              onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#7a6240'}
+              onMouseLeave={e=>(e.currentTarget as HTMLElement).style.color='#352a18'}>
+              {label}
+            </Link>
+          ))}
+        </div>
       </div>
+
       <style>{`
         @media(max-width:580px){
           .footer-inner{ justify-content:center!important; text-align:center; }
