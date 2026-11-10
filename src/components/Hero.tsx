@@ -67,7 +67,7 @@ export default function Hero() {
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
 
       {/* Content grid */}
-      <div className="wrap hero-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', alignItems: 'center', paddingTop: 20, width: '100%' }}>
+      <div className="wrap hero-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', alignItems: 'center', paddingTop: 0, width: '100%' }}>
 
         {/* LEFT: copy */}
         <div style={{ padding: '45px 0 65px' }}>
