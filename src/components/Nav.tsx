@@ -1,115 +1,69 @@
 'use client';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-
-const LINKS = [
-  { label: 'Historia', href: '/#historia' },
-  { label: 'Colección', href: '/#coleccion' },
-  { label: 'Contacto', href: '/#contacto' },
-];
+import { useState } from 'react';
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
-        padding: scrolled ? '0.7rem clamp(1.5rem,5vw,5rem)' : '1.2rem clamp(1.5rem,5vw,5rem)',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        background: scrolled ? 'rgba(6,5,4,0.98)' : 'rgba(6,5,4,0.75)',
-        borderBottom: scrolled ? '1px solid rgba(201,168,76,0.12)' : '1px solid rgba(201,168,76,0)',
-        backdropFilter: 'blur(16px)',
-        transition: 'padding 0.4s ease, background 0.4s ease, border-color 0.4s ease',
+      {/* Ribbon marquee */}
+      <div className="ribbon" aria-label="Lema de MAMOTIS">
+        <div className="ribbon-track">
+          {['Una sola','Existió antes','Irrepetible','Vivió una vida','Ahora vive otra','Renace',
+            'Una sola','Existió antes','Irrepetible','Vivió una vida','Ahora vive otra','Renace'].map((t,i) => (
+            <span key={i}>{t}<span className="seed" style={{margin:'0 15px'}}>◈</span></span>
+          ))}
+        </div>
+      </div>
+
+      {/* Header */}
+      <header style={{
+        height: 76,
+        position: 'fixed',
+        zIndex: 50,
+        top: 38,
+        left: 0,
+        width: '100%',
+        borderBottom: '1px solid rgba(255,255,255,0.12)',
+        background: 'linear-gradient(#080706cc, transparent)',
+        backdropFilter: 'blur(8px)',
       }}>
-        {/* LOGO — huevo + texto script */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', textDecoration: 'none' }}>
-          <div style={{ width: '36px', height: '38px', position: 'relative', flexShrink: 0 }}>
-            <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS" fill style={{ objectFit: 'contain' }} />
-          </div>
-          <div style={{ position:'relative', width:'120px', height:'38px' }}>
-            <Image src="/marca/mamotis-t.png" alt="Mamotis" fill style={{ objectFit:'contain', objectPosition:'left center',
-              filter:'brightness(0.9) sepia(0.2)', opacity:0.9 }} />
-          </div>
-        </Link>
+        <div className="wrap nav" style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+          <Link href="/" style={{font:`26px var(--display)`,letterSpacing:'0.34em',color:'var(--cream)'}}>
+            MAMOTIS
+          </Link>
 
-        {/* links desktop */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem' }} className="nav-links">
-          {LINKS.map(l => (
-            <Link key={l.href} href={l.href} style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem',
-              letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(242,232,212,0.6)',
-              textDecoration: 'none', transition: 'color 0.3s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--oro)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(242,232,212,0.6)')}>
-              {l.label}
-            </Link>
-          ))}
-          <a href="https://wa.me/34605764097" target="_blank" rel="noopener" style={{
-            fontFamily: 'var(--mono)', fontSize: '0.58rem', letterSpacing: '0.3em',
-            textTransform: 'uppercase', color: 'var(--negro)', background: 'var(--oro)',
-            padding: '0.6rem 1.4rem', textDecoration: 'none', transition: 'opacity 0.3s',
-          }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-            WhatsApp
-          </a>
+          <nav className={`navlinks${open?' mobile-open':''}`} style={{display:'flex',gap:34,font:`13px var(--serif)`,color:'#e7dcc8'}}>
+            {[['#inicio','Inicio'],['#historia','La historia'],['#proceso','El proceso'],['#coleccion','Colección'],['#filosofia','Filosofía'],['#contacto','Contacto']].map(([h,l])=>(
+              <Link key={h} href={h} onClick={()=>setOpen(false)}
+                style={{transition:'color .2s'}}
+                onMouseEnter={e=>(e.currentTarget.style.color='var(--gold2)')}
+                onMouseLeave={e=>(e.currentTarget.style.color='')}>
+                {l}
+              </Link>
+            ))}
+          </nav>
+
+          <Link href="#coleccion" style={{border:'1px solid #c6a65e',padding:'11px 18px',fontSize:10,letterSpacing:'0.16em',textTransform:'uppercase'}}>
+            Descubre las piezas
+          </Link>
+
+          <button onClick={()=>setOpen(o=>!o)} style={{display:'none',background:'none',border:0,color:'var(--cream)',fontSize:25,cursor:'pointer'}}
+            className="menu-btn" aria-label="Abrir menú">☰</button>
         </div>
+      </header>
 
-        {/* hamburger mobile */}
-        <button onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem', zIndex: 10 }}
-          className="nav-burger" aria-label="Menú">
-          <div style={{ width: '24px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <span style={{ display: 'block', height: '1px', background: 'var(--crema)',
-              transform: menuOpen ? 'translateY(6px) rotate(45deg)' : 'none', transition: 'transform 0.3s' }} />
-            <span style={{ display: 'block', height: '1px', background: 'var(--crema)',
-              opacity: menuOpen ? 0 : 1, transition: 'opacity 0.3s' }} />
-            <span style={{ display: 'block', height: '1px', background: 'var(--crema)',
-              transform: menuOpen ? 'translateY(-6px) rotate(-45deg)' : 'none', transition: 'transform 0.3s' }} />
-          </div>
-        </button>
-      </nav>
-
-      {/* menú mobile overlay */}
-      {menuOpen && (
-        <div onClick={() => setMenuOpen(false)} style={{
-          position: 'fixed', inset: 0, zIndex: 400,
-          background: 'rgba(6,5,4,0.97)', backdropFilter: 'blur(20px)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '3.5rem',
-        }}>
-          {LINKS.map(l => (
-            <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-              style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: '3rem',
-                color: 'var(--crema)', textDecoration: 'none', fontWeight: 300 }}>
-              {l.label}
-            </Link>
-          ))}
-          <a href="https://wa.me/34605764097" target="_blank" rel="noopener"
-            style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.35em',
-              textTransform: 'uppercase', color: 'var(--negro)', background: 'var(--oro)',
-              padding: '1rem 2.5rem', textDecoration: 'none', marginTop: '1rem' }}>
-            WhatsApp
-          </a>
-        </div>
-      )}
+      {/* Spacer for ribbon+header */}
+      <div style={{height: 38 + 76}} />
 
       <style>{`
-        @media (max-width: 768px) {
-          .nav-links { display: none !important; }
-          .nav-burger { display: flex !important; }
+        @media(max-width:640px){
+          .menu-btn{display:block!important}
+          .navlinks:not(.mobile-open){display:none!important}
+          .navlinks{display:flex;flex-direction:column}
+        }
+        @media(max-width:900px){
+          header nav a{font-size:11px}
         }
       `}</style>
     </>

@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,225 +11,125 @@ export default function Hero() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
     let raf: number;
-
-    // Efecto seda: líneas diagonales suaves que se mueven
     let t = 0;
-    function resize() {
-      canvas!.width = canvas!.offsetWidth;
-      canvas!.height = canvas!.offsetHeight;
-    }
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
     resize();
-    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('resize', resize);
 
-    function draw() {
-      const w = canvas!.width;
-      const h = canvas!.height;
+    const draw = () => {
+      const { width: w, height: h } = canvas;
       ctx.clearRect(0, 0, w, h);
-      t += 0.003;
 
-      // Ondas de seda diagonales
-      for (let i = 0; i < 18; i++) {
-        const x = (i / 18) * w * 2 - w * 0.5 + Math.sin(t + i * 0.4) * 60;
-        const grad = ctx.createLinearGradient(x, 0, x + w * 0.15, h);
-        const a = 0.012 + Math.sin(t * 0.7 + i) * 0.006;
-        grad.addColorStop(0, `rgba(201,168,76,0)`);
-        grad.addColorStop(0.4, `rgba(201,168,76,${a})`);
-        grad.addColorStop(0.6, `rgba(242,232,212,${a * 0.7})`);
-        grad.addColorStop(1, `rgba(201,168,76,0)`);
+      // Dark satin base
+      const bg = ctx.createRadialGradient(w * 0.72, h * 0.45, 0, w * 0.5, h * 0.5, w * 0.9);
+      bg.addColorStop(0, '#3a2214');
+      bg.addColorStop(0.3, '#1c1510');
+      bg.addColorStop(0.7, '#0d0a07');
+      bg.addColorStop(1, '#080604');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // Silk ripple waves
+      for (let i = 0; i < 22; i++) {
+        const x = (i / 22) * w * 2.2 - w * 0.6 + Math.sin(t * 0.4 + i * 0.5) * 80;
+        const a = 0.03 + Math.sin(t * 0.6 + i * 0.8) * 0.018;
+        const grad = ctx.createLinearGradient(x, 0, x + w * 0.18, h);
+        grad.addColorStop(0, `rgba(180,140,60,0)`);
+        grad.addColorStop(0.35, `rgba(200,160,70,${a})`);
+        grad.addColorStop(0.5, `rgba(240,210,140,${a * 0.5})`);
+        grad.addColorStop(0.65, `rgba(200,160,70,${a})`);
+        grad.addColorStop(1, `rgba(180,140,60,0)`);
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
       }
 
+      // Vignette
+      const vig = ctx.createRadialGradient(w * 0.5, h * 0.5, h * 0.2, w * 0.5, h * 0.5, w * 0.9);
+      vig.addColorStop(0, 'rgba(0,0,0,0)');
+      vig.addColorStop(1, 'rgba(0,0,0,0.65)');
+      ctx.fillStyle = vig;
+      ctx.fillRect(0, 0, w, h);
+
+      t += 0.008;
       raf = requestAnimationFrame(draw);
-    }
+    };
     draw();
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, []);
 
   return (
-    <section className="hero-section" style={{
-      minHeight: '100vh',
-      position: 'relative',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      alignItems: 'center',
-      background: '#0a0806',
-      overflow: 'hidden',
-    }}>
-      {/* Canvas seda */}
-      <canvas ref={canvasRef} style={{
-        position: 'absolute', inset: 0,
-        width: '100%', height: '100%',
-        zIndex: 0,
-      }} />
+    <section id="inicio" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+      {/* Canvas silk background */}
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
 
-      {/* Gradiente radial fondo para profundidad */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'radial-gradient(ellipse 80% 80% at 65% 50%, rgba(40,25,10,0.0) 0%, rgba(6,4,2,0.85) 100%)',
-        pointerEvents: 'none',
-      }} />
+      {/* Content grid */}
+      <div className="wrap hero-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', alignItems: 'center', paddingTop: 20, width: '100%' }}>
 
-      {/* Viñeta bordes */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to right, rgba(6,4,2,0.75) 0%, transparent 40%, transparent 60%, rgba(6,4,2,0.6) 100%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', zIndex: 1,
-        background: 'linear-gradient(to top, #0a0806, transparent)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* IZQUIERDA — texto */}
-      <div className="hero-text" style={{
-        position: 'relative', zIndex: 2,
-        padding: 'clamp(6rem,10vw,10rem) clamp(2.5rem,6vw,7rem)',
-        paddingTop: 'max(9rem, 16vh)',
-      }}>
-        <span style={{
-          fontFamily: 'var(--mono)', fontSize: '0.62rem', letterSpacing: '0.55em',
-          textTransform: 'uppercase', color: 'var(--oro)', opacity: 0.7,
-          display: 'block', marginBottom: '2.5rem',
-        }}>
-          Madrid · Artesanía de lujo
-        </span>
-
-        <h1 style={{
-          fontFamily: 'var(--serif)', fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(3rem, 6.5vw, 8.5rem)', lineHeight: 1.0,
-          letterSpacing: '-0.02em', color: 'var(--crema)', margin: '0 0 1.8rem',
-        }}>
-          Un bolso artesano<br/>
-          tiene un{' '}
-          <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>nombre.</em>
-        </h1>
-
-        {/* línea dorada ornamental */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem',
-        }}>
-          <div style={{ flex: 1, maxWidth: '80px', height: '1px', background: 'var(--oro)', opacity: 0.4 }} />
-          <svg width="12" height="6" viewBox="0 0 12 6" fill="none">
-            <path d="M0 3 Q6 0 12 3 Q6 6 0 3Z" fill="rgba(201,168,76,0.5)" />
+        {/* LEFT: copy */}
+        <div style={{ padding: '45px 0 65px' }}>
+          {/* Golden egg SVG */}
+          <svg viewBox="0 0 70 90" aria-label="Emblema MAMOTIS" style={{ width: 50, height: 60, marginBottom: 28, filter: 'drop-shadow(0 7px 14px rgba(0,0,0,0.7))' }}>
+            <defs>
+              <linearGradient id="eggG" x1="0" x2="1">
+                <stop stopColor="#8c6424"/>
+                <stop offset=".45" stopColor="#f5d987"/>
+                <stop offset="1" stopColor="#a77928"/>
+              </linearGradient>
+            </defs>
+            <path d="M35 4 C23 22 9 38 11 55 C13 76 25 85 35 85 C48 85 60 75 60 56 C60 39 47 20 35 4Z" fill="url(#eggG)" stroke="#e7c66f" strokeWidth="1.2"/>
+            <path d="M22 48 Q35 35 49 49" fill="none" stroke="#fff0b7" strokeOpacity=".55"/>
           </svg>
-          <div style={{ flex: 1, maxWidth: '80px', height: '1px', background: 'var(--oro)', opacity: 0.4 }} />
+
+          <h1 style={{ font: `clamp(42px,5.2vw,76px)/1.08 var(--serif)`, margin: '0 0 0', maxWidth: 560, letterSpacing: '-0.035em', color: 'var(--cream)' }}>
+            Un bolso artesano<br />tiene un <em style={{ color: 'var(--gold2)', fontWeight: 400 }}>nombre.</em>
+          </h1>
+
+          {/* Gold rule */}
+          <div style={{ height: 1, width: 180, background: 'linear-gradient(90deg,transparent,var(--gold),transparent)', margin: '28px 0 20px' }} />
+
+          {/* MAMOTIS in Italiana */}
+          <div style={{ font: `clamp(42px,5.8vw,80px) var(--display)`, letterSpacing: '0.34em', color: '#e7d6ad', lineHeight: 1 }}>
+            MAMOTIS
+          </div>
+
+          <p style={{ font: `italic 16px var(--serif)`, color: '#b9ad98', marginTop: 20, marginBottom: 0 }}>
+            Una segunda vida. Una pieza irrepetible.
+          </p>
+
+          <Link href="#coleccion" className="btn-gold" style={{ marginTop: 32, display: 'inline-flex', alignItems: 'center', gap: 20 }}>
+            Descubre la colección <span>⟶</span>
+          </Link>
         </div>
 
-        <div style={{
-          fontFamily: 'var(--serif)', fontStyle: 'italic',
-          fontSize: 'clamp(2.2rem, 4vw, 5.5rem)', fontWeight: 300,
-          letterSpacing: '0.12em', color: 'var(--oro)',
-          marginBottom: '3rem', lineHeight: 1,
-        }}>
-          MAMOTIS
+        {/* RIGHT: bolso */}
+        <div className="hero-product" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 610, position: 'relative' }}>
+          {/* Shadow under bag */}
+          <div style={{ position: 'absolute', bottom: 52, left: '12%', width: '75%', height: 25, borderRadius: '50%', background: '#000', filter: 'blur(28px)' }} />
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Image
+              src="/marca/bolso-hero.png"
+              alt="Bolso artesanal MAMOTIS de pelo marrón con asas fucsias"
+              fill
+              style={{ objectFit: 'contain', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.85))', position: 'relative', zIndex: 1 }}
+              priority
+            />
+          </div>
         </div>
-
-        <p style={{
-          fontFamily: 'var(--serif)', fontStyle: 'italic',
-          fontSize: 'clamp(0.95rem, 1.3vw, 1.2rem)',
-          lineHeight: 1.9, color: 'rgba(242,232,212,0.55)',
-          maxWidth: '38ch', marginBottom: '3.5rem',
-        }}>
-          Piel vintage rescatada. Transformada a mano en Madrid.
-          Piezas únicas que llevan dos historias dentro.
-        </p>
-
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <a href="#historia" style={{
-            fontFamily: 'var(--mono)', fontSize: '0.6rem', letterSpacing: '0.35em',
-            textTransform: 'uppercase', color: 'var(--negro)', background: 'var(--oro)',
-            padding: '0.85rem 2rem', textDecoration: 'none', transition: 'opacity 0.3s',
-          }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-            Descubrir
-          </a>
-          <a href="https://wa.me/34605764097" target="_blank" rel="noopener" style={{
-            fontFamily: 'var(--mono)', fontSize: '0.6rem', letterSpacing: '0.35em',
-            textTransform: 'uppercase', color: 'rgba(242,232,212,0.5)',
-            textDecoration: 'none', borderBottom: '1px solid rgba(242,232,212,0.2)',
-            paddingBottom: '2px', transition: 'color 0.3s',
-          }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--oro)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(242,232,212,0.5)')}>
-            Contactar →
-          </a>
-        </div>
-      </div>
-
-      {/* DERECHA — bolso */}
-      <div className="hero-bolso" style={{
-        position: 'relative', zIndex: 2,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '0 clamp(1rem,4vw,5rem)',
-        paddingTop: 'max(5rem, 10vh)',
-        paddingBottom: '4rem',
-      }}>
-        {/* Halo dorado detrás del bolso */}
-        <div style={{
-          position: 'absolute',
-          width: '55%', paddingBottom: '55%',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-
-        <div style={{
-          width: 'min(520px, 50vw)',
-          position: 'relative',
-          animation: 'heroFloat 9s ease-in-out infinite',
-          filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.9)) drop-shadow(0 0 40px rgba(201,168,76,0.18)) drop-shadow(0 -10px 30px rgba(201,168,76,0.08))',
-        }}>
-          <Image
-            src="/marca/bolso-hero.png"
-            alt="Bolso MAMOTIS"
-            width={700}
-            height={700}
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-            priority
-          />
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
-        zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
-      }}>
-        <div style={{
-          width: '1px', height: '50px',
-          background: 'linear-gradient(to bottom, transparent, rgba(201,168,76,0.6), transparent)',
-          animation: 'scrollPulse 2.4s ease-in-out infinite',
-        }} />
       </div>
 
       <style>{`
-        @keyframes heroFloat {
-          0%,100% { transform: translateY(0) rotate(-0.3deg); }
-          50% { transform: translateY(-22px) rotate(0.3deg); }
+        @media(max-width:640px){
+          .hero-grid { grid-template-columns: 1fr !important; padding-top: 24px !important; }
+          .hero-product { height: 380px !important; }
         }
-        @keyframes scrollPulse {
-          0%,100% { opacity: 0.3; }
-          50% { opacity: 1; }
+        @media(max-width:900px){
+          .hero-grid { grid-template-columns: 1fr 1fr !important; }
+          .hero-product { height: 460px !important; }
         }
-        @media (max-width: 768px) {
-          .hero-section {
-            grid-template-columns: 1fr !important;
-            min-height: 100svh !important;
-          }
-          .hero-text {
-            padding: 7rem 1.5rem 1.5rem !important;
-          }
-          .hero-bolso {
-            padding: 0 2rem 3rem !important;
-          }
-          .hero-bolso > div:last-child {
-            width: min(280px, 72vw) !important;
-          }
-        }
-        @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
       `}</style>
     </section>
   );

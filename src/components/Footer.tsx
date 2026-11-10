@@ -1,60 +1,21 @@
-'use client';
 import Link from 'next/link';
-
-const REDES = [
-  { label:'Instagram', href:'https://www.instagram.com/mamotis_/' },
-  { label:'TikTok', href:'https://www.tiktok.com/@mamotis_' },
-  { label:'WhatsApp', href:'https://wa.me/34605764097' },
-];
 
 export default function Footer() {
   return (
-    <footer className="on-negro2" style={{
-      borderTop:'1px solid var(--borde-n)',
-      padding:'2.5rem clamp(2rem,8vw,8rem)',
-    }}>
-      <div style={{
-        display:'flex', flexWrap:'wrap', alignItems:'center',
-        justifyContent:'space-between', gap:'1.5rem',
-      }}>
-        {/* logo texto */}
-        <span style={{
-          fontFamily:'var(--serif)', fontStyle:'italic', fontWeight:300,
-          fontSize:'1.3rem', color:'rgba(242,232,212,0.4)', letterSpacing:'0.04em',
-        }}>Mamotis</span>
-
-        {/* redes */}
-        <div style={{ display:'flex', gap:'2.5rem', alignItems:'center' }}>
-          {REDES.map(({ label, href }) => (
-            <a key={label} href={href} target="_blank" rel="noopener"
-              style={{
-                fontFamily:'var(--mono)', fontSize:'0.52rem', letterSpacing:'0.28em',
-                textTransform:'uppercase', color:'rgba(242,232,212,0.35)',
-                textDecoration:'none', transition:'color 0.3s',
-              }}
-              onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color='var(--crema)'; }}
-              onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.color='rgba(242,232,212,0.35)'; }}>
-              {label}
-            </a>
-          ))}
+    <footer style={{ background: '#050403', borderTop: '1px solid #40331d', padding: '30px 0', color: '#938875' }}>
+      <div className="wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 10, letterSpacing: '0.15em', flexWrap: 'wrap', gap: 16 }}>
+        <Link href="/" style={{ font: `23px var(--display)`, letterSpacing: '0.3em', color: '#e4d4b4' }}>MAMOTIS</Link>
+        <span>Una sola. Existió antes. Irrepetible.</span>
+        <div style={{ display: 'flex', gap: 24 }}>
+          <Link href="#historia">Historia</Link>
+          <Link href="#coleccion">Colección</Link>
+          <Link href="#contacto">Contacto</Link>
         </div>
-
-        {/* legal */}
-        <div style={{ display:'flex', gap:'2rem', alignItems:'center' }}>
-          <span style={{ fontFamily:'var(--mono)', fontSize:'0.46rem', letterSpacing:'0.2em',
-            textTransform:'uppercase', color:'rgba(242,232,212,0.2)' }}>
-            © MAMOTIS 2024
-          </span>
-          <Link href="/legal" style={{ fontFamily:'var(--mono)', fontSize:'0.46rem', letterSpacing:'0.2em',
-            textTransform:'uppercase', color:'rgba(242,232,212,0.2)', textDecoration:'none' }}>
-            Aviso legal
-          </Link>
-        </div>
+        <span>© MAMOTIS 2026</span>
       </div>
-
       <style>{`
         @media(max-width:640px){
-          footer > div { flex-direction:column; align-items:flex-start; gap:1.2rem; }
+          footer .wrap{flex-direction:column!important;text-align:center!important;gap:12px!important}
         }
       `}</style>
     </footer>
