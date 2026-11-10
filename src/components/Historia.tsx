@@ -33,10 +33,20 @@ const CARDS = [
 ];
 
 const BOLSOS = [
-  { src: '/bolsos/bolso-001.jpeg', label: 'Visón rescatado · Forro seda' },
-  { src: '/bolsos/bolso-002.jpeg', label: 'Astracán persa · Jacquard' },
-  { src: '/bolsos/bolso-003.jpeg', label: 'Piel clásica · Madrid' },
-  { src: '/bolsos/bolso-004.jpeg', label: 'Pieza única · 2024' },
+  { src: '/bolsos/bolso-001.jpeg', label: 'Pieza única · Madrid' },
+  { src: '/bolsos/bolso-002.jpeg', label: 'Piel vintage rescatada' },
+  { src: '/bolsos/bolso-003.jpeg', label: 'Artesanía Madrid' },
+  { src: '/bolsos/bolso-004.jpeg', label: 'Dos historias dentro' },
+  { src: '/bolsos/bolso-005.jpeg', label: 'Visón rescatado' },
+  { src: '/bolsos/bolso-006.jpeg', label: 'Forro seda brocada' },
+  { src: '/bolsos/bolso-007.jpeg', label: 'Pieza única' },
+  { src: '/bolsos/bolso-008.jpeg', label: 'Astracán persa' },
+  { src: '/bolsos/bolso-009.jpeg', label: 'Jacquard turquesa' },
+  { src: '/bolsos/bolso-010.jpeg', label: 'Piel clásica' },
+  { src: '/bolsos/bolso-011.jpeg', label: 'Madrid 2024' },
+  { src: '/bolsos/bolso-012.jpeg', label: 'Rescatada · Única' },
+  { src: '/bolsos/bolso-013.jpeg', label: 'Artesanía lenta' },
+  { src: '/bolsos/bolso-014.jpeg', label: 'Dos vidas, una pieza' },
 ];
 
 function HistoriaCard({ card, index }: { card: typeof CARDS[0], index: number }) {
