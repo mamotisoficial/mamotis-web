@@ -35,15 +35,15 @@ export default function Nav() {
         backdropFilter: 'blur(16px)',
         transition: 'padding 0.4s ease, background 0.4s ease, border-color 0.4s ease',
       }}>
-        {/* LOGO — huevo + texto */}
+        {/* LOGO — huevo + texto script */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', textDecoration: 'none' }}>
-          <div style={{ width: '36px', height: '38px', position: 'relative', mixBlendMode: 'screen', flexShrink: 0 }}>
+          <div style={{ width: '36px', height: '38px', position: 'relative', flexShrink: 0 }}>
             <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS" fill style={{ objectFit: 'contain' }} />
           </div>
-          <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 300,
-            fontSize: '1.4rem', color: 'var(--crema)', letterSpacing: '0.04em', lineHeight: 1 }}>
-            Mamotis
-          </span>
+          <div style={{ position:'relative', width:'120px', height:'38px' }}>
+            <Image src="/marca/mamotis-t.png" alt="Mamotis" fill style={{ objectFit:'contain', objectPosition:'left center',
+              filter:'brightness(0.9) sepia(0.2)', opacity:0.9 }} />
+          </div>
         </Link>
 
         {/* links desktop */}

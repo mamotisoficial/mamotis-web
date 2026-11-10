@@ -35,42 +35,39 @@ export default function Hero() {
   }, []);
 
   return (
-    <section style={{
+    <section className="hero-section" style={{
       minHeight: '100vh', position: 'relative',
       display: 'grid', gridTemplateColumns: '1fr 1fr',
       alignItems: 'center',
       background: 'var(--negro)', overflow: 'hidden',
     }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.25, zIndex: 0 }} />
-
-      {/* gradiente lateral derecho */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1,
         background: 'linear-gradient(to right, rgba(6,5,4,0.6) 0%, transparent 50%, rgba(6,5,4,0.3) 100%)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%', zIndex: 1,
         background: 'linear-gradient(to top, var(--negro), transparent)' }} />
 
       {/* IZQUIERDA — texto */}
-      <div style={{ position: 'relative', zIndex: 2, padding: 'clamp(6rem,10vw,10rem) clamp(2.5rem,6vw,7rem)', paddingTop: 'max(8rem, 15vh)' }}>
+      <div className="hero-text" style={{ position: 'relative', zIndex: 2,
+        padding: 'clamp(6rem,10vw,10rem) clamp(2.5rem,6vw,7rem)',
+        paddingTop: 'max(8rem, 15vh)' }}>
         <span style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.5em',
           textTransform: 'uppercase', color: 'var(--oro)', opacity: 0.65,
           display: 'block', marginBottom: '3rem' }}>
           Madrid · Artesanía de lujo
         </span>
-
         <h1 style={{ fontFamily: 'var(--serif)', fontWeight: 300, fontStyle: 'italic',
-          fontSize: 'clamp(4rem, 7.5vw, 9.5rem)', lineHeight: 0.9,
-          letterSpacing: '-0.02em', color: 'var(--crema)', marginBottom: '3.5rem', margin: '0 0 3.5rem' }}>
+          fontSize: 'clamp(3.2rem, 7vw, 9.5rem)', lineHeight: 0.9,
+          letterSpacing: '-0.02em', color: 'var(--crema)', margin: '0 0 3.5rem' }}>
           Un bolso<br/>
           que <em style={{ color: 'var(--oro)', fontStyle: 'normal' }}>existió</em><br/>
           antes de ti.
         </h1>
-
-        <p style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)',
-          lineHeight: 1.9, color: 'rgba(242,232,212,0.6)', maxWidth: '36ch', marginBottom: '4rem' }}>
+        <p style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 'clamp(1rem, 1.4vw, 1.3rem)',
+          lineHeight: 1.9, color: 'rgba(242,232,212,0.6)', maxWidth: '36ch', marginBottom: '3.5rem' }}>
           Piel vintage rescatada. Transformada a mano en Madrid.<br/>
           Piezas únicas que llevan dos historias dentro.
         </p>
-
         <a href="#historia" style={{ display: 'inline-flex', alignItems: 'center', gap: '1.2rem',
           fontFamily: 'var(--mono)', fontSize: '0.62rem', letterSpacing: '0.35em',
           textTransform: 'uppercase', color: 'var(--oro)', textDecoration: 'none',
@@ -85,31 +82,25 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* DERECHA — huevo enorme */}
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
+      {/* DERECHA — huevo */}
+      <div className="hero-egg" style={{ position: 'relative', zIndex: 2, display: 'flex',
+        alignItems: 'center', justifyContent: 'center',
         padding: '0 clamp(1rem,4vw,4rem)', paddingTop: 'max(5rem, 10vh)' }}>
         <div style={{
           width: 'min(560px, 52vw)',
           animation: 'heroFloat 8s ease-in-out infinite',
           filter: 'drop-shadow(0 40px 120px rgba(0,0,0,0.9)) drop-shadow(0 0 80px rgba(201,168,76,0.15))',
-          mixBlendMode: 'screen',
         }}>
-          <Image
-            src="/marca/logo-huevo-nuevo.png"
-            alt="MAMOTIS"
-            width={500}
-            height={500}
+          <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS"
+            width={500} height={500}
             style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-            priority
-          />
+            priority />
         </div>
       </div>
 
       {/* scroll indicator */}
       <div style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-        zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem',
-        fontFamily: 'var(--mono)', fontSize: '0.46rem', letterSpacing: '0.42em',
-        color: 'rgba(242,232,212,0.22)', textTransform: 'uppercase' }}>
+        zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ width: '1px', height: '50px',
           background: 'linear-gradient(to bottom, transparent, var(--oro), transparent)',
           animation: 'scrollPulse 2.4s ease-in-out infinite' }} />
@@ -118,10 +109,21 @@ export default function Hero() {
       <style>{`
         @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-28px) rotate(.5deg); } }
         @keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+
         @media (max-width: 768px) {
-          section[style*="grid-template-columns"] {
+          .hero-section {
             grid-template-columns: 1fr !important;
-            min-height: auto !important;
+            min-height: 100svh !important;
+            padding-bottom: 4rem;
+          }
+          .hero-text {
+            padding: 7rem 1.5rem 2rem !important;
+          }
+          .hero-egg {
+            padding: 0 2rem 3rem !important;
+          }
+          .hero-egg > div {
+            width: min(260px, 65vw) !important;
           }
         }
         @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }

@@ -54,44 +54,40 @@ function HistoriaCard({ card, index }: { card: typeof CARDS[0], index: number })
     <div ref={ref} className="reveal historia-card" style={{
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
-      gap: '5rem',
+      gap: '4rem',
       alignItems: 'center',
-      padding: '4.5rem 0',
+      padding: '4rem 0',
       borderBottom: '1px solid var(--borde-c)',
       direction: card.reverse ? 'rtl' : 'ltr',
     }}>
       {/* foto */}
       <div style={{ direction:'ltr', position:'relative', aspectRatio:'3/4', overflow:'hidden',
-        boxShadow: card.reverse ? '-10px 10px 0 var(--crema3)' : '10px 10px 0 var(--crema3)' }}>
-        <Image src={card.img} alt={card.anyo} fill sizes="40vw"
+        boxShadow: card.reverse ? '-8px 8px 0 var(--crema3)' : '8px 8px 0 var(--crema3)' }}>
+        <Image src={card.img} alt={card.anyo} fill sizes="(max-width:768px) 90vw, 40vw"
           style={{ objectFit:'cover', objectPosition:'center top', filter:'sepia(0.15) contrast(1.06)' }} />
         <div style={{ position:'absolute',inset:0,
           background:'linear-gradient(to bottom,rgba(242,232,212,0.04) 0%,transparent 30%,transparent 70%,rgba(242,232,212,0.1) 100%)',
           pointerEvents:'none' }}/>
-        <span style={{ position:'absolute',top:0,left:0,width:'18px',height:'18px',
-          borderTop:'1px solid rgba(201,168,76,0.5)',borderLeft:'1px solid rgba(201,168,76,0.5)' }}/>
-        <span style={{ position:'absolute',bottom:0,right:0,width:'18px',height:'18px',
-          borderBottom:'1px solid rgba(201,168,76,0.5)',borderRight:'1px solid rgba(201,168,76,0.5)' }}/>
       </div>
 
       {/* texto */}
       <div style={{ direction:'ltr' }}>
-        <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.4em',
-          textTransform:'uppercase',color:'var(--oro)',display:'block',marginBottom:'2rem',opacity:0.7 }}>
+        <span style={{ fontFamily:'var(--mono)', fontSize:'0.52rem', letterSpacing:'0.4em',
+          textTransform:'uppercase', color:'var(--oro)', display:'block', marginBottom:'1.5rem', opacity:0.7 }}>
           {card.anyo}
         </span>
-        <h2 style={{ fontFamily:'var(--serif)',fontWeight:300,fontStyle:'italic',
-          fontSize:'clamp(1.9rem,3vw,3.2rem)',lineHeight:1.15,color:'var(--txt-crema)',marginBottom:'2rem' }}>
+        <h2 style={{ fontFamily:'var(--serif)', fontWeight:300, fontStyle:'italic',
+          fontSize:'clamp(1.6rem,2.5vw,2.8rem)', lineHeight:1.15, color:'var(--txt-crema)', marginBottom:'1.5rem' }}>
           {card.h2.replace(card.em, '')}
-          <em style={{ color:'var(--oro)',fontStyle:'normal' }}>{card.em}</em>
+          <em style={{ color:'var(--oro)', fontStyle:'normal' }}>{card.em}</em>
         </h2>
-        <p style={{ fontSize:'clamp(1rem,1.2vw,1.15rem)',lineHeight:1.9,color:'var(--txt-crema)',
-          borderLeft:'2px solid rgba(201,168,76,0.35)',paddingLeft:'1.5rem',
-          marginBottom:'2rem',opacity:0.8 }}>
+        <p style={{ fontSize:'clamp(0.95rem,1.1vw,1.1rem)', lineHeight:1.85, color:'var(--txt-crema)',
+          borderLeft:'2px solid rgba(201,168,76,0.35)', paddingLeft:'1.4rem',
+          marginBottom:'1.5rem', opacity:0.82 }}>
           {card.p}
         </p>
-        <p style={{ fontFamily:'var(--mono)',fontSize:'0.48rem',letterSpacing:'0.18em',
-          color:'var(--txt-crema)',opacity:0.35,lineHeight:2 }}>
+        <p style={{ fontFamily:'var(--mono)', fontSize:'0.48rem', letterSpacing:'0.18em',
+          color:'var(--txt-crema)', opacity:0.35, lineHeight:2 }}>
           {card.origen}
         </p>
       </div>
@@ -111,68 +107,70 @@ export default function Historia() {
   }, []);
 
   return (
-    <section id="historia" className="on-crema" style={{ padding:'5rem clamp(2rem,8vw,8rem) 0' }}>
+    <section id="historia" className="on-crema" style={{ padding:'4rem clamp(1.5rem,6vw,8rem) 0' }}>
 
-      {/* título sección */}
-      <div style={{ display:'flex',alignItems:'center',gap:'2rem',marginBottom:'4rem' }}>
-        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
-        <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.45em',
-          textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,whiteSpace:'nowrap' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:'2rem', marginBottom:'3rem' }}>
+        <div style={{ flex:1, height:'1px', background:'var(--borde-c)' }}/>
+        <span style={{ fontFamily:'var(--mono)', fontSize:'0.5rem', letterSpacing:'0.45em',
+          textTransform:'uppercase', color:'var(--txt-crema)', opacity:0.45, whiteSpace:'nowrap' }}>
           El origen
         </span>
-        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
+        <div style={{ flex:1, height:'1px', background:'var(--borde-c)' }}/>
       </div>
 
-      {/* 3 tarjetas foto+historia */}
       {CARDS.map((card, i) => <HistoriaCard key={i} card={card} index={i} />)}
 
-      {/* bolsos — después de las historias */}
-      <div ref={bolsosRef} className="reveal" style={{ padding:'4.5rem 0 5rem' }}>
-        <div style={{ display:'flex',alignItems:'center',gap:'2rem',marginBottom:'3rem' }}>
-          <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
-          <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.45em',
-            textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,whiteSpace:'nowrap' }}>
+      {/* bolsos */}
+      <div ref={bolsosRef} className="reveal" style={{ padding:'4rem 0 4.5rem' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'2rem', marginBottom:'2.5rem' }}>
+          <div style={{ flex:1, height:'1px', background:'var(--borde-c)' }}/>
+          <span style={{ fontFamily:'var(--mono)', fontSize:'0.5rem', letterSpacing:'0.45em',
+            textTransform:'uppercase', color:'var(--txt-crema)', opacity:0.45, whiteSpace:'nowrap' }}>
             Las piezas
           </span>
-          <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
+          <div style={{ flex:1, height:'1px', background:'var(--borde-c)' }}/>
         </div>
 
-        <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1.2rem' }}>
+        <div className="bolsos-grid" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'1rem' }}>
           {BOLSOS.map((b, i) => (
             <div key={i}>
-              <div style={{ position:'relative',aspectRatio:'3/4',overflow:'hidden',marginBottom:'0.8rem' }}>
-                <Image src={b.src} alt={b.label} fill sizes="25vw"
-                  style={{ objectFit:'cover',transition:'transform 0.6s ease' }}
+              <div style={{ position:'relative', aspectRatio:'3/4', overflow:'hidden', marginBottom:'0.6rem' }}>
+                <Image src={b.src} alt={b.label} fill sizes="(max-width:640px) 50vw, 25vw"
+                  style={{ objectFit:'cover', transition:'transform 0.6s ease' }}
                   onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform='scale(1.05)'}}
                   onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform='scale(1)'}} />
               </div>
-              <p style={{ fontFamily:'var(--mono)',fontSize:'0.46rem',letterSpacing:'0.18em',
-                textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,textAlign:'center',margin:0 }}>
+              <p style={{ fontFamily:'var(--mono)', fontSize:'0.44rem', letterSpacing:'0.16em',
+                textTransform:'uppercase', color:'var(--txt-crema)', opacity:0.42, textAlign:'center', margin:0 }}>
                 {b.label}
               </p>
             </div>
           ))}
         </div>
 
-        <div style={{ textAlign:'center',marginTop:'2.5rem' }}>
-          <a href="https://www.instagram.com/mamotisoficial" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily:'var(--mono)',fontSize:'0.56rem',letterSpacing:'0.35em',
-              textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,textDecoration:'none',
-              borderBottom:'1px solid var(--borde-c)',paddingBottom:'2px',transition:'opacity 0.3s' }}
-            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.opacity='0.85'}}
-            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.opacity='0.45'}}>
-            Ver todas en Instagram →
+        <div style={{ textAlign:'center', marginTop:'2.5rem' }}>
+          <a href="https://www.instagram.com/mamotis_/" target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily:'var(--mono)', fontSize:'0.56rem', letterSpacing:'0.35em',
+              textTransform:'uppercase', color:'var(--txt-crema)', opacity:0.5, textDecoration:'none',
+              borderBottom:'1px solid var(--borde-c)', paddingBottom:'2px', transition:'opacity 0.3s' }}
+            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.opacity='0.9'}}
+            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.opacity='0.5'}}>
+            Ver en Instagram →
           </a>
         </div>
       </div>
 
       <style>{`
         @media(max-width:768px){
-          .historia-card{ grid-template-columns:1fr !important; gap:3rem !important; direction:ltr !important; padding:3.5rem 0 !important; }
-          .historia-card > div:first-child { box-shadow:6px 6px 0 var(--crema3) !important; }
+          .historia-card {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            direction: ltr !important;
+            padding: 3rem 0 !important;
+          }
         }
         @media(max-width:640px){
-          .reveal.historia-card ~ .reveal > div { grid-template-columns:repeat(2,1fr) !important; }
+          .bolsos-grid { grid-template-columns: repeat(2,1fr) !important; }
         }
       `}</style>
     </section>
