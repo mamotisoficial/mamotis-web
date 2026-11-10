@@ -73,7 +73,7 @@ export default function PreviewColeccion() {
 
       {/* CTA */}
       <div style={{ width:'min(1320px,90vw)', margin:'36px auto 0', textAlign:'center' }}>
-        <Link href="https://instagram.com/mamotisoficial" target="_blank" style={{
+        <Link href="https://www.instagram.com/mamotis_/" target="_blank" style={{
           display:'inline-flex', alignItems:'center', gap:10,
           border:'1px solid rgba(160,120,48,0.5)', padding:'13px 28px',
           fontSize:9, letterSpacing:'0.22em', textTransform:'uppercase',

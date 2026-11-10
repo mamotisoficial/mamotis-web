@@ -38,7 +38,7 @@ export default function Footer() {
             </Link>
 
             {/* Instagram */}
-            <Link href="https://instagram.com/mamotisoficial" target="_blank"
+            <Link href="https://www.instagram.com/mamotis_/" target="_blank"
               aria-label="Instagram"
               style={{ color:'#4a3c26', transition:'color 0.2s' }}
               onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#c9a64c'}

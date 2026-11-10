@@ -27,7 +27,7 @@ export default function Instagram() {
               en Instagram.
             </h2>
           </div>
-          <Link href="https://instagram.com/mamotisoficial" target="_blank" style={{
+          <Link href="https://www.instagram.com/mamotis_/" target="_blank" style={{
             display:'inline-flex', alignItems:'center', gap:10,
             border:'1px solid rgba(201,168,76,0.4)', padding:'11px 18px',
             fontSize:9, letterSpacing:'0.2em', textTransform:'uppercase',
@@ -47,7 +47,7 @@ export default function Instagram() {
         <div style={{ display:'grid', gridTemplateColumns:'repeat(6,1fr)', gap:4 }}
           className="ig-grid">
           {POSTS.map((src, i) => (
-            <Link key={i} href="https://instagram.com/mamotisoficial" target="_blank"
+            <Link key={i} href="https://www.instagram.com/mamotis_/" target="_blank"
               style={{ display:'block', aspectRatio:'1', overflow:'hidden',
                 position:'relative', background:'#1a1410' }}
               className="ig-item">

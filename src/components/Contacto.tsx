@@ -50,7 +50,7 @@ export default function Contacto() {
             </svg>
             Encargar la tuya — WhatsApp
           </Link>
-          <Link href="https://instagram.com/mamotisoficial" target="_blank"
+          <Link href="https://www.instagram.com/mamotis_/" target="_blank"
             style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', gap:12,
               border:'1px solid rgba(201,168,76,0.35)', padding:'15px 24px',
               fontSize:9, letterSpacing:'0.24em', textTransform:'uppercase',
