@@ -2,137 +2,165 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 
-const FOTOS_VINTAGE = [
-  '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939d.jpg',
-  '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939e.jpg',
-  '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939f.jpg',
+const CARDS = [
+  {
+    anyo: 'c. 1960 — Década prodigiosa',
+    h2: 'Un abrigo comprado para toda la vida.',
+    em: 'para toda la vida.',
+    p: 'Las mujeres de los años sesenta lo sabían: la piel era la inversión definitiva. No se compraba un abrigo — se adquiría un legado. Se llevaba a la ópera, al paseo, a las cenas. Se cuidaba como se cuidan las cosas importantes.',
+    origen: 'Piel rescatada · Artesanía Madrid · Pieza única',
+    img: '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939d.jpg',
+    reverse: false,
+  },
+  {
+    anyo: 'c. 1967 — La herencia',
+    h2: 'Guardado en un armario lleno de historia.',
+    em: 'lleno de historia.',
+    p: 'Muchos de estos abrigos llevan décadas en el mismo lugar. La dueña original los dejó un día y nunca volvieron a usarse. Demasiado valiosos para tirar. Demasiado olvidados para usar. Cuando los encontramos, les damos voz.',
+    origen: 'Visón rescatado · Forro seda brocada · Madrid 2024',
+    img: '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939e.jpg',
+    reverse: true,
+  },
+  {
+    anyo: 'c. 1972 — La transformación',
+    h2: 'La misma piel. Otra vida.',
+    em: 'Otra vida.',
+    p: 'Nuestras artesanas transforman cada abrigo a mano, con respeto y lentitud. El resultado es un bolso que lleva dos historias dentro: la de quien lo llevó antes. Y la que tú escribirás.',
+    origen: 'Astracán persa · Jacquard turquesa · Artesanía Madrid',
+    img: '/fotos/1940s-Fashion-Forecast-Coats-New-York-Worlds-Fair-1939f.jpg',
+    reverse: false,
+  },
 ];
 
 const BOLSOS = [
   { src: '/bolsos/bolso-001.jpeg', label: 'Visón rescatado · Forro seda' },
   { src: '/bolsos/bolso-002.jpeg', label: 'Astracán persa · Jacquard' },
-  { src: '/bolsos/bolso-003.jpeg', label: 'Piel clásica · Artesanía Madrid' },
-  { src: '/bolsos/bolso-004.jpeg', label: 'Pieza única · Colección 2024' },
+  { src: '/bolsos/bolso-003.jpeg', label: 'Piel clásica · Madrid' },
+  { src: '/bolsos/bolso-004.jpeg', label: 'Pieza única · 2024' },
 ];
 
-export default function Historia() {
-  const ref = useRef<HTMLElement>(null);
+function HistoriaCard({ card, index }: { card: typeof CARDS[0], index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current; if (!el) return;
-    const items = el.querySelectorAll('.h-reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          (e.target as HTMLElement).style.opacity = '1';
-          (e.target as HTMLElement).style.transform = 'translateY(0)';
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    items.forEach(el => io.observe(el));
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add('visible'); io.disconnect(); }
+    }, { threshold: 0.08 });
+    io.observe(el);
     return () => io.disconnect();
   }, []);
 
   return (
-    <section id="historia" ref={ref} className="on-crema" style={{ padding: '5rem 0 0' }}>
-
-      {/* — TÍTULO — */}
-      <div style={{ display:'flex',alignItems:'center',gap:'2rem',marginBottom:'4rem', padding:'0 clamp(2rem,8vw,8rem)' }}>
-        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
-        <span style={{ fontFamily:'var(--mono)',fontSize:'0.52rem',letterSpacing:'0.45em',textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.5,whiteSpace:'nowrap' }}>El origen</span>
-        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
+    <div ref={ref} className="reveal historia-card" style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '5rem',
+      alignItems: 'center',
+      padding: '4.5rem 0',
+      borderBottom: '1px solid var(--borde-c)',
+      direction: card.reverse ? 'rtl' : 'ltr',
+    }}>
+      {/* foto */}
+      <div style={{ direction:'ltr', position:'relative', aspectRatio:'3/4', overflow:'hidden',
+        boxShadow: card.reverse ? '-10px 10px 0 var(--crema3)' : '10px 10px 0 var(--crema3)' }}>
+        <Image src={card.img} alt={card.anyo} fill sizes="40vw"
+          style={{ objectFit:'cover', objectPosition:'center top', filter:'sepia(0.15) contrast(1.06)' }} />
+        <div style={{ position:'absolute',inset:0,
+          background:'linear-gradient(to bottom,rgba(242,232,212,0.04) 0%,transparent 30%,transparent 70%,rgba(242,232,212,0.1) 100%)',
+          pointerEvents:'none' }}/>
+        <span style={{ position:'absolute',top:0,left:0,width:'18px',height:'18px',
+          borderTop:'1px solid rgba(201,168,76,0.5)',borderLeft:'1px solid rgba(201,168,76,0.5)' }}/>
+        <span style={{ position:'absolute',bottom:0,right:0,width:'18px',height:'18px',
+          borderBottom:'1px solid rgba(201,168,76,0.5)',borderRight:'1px solid rgba(201,168,76,0.5)' }}/>
       </div>
 
-      {/* — INTRO GRANDE — */}
-      <div className="h-reveal" style={{ padding:'0 clamp(2rem,8vw,8rem) 4rem', opacity:0, transform:'translateY(28px)', transition:'opacity 0.9s, transform 0.9s' }}>
+      {/* texto */}
+      <div style={{ direction:'ltr' }}>
+        <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.4em',
+          textTransform:'uppercase',color:'var(--oro)',display:'block',marginBottom:'2rem',opacity:0.7 }}>
+          {card.anyo}
+        </span>
         <h2 style={{ fontFamily:'var(--serif)',fontWeight:300,fontStyle:'italic',
-          fontSize:'clamp(2.4rem,4.5vw,5.5rem)',lineHeight:1.1,
-          color:'var(--txt-crema)',maxWidth:'18ch',marginBottom:'1.5rem' }}>
-          Un abrigo<br/>que <em style={{color:'var(--oro)',fontStyle:'normal'}}>esperaba</em><br/>ser bolso.
+          fontSize:'clamp(1.9rem,3vw,3.2rem)',lineHeight:1.15,color:'var(--txt-crema)',marginBottom:'2rem' }}>
+          {card.h2.replace(card.em, '')}
+          <em style={{ color:'var(--oro)',fontStyle:'normal' }}>{card.em}</em>
         </h2>
-        <p style={{ fontFamily:'var(--serif)',fontStyle:'italic',fontSize:'clamp(1.05rem,1.4vw,1.3rem)',
-          lineHeight:1.85,color:'var(--txt-crema2)',maxWidth:'52ch',opacity:0.8 }}>
-          Cada pieza fue un abrigo con historia. Nuestras artesanas madrileñas lo transforman a mano, sin prisa, sin cadenas de producción. El resultado lleva dos historias dentro.
+        <p style={{ fontSize:'clamp(1rem,1.2vw,1.15rem)',lineHeight:1.9,color:'var(--txt-crema)',
+          borderLeft:'2px solid rgba(201,168,76,0.35)',paddingLeft:'1.5rem',
+          marginBottom:'2rem',opacity:0.8 }}>
+          {card.p}
+        </p>
+        <p style={{ fontFamily:'var(--mono)',fontSize:'0.48rem',letterSpacing:'0.18em',
+          color:'var(--txt-crema)',opacity:0.35,lineHeight:2 }}>
+          {card.origen}
         </p>
       </div>
+    </div>
+  );
+}
 
-      {/* — FOTOS VINTAGE 3 COL — */}
-      <div className="h-reveal" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'0',marginBottom:'0',
-        opacity:0,transform:'translateY(28px)',transition:'opacity 0.9s 0.2s, transform 0.9s 0.2s' }}>
-        {FOTOS_VINTAGE.map((src, i) => (
-          <div key={i} style={{ position:'relative',aspectRatio:'2/3',overflow:'hidden' }}>
-            <Image src={src} alt="Vintage" fill sizes="33vw"
-              style={{ objectFit:'cover',objectPosition:'center top',filter:'sepia(0.2) contrast(1.05)' }} />
-            <div style={{ position:'absolute',inset:0,background:'linear-gradient(to bottom,transparent 60%,rgba(242,232,212,0.5))' }}/>
-            {i===1 && (
-              <div style={{ position:'absolute',bottom:'2rem',left:'50%',transform:'translateX(-50%)',
-                fontFamily:'var(--mono)',fontSize:'0.45rem',letterSpacing:'0.4em',textTransform:'uppercase',
-                color:'var(--txt-crema)',opacity:0.6,whiteSpace:'nowrap' }}>
-                Madrid · desde 1940
-              </div>
-            )}
-          </div>
-        ))}
+export default function Historia() {
+  const bolsosRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = bolsosRef.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add('visible'); io.disconnect(); }
+    }, { threshold: 0.1 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <section id="historia" className="on-crema" style={{ padding:'5rem clamp(2rem,8vw,8rem) 0' }}>
+
+      {/* título sección */}
+      <div style={{ display:'flex',alignItems:'center',gap:'2rem',marginBottom:'4rem' }}>
+        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
+        <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.45em',
+          textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,whiteSpace:'nowrap' }}>
+          El origen
+        </span>
+        <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
       </div>
 
-      {/* — SEPARADOR NEGRO — */}
-      <div className="on-negro" style={{ padding:'4rem clamp(2rem,8vw,8rem)', textAlign:'center' }}>
-        <p style={{ fontFamily:'var(--mono)',fontSize:'0.52rem',letterSpacing:'0.45em',textTransform:'uppercase',
-          color:'var(--oro)',opacity:0.6,marginBottom:'1.5rem' }}>El proceso</p>
-        <div style={{ display:'flex',justifyContent:'center',gap:'clamp(2rem,6vw,6rem)',flexWrap:'wrap' }}>
-          {['Rescate\nde pieles','Artesanía\nMadrid','Pieza única\nal mundo'].map((t,i) => (
-            <div key={i} style={{ textAlign:'center' }}>
-              <div style={{ fontFamily:'var(--serif)',fontStyle:'italic',
-                fontSize:'clamp(2.5rem,4vw,4.5rem)',color:'transparent',
-                WebkitTextStroke:'1px rgba(201,168,76,0.25)',lineHeight:1,marginBottom:'0.8rem' }}>
-                0{i+1}
-              </div>
-              <div style={{ fontFamily:'var(--serif)',fontStyle:'italic',
-                fontSize:'clamp(1.1rem,1.6vw,1.5rem)',color:'var(--oro)',lineHeight:1.3 }}>
-                {t.split('\n').map((l,j)=><span key={j} style={{display:'block'}}>{l}</span>)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* 3 tarjetas foto+historia */}
+      {CARDS.map((card, i) => <HistoriaCard key={i} card={card} index={i} />)}
 
-      {/* — BOLSOS — */}
-      <div className="on-crema" style={{ padding:'4rem clamp(2rem,8vw,8rem) 5rem' }}>
+      {/* bolsos — después de las historias */}
+      <div ref={bolsosRef} className="reveal" style={{ padding:'4.5rem 0 5rem' }}>
         <div style={{ display:'flex',alignItems:'center',gap:'2rem',marginBottom:'3rem' }}>
           <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
-          <span style={{ fontFamily:'var(--mono)',fontSize:'0.52rem',letterSpacing:'0.45em',
-            textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.5,whiteSpace:'nowrap' }}>
+          <span style={{ fontFamily:'var(--mono)',fontSize:'0.5rem',letterSpacing:'0.45em',
+            textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,whiteSpace:'nowrap' }}>
             Las piezas
           </span>
           <div style={{ flex:1,height:'1px',background:'var(--borde-c)' }}/>
         </div>
 
-        <div className="h-reveal" style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1.5rem',
-          opacity:0,transform:'translateY(28px)',transition:'opacity 0.9s 0.1s, transform 0.9s 0.1s' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1.2rem' }}>
           {BOLSOS.map((b, i) => (
             <div key={i}>
-              <div style={{ position:'relative',aspectRatio:'3/4',overflow:'hidden',marginBottom:'1rem' }}>
+              <div style={{ position:'relative',aspectRatio:'3/4',overflow:'hidden',marginBottom:'0.8rem' }}>
                 <Image src={b.src} alt={b.label} fill sizes="25vw"
-                  style={{ objectFit:'cover',objectPosition:'center',transition:'transform 0.7s ease' }}
-                  onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform='scale(1.04)'}}
+                  style={{ objectFit:'cover',transition:'transform 0.6s ease' }}
+                  onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform='scale(1.05)'}}
                   onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform='scale(1)'}} />
               </div>
-              <p style={{ fontFamily:'var(--mono)',fontSize:'0.48rem',letterSpacing:'0.2em',
-                textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.5,textAlign:'center' }}>
+              <p style={{ fontFamily:'var(--mono)',fontSize:'0.46rem',letterSpacing:'0.18em',
+                textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,textAlign:'center',margin:0 }}>
                 {b.label}
               </p>
             </div>
           ))}
         </div>
 
-        <div style={{ textAlign:'center',marginTop:'3rem' }}>
+        <div style={{ textAlign:'center',marginTop:'2.5rem' }}>
           <a href="https://www.instagram.com/mamotisoficial" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily:'var(--mono)',fontSize:'0.6rem',letterSpacing:'0.4em',textTransform:'uppercase',
-              color:'var(--txt-crema)',opacity:0.5,textDecoration:'none',
-              borderBottom:'1px solid var(--borde-c)',paddingBottom:'3px',
-              transition:'opacity 0.3s' }}
-            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.opacity='0.9'}}
-            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.opacity='0.5'}}>
+            style={{ fontFamily:'var(--mono)',fontSize:'0.56rem',letterSpacing:'0.35em',
+              textTransform:'uppercase',color:'var(--txt-crema)',opacity:0.45,textDecoration:'none',
+              borderBottom:'1px solid var(--borde-c)',paddingBottom:'2px',transition:'opacity 0.3s' }}
+            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.opacity='0.85'}}
+            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.opacity='0.45'}}>
             Ver todas en Instagram →
           </a>
         </div>
@@ -140,8 +168,11 @@ export default function Historia() {
 
       <style>{`
         @media(max-width:768px){
-          .historia-vintage-grid { grid-template-columns: 1fr !important; }
-          .historia-bolsos-grid { grid-template-columns: repeat(2,1fr) !important; }
+          .historia-card{ grid-template-columns:1fr !important; gap:3rem !important; direction:ltr !important; padding:3.5rem 0 !important; }
+          .historia-card > div:first-child { box-shadow:6px 6px 0 var(--crema3) !important; }
+        }
+        @media(max-width:640px){
+          .reveal.historia-card ~ .reveal > div { grid-template-columns:repeat(2,1fr) !important; }
         }
       `}</style>
     </section>
