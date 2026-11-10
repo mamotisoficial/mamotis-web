@@ -5,6 +5,7 @@ import Historia from '@/components/Historia';
 import Pilares from '@/components/Pilares';
 import Cita from '@/components/Cita';
 import PreviewColeccion from '@/components/PreviewColeccion';
+import InstagramFeed from '@/components/InstagramFeed';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <Historia />
       <Pilares />
       <Cita />
+      <InstagramFeed />
       <PreviewColeccion />
       <Footer />
     </main>

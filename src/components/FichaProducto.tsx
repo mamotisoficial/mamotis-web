@@ -4,7 +4,7 @@ import { Producto } from '@/data/productos';
 
 export default function FichaProducto({ producto: p }: { producto: Producto }) {
   const msg = encodeURIComponent(`Hola, me interesa el bolso ${p.nombre} (Nº ${p.num}). Quiero saber más.`);
-  const waUrl = `https://wa.me/34600000000?text=${msg}`;
+  const waUrl = `https://wa.me/34605764097?text=${msg}`;
   const attrs = [
     { label: 'Material', value: p.material },
     { label: 'Forro interior', value: p.forro },
