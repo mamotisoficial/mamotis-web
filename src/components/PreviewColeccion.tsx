@@ -98,7 +98,6 @@ export default function PreviewColeccion() {
                 <span style={{
                   fontFamily:'var(--sans)', fontSize:8, letterSpacing:'0.22em',
                   textTransform:'uppercase', color:'rgba(255,255,255,0)',
-                  transition:'color 0.3s ease',
                   background:'rgba(0,0,0,0.0)',
                   padding:'7px 14px',
                   border:'1px solid rgba(255,255,255,0)',
