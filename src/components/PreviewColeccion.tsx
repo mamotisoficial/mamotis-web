@@ -34,6 +34,7 @@ export default function PreviewColeccion() {
   const ITEM_W = 268;
 
   const [selected, setSelected] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const half = BOLSOS.length * ITEM_W;
@@ -115,6 +116,9 @@ export default function PreviewColeccion() {
 
       {/* CTA */}
       <div className='cta-row' style={{ width:'min(1320px,90vw)', margin:'36px auto 0', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'16px' }}>
+        <button onClick={() => setShowAll(v => !v)} className="ver-todos-btn">
+          {showAll ? 'Ocultar' : 'Ver toda la colección'}
+        </button>
         <Link href="https://wa.me/34605764097" target="_blank" className="coleccion-cta">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none"
             stroke="currentColor" strokeWidth="1.5">
@@ -139,6 +143,22 @@ export default function PreviewColeccion() {
           </Link>
         </div>
       </div>
+
+      {/* Ver todos grid */}
+      {showAll && (
+        <div style={{ width:'min(1320px,90vw)', margin:'40px auto 0',
+          display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:12 }}>
+          {BOLSOS.map((src, i) => (
+            <button key={src} onClick={() => { setSelected(i); setShowAll(false); }}
+              style={{ position:'relative', aspectRatio:'1', overflow:'hidden',
+                border:'none', cursor:'pointer', padding:0, background:'#e8e0d0' }}>
+              <Image src={src} alt={"Bolso MAMOTIS " + (i+1)} fill
+                style={{ objectFit:'cover', transition:'transform 0.4s ease' }}
+                sizes="220px" />
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Modal lightbox */}
       {selected !== null && (
@@ -202,6 +222,21 @@ export default function PreviewColeccion() {
 
       <style>{`
         @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        .ver-todos-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-family: var(--sans);
+          font-size: 10px;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #9a7840;
+          opacity: 0.8;
+          transition: opacity 0.2s;
+          padding: 4px 0;
+          margin-bottom: 4px;
+        }
+        .ver-todos-btn:hover { opacity: 1; }
         .social-icon {
           color: #9a7840;
           opacity: 0.75;
