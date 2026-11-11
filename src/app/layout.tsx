@@ -18,7 +18,28 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "MAMOTIS — Una segunda vida. Una pieza única.",
   description: "MAMOTIS transforma abrigos vintage en bolsos artesanales únicos. Cada pieza tiene una historia anterior y otra por escribir.",
-  themeColor: "#080706",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "MAMOTIS — Una segunda vida. Una pieza única.",
+    description: "Bolsos artesanales únicos creados a partir de abrigos vintage de piel.",
+    url: "https://mamotiss.com",
+    siteName: "MAMOTIS",
+    images: [{ url: "https://mamotiss.com/og-image.jpg", width: 1200, height: 630, alt: "MAMOTIS" }],
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MAMOTIS — Una segunda vida. Una pieza única.",
+    description: "Bolsos artesanales únicos creados a partir de abrigos vintage de piel.",
+    images: ["https://mamotiss.com/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
