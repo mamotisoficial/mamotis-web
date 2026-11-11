@@ -20,7 +20,7 @@ export default function Footer() {
             </div>
             <span style={{ fontFamily:'var(--sans)', fontSize:10,
               letterSpacing:'0.18em', color:'#5a4a30', textTransform:'uppercase' }}>
-              mamotis.es
+              mamotiss.com
             </span>
           </div>
 
