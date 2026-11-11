@@ -27,7 +27,7 @@ export default function Footer() {
           {/* Iconos sociales */}
           <div style={{ display:'flex', alignItems:'center', gap:20 }}>
             {/* TikTok */}
-            <Link href="https://tiktok.com/@mamotisoficial" target="_blank"
+            <Link href="https://www.tiktok.com/@mamotis_/" target="_blank"
               aria-label="TikTok"
               style={{ color:'#4a3c26', transition:'color 0.2s' }}
               onMouseEnter={e=>(e.currentTarget as HTMLElement).style.color='#c9a64c'}
