@@ -18,6 +18,18 @@ const BOLSOS = [
   '/bolsos/012.jpeg',
   '/bolsos/013.jpeg',
   '/bolsos/014.jpeg',
+  '/bolsos/015.jpeg',
+  '/bolsos/016.jpeg',
+  '/bolsos/017.jpeg',
+  '/bolsos/018.jpeg',
+  '/bolsos/019.jpeg',
+  '/bolsos/020.jpeg',
+  '/bolsos/021.jpeg',
+  '/bolsos/022.jpeg',
+  '/bolsos/023.jpeg',
+  '/bolsos/024.jpeg',
+  '/bolsos/025.jpeg',
+  '/bolsos/026.jpeg',
 ];
 
 const BASE_URL = 'https://mamotis-web.vercel.app';
