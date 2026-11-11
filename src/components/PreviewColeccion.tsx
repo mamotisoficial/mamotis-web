@@ -114,7 +114,7 @@ export default function PreviewColeccion() {
       </div>
 
       {/* CTA */}
-      <div style={{ width:'min(1320px,90vw)', margin:'36px auto 0', display:'flex', alignItems:'center', justifyContent:'center', gap:'24px' }}>
+      <div className='cta-row' style={{ width:'min(1320px,90vw)', margin:'36px auto 0', display:'flex', alignItems:'center', justifyContent:'center', gap:'24px' }}>
         {/* Instagram */}
         <Link href="https://www.instagram.com/mamotis_official/" target="_blank" className="social-icon" aria-label="Instagram">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -208,6 +208,17 @@ export default function PreviewColeccion() {
           transition: opacity 0.2s, color 0.2s;
           display: flex;
           align-items: center;
+        }
+        @media (max-width: 500px) {
+          .cta-row {
+            flex-wrap: wrap;
+            gap: 16px;
+          }
+          .coleccion-cta {
+            font-size: 8px;
+            padding: 12px 18px;
+            letter-spacing: 0.22em;
+          }
         }
         .social-icon:hover {
           opacity: 1;
