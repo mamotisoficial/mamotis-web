@@ -14,7 +14,7 @@ export default function Privacidad() {
           <strong style={{ color:'#241b12' }}>Soluciones de Artesanos para Capilares y Estética, S.L.</strong><br/>
           CIF: B88427463<br/>
           C/ López de Hoyos, 66, 28002, Madrid<br/>
-          Email: hola@mamotis.es
+          Email: mamotis.oficial@gmail.com
         </p>
 
         <h2 style={{ fontFamily:'var(--display)', fontSize:20, fontWeight:400,
@@ -53,7 +53,7 @@ export default function Privacidad() {
           color:'#241b12', margin:'0 0 10px' }}>6. Tus derechos</h2>
         <p style={{ fontSize:15, lineHeight:1.9, margin:'0 0 36px' }}>
           Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición,
-          limitación del tratamiento y portabilidad enviando un correo a hola@mamotis.es.
+          limitación del tratamiento y portabilidad enviando un correo a mamotis.oficial@gmail.com.
           También tienes derecho a presentar una reclamación ante la Agencia Española de
           Protección de Datos (www.aepd.es).
         </p>

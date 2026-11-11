@@ -17,14 +17,14 @@ export default function AvisoLegal() {
           <strong style={{ color:'#241b12' }}>Soluciones de Artesanos para Capilares y Estética, S.L.</strong><br/>
           CIF: B88427463<br/>
           Domicilio social: C/ López de Hoyos, 66, 28002, Madrid<br/>
-          Email: hola@mamotis.es<br/>
-          Web: mamotis.es
+          Email: mamotis.oficial@gmail.com<br/>
+          Web: mamotiss.com
         </p>
 
         <h2 style={{ fontFamily:'var(--display)', fontSize:20, fontWeight:400,
           color:'#241b12', margin:'0 0 10px' }}>2. Objeto</h2>
         <p style={{ fontSize:15, lineHeight:1.9, margin:'0 0 36px' }}>
-          El presente Aviso Legal regula el acceso y uso del sitio web mamotis.es, titularidad de
+          El presente Aviso Legal regula el acceso y uso del sitio web mamotiss.com, titularidad de
           Soluciones de Artesanos para Capilares y Estética, S.L., a través del cual se ofrece
           información sobre la marca MAMOTIS y sus productos artesanales.
         </p>

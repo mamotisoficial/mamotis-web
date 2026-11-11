@@ -55,7 +55,7 @@ export default function Cookies() {
         <p style={{ fontSize:15, lineHeight:1.9, margin:'0 0 36px' }}>
           <strong style={{ color:'#241b12' }}>Soluciones de Artesanos para Capilares y Estética, S.L.</strong><br/>
           CIF: B88427463 · C/ López de Hoyos, 66, 28002, Madrid<br/>
-          Email: hola@mamotis.es
+          Email: mamotis.oficial@gmail.com
         </p>
 
         <h2 style={{ fontFamily:'var(--display)', fontSize:20, fontWeight:400,
