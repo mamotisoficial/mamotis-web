@@ -71,7 +71,7 @@ export default function Pilares() {
         </div>
       </div>
       <style>{`
-        @media(max-width:720px){
+        @media(max-width:760px){
           .pilares-grid{grid-template-columns:1fr!important;}
           .pilar{border-right:none!important;border-bottom:1px solid rgba(201,168,76,0.12);padding:32px 24px!important;}
           .pilar:last-child{border-bottom:none!important;}

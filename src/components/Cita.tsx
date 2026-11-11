@@ -44,7 +44,7 @@ export default function Cita() {
         </div>
       </div>
       <style>{`
-        @media(max-width:720px){
+        @media(max-width:860px){
           .cita-grid{grid-template-columns:1fr!important;}
           .cita-grid>div:first-child{min-height:240px!important;}
         }

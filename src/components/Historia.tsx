@@ -89,10 +89,10 @@ export default function Historia() {
         </div>
       ))}
       <style>{`
-        @media(max-width:720px){
+        @media(max-width:860px){
           .historia-row{grid-template-columns:1fr!important; min-height:auto!important;}
           .historia-row>div{order:unset!important;}
-          .historia-foto-col{min-height:260px!important;}
+          .historia-foto-col{min-height:320px!important;}
         }
       `}</style>
     </section>

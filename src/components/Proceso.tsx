@@ -50,8 +50,8 @@ export default function Proceso() {
         </div>
       </div>
       <style>{`
-        @media(max-width:720px){
-          .proceso-grid{grid-template-columns:1fr!important; gap:12px!important;}
+        @media(max-width:860px){
+          .proceso-grid{grid-template-columns:1fr!important; gap:16px!important; max-width:520px; margin:0 auto;}
         }
       `}</style>
     </section>
