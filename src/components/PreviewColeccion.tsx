@@ -150,11 +150,30 @@ export default function PreviewColeccion() {
           display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:12 }}>
           {BOLSOS.map((src, i) => (
             <button key={src} onClick={() => { setSelected(i); setShowAll(false); }}
-              style={{ position:'relative', aspectRatio:'1', overflow:'hidden',
-                border:'none', cursor:'pointer', padding:0, background:'#e8e0d0' }}>
+              className="grid-card"
+              style={{ position:'relative', paddingBottom:'100%', overflow:'hidden',
+                border:'none', cursor:'pointer', background:'#e8e0d0', borderRadius:2 }}>
               <Image src={src} alt={"Bolso MAMOTIS " + (i+1)} fill
                 style={{ objectFit:'cover', transition:'transform 0.4s ease' }}
-                sizes="220px" />
+                sizes="(max-width:600px) 45vw, (max-width:900px) 30vw, 220px" />
+              <div className="grid-hover-overlay" style={{
+                position:'absolute', inset:0,
+                background:'rgba(9,7,5,0)',
+                transition:'background 0.3s ease',
+                display:'flex', alignItems:'flex-end', justifyContent:'center',
+                paddingBottom:14,
+              }}>
+                <span className="grid-hover-label" style={{
+                  fontFamily:'var(--sans)', fontSize:7, letterSpacing:'0.22em',
+                  textTransform:'uppercase', color:'rgba(255,255,255,0)',
+                  padding:'6px 12px',
+                  border:'1px solid rgba(255,255,255,0)',
+                  transition:'all 0.3s ease',
+                  whiteSpace:'nowrap',
+                }}>
+                  Preguntar por esta pieza
+                </span>
+              </div>
             </button>
           ))}
         </div>
@@ -287,6 +306,13 @@ export default function PreviewColeccion() {
           background: rgba(9,7,5,0.45) !important;
         }
         button:hover .card-hover-overlay span {
+          color: rgba(255,255,255,0.9) !important;
+          border-color: rgba(255,255,255,0.4) !important;
+        }
+        .grid-card:hover .grid-hover-overlay {
+          background: rgba(9,7,5,0.45) !important;
+        }
+        .grid-card:hover .grid-hover-label {
           color: rgba(255,255,255,0.9) !important;
           border-color: rgba(255,255,255,0.4) !important;
         }
