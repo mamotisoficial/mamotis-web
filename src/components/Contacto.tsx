@@ -6,9 +6,9 @@ export default function Contacto() {
     <section id="contacto" style={{ position:'relative', overflow:'hidden', minHeight:560 }}>
       <div style={{ position:'absolute', inset:0 }}>
         <Image src="/proceso/proceso-02.jpg" alt="Artesanía MAMOTIS" fill
-          style={{ objectFit:'cover', objectPosition:'center', filter:'brightness(0.28)' }} />
+          style={{ objectFit:'cover', objectPosition:'center', filter:'brightness(0.42)' }} />
         <div style={{ position:'absolute', inset:0,
-          background:'linear-gradient(135deg, rgba(5,3,2,0.90) 0%, rgba(15,8,4,0.55) 100%)' }} />
+          background:'linear-gradient(135deg, rgba(5,3,2,0.68) 0%, rgba(15,8,4,0.30) 100%)' }} />
       </div>
 
       <div style={{ position:'relative', zIndex:1,
