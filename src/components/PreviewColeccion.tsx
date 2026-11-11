@@ -115,12 +115,7 @@ export default function PreviewColeccion() {
 
       {/* CTA */}
       <div style={{ width:'min(1320px,90vw)', margin:'36px auto 0', textAlign:'center' }}>
-        <Link href="https://wa.me/34605764097" target="_blank" style={{
-          display:'inline-flex', alignItems:'center', gap:10,
-          border:'1px solid rgba(160,120,48,0.5)', padding:'13px 28px',
-          fontSize:9, letterSpacing:'0.22em', textTransform:'uppercase',
-          color:'#7a5c28', fontFamily:'var(--sans)', textDecoration:'none',
-        }}>
+        <Link href="https://wa.me/34605764097" target="_blank" className="coleccion-cta">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none"
             stroke="currentColor" strokeWidth="1.5">
             <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
@@ -191,6 +186,28 @@ export default function PreviewColeccion() {
 
       <style>{`
         @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        .coleccion-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          border: 1.5px solid #a07830;
+          padding: 14px 28px;
+          font-size: 9px;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #7a5520;
+          font-family: var(--sans);
+          font-weight: 400;
+          text-decoration: none;
+          background: rgba(232,224,212,0.0);
+          transition: background 0.25s, color 0.25s, border-color 0.25s;
+          white-space: nowrap;
+        }
+        .coleccion-cta:hover {
+          background: rgba(160,120,48,0.12);
+          color: #5a3d10;
+          border-color: #a07830;
+        }
         button:hover .card-hover-overlay {
           background: rgba(9,7,5,0.45) !important;
         }
