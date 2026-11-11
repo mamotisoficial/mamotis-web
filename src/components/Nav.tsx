@@ -30,7 +30,7 @@ export default function Nav() {
         }}>
 
           {/* Solo el huevo */}
-          <Link href="/" style={{ display:'flex', alignItems:'center', textDecoration:'none' }}>
+          <Link href="#inicio" style={{ display:'flex', alignItems:'center', textDecoration:'none' }}>
             <div style={{ width: 26, height: 32, position:'relative', flexShrink: 0 }}>
               <Image src="/marca/logo-huevo-nuevo.png" alt="MAMOTIS" fill
                 style={{ objectFit:'contain' }} priority />
