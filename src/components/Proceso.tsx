@@ -24,12 +24,12 @@ export default function Proceso() {
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }} className="proceso-grid">
           {CARDS.map((c) => (
-            <article key={c.n} style={{ overflow:'hidden', background:'#1a1108', borderRadius:2 }}>
+            <article key={c.n} style={{ overflow:'hidden', background:'#2a1f10', borderRadius:2 }}>
               <div style={{ position:'relative', width:'100%', height:260 }}>
                 <Image src={c.img} alt={c.title} fill
-                  style={{ objectFit:'cover', filter:'brightness(0.52)' }} />
+                  style={{ objectFit:'cover', filter:'brightness(0.72)' }} />
                 <div style={{ position:'absolute', inset:'30% 0 0',
-                  background:'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 80%, rgba(0,0,0,1) 100%)' }} />
+                  background:'linear-gradient(to bottom, transparent 50%, rgba(26,15,5,0.80) 80%, rgba(26,15,5,0.95) 100%)' }} />
               </div>
               <div style={{ padding:'18px 24px 28px' }}>
                 <div style={{ fontFamily:'var(--serif)', fontSize:48, fontStyle:'italic',
