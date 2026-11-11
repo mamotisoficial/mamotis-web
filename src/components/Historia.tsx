@@ -93,10 +93,10 @@ export default function Historia() {
       {/* FILA 2 — El presente: foto izquierda (carrusel), texto derecha */}
       <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:560 }}
         className="historia-row">
-        <div style={{ order:1, overflow:'hidden' }} className="historia-foto-col">
+        <div style={{ order:1, overflow:'hidden' }} className="historia-foto-col presente-foto">
           <CarruselBolso />
         </div>
-        <div style={{
+        <div className="presente-texto" style={{
           order:2,
           display:'flex', flexDirection:'column', justifyContent:'center',
           padding:'clamp(44px,6vw,88px) clamp(32px,5vw,88px)',
@@ -130,8 +130,9 @@ export default function Historia() {
       <style>{`
         @media(max-width:860px){
           .historia-row{grid-template-columns:1fr!important; min-height:auto!important;}
-          .historia-row>div{order:unset!important;}
           .historia-foto-col{min-height:320px!important;}
+          .presente-foto{order:3!important;}
+          .presente-texto{order:2!important;}
         }
       `}</style>
     </section>
