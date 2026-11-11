@@ -10,8 +10,8 @@ export default function Hero() {
       overflow: 'hidden',
       background: '#e8e0d4',
     }}>
-      {/* Imagen principal */}
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '1755 / 896' }}>
+      {/* Desktop: ratio natural de la imagen */}
+      <div className="hero-img-desktop" style={{ position: 'relative', width: '100%', aspectRatio: '1755 / 896' }}>
         <Image
           src="/fotos/Hero copia.png"
           alt="Un bolso artesano tiene un nombre — MAMOTIS"
@@ -21,7 +21,29 @@ export default function Hero() {
         />
       </div>
 
-      {/* Botón — absoluto en desktop, estático bajo la imagen en móvil */}
+      {/* Móvil: recortamos la imagen para que tenga más altura */}
+      <div className="hero-img-mobile" style={{ display:'none', position:'relative', width:'100%', height:460, overflow:'hidden' }}>
+        <Image
+          src="/fotos/Hero copia.png"
+          alt="Un bolso artesano tiene un nombre — MAMOTIS"
+          fill
+          style={{ objectFit:'cover', objectPosition:'center top' }}
+          priority
+        />
+        {/* Degradado suave abajo para que el botón flote bien */}
+        <div style={{ position:'absolute', inset:0,
+          background:'linear-gradient(to bottom, transparent 55%, rgba(232,224,212,0.7) 85%, rgba(232,224,212,0.95) 100%)' }} />
+
+        {/* Botón encima de la foto en móvil */}
+        <div style={{ position:'absolute', bottom:28, left:0, right:0,
+          display:'flex', justifyContent:'center', zIndex:2 }}>
+          <Link href="#coleccion" className="hero-cta">
+            Descubrir colección →
+          </Link>
+        </div>
+      </div>
+
+      {/* Botón desktop — superpuesto sobre la foto */}
       <div className="hero-cta-wrap">
         <Link href="#coleccion" className="hero-cta">
           Descubrir colección →
@@ -29,14 +51,6 @@ export default function Hero() {
       </div>
 
       <style>{`
-        /* Desktop: superpuesto sobre la foto, alineado con el texto izquierdo */
-        .hero-cta-wrap {
-          position: absolute;
-          bottom: 8%;
-          left: 25%;
-          transform: translateX(-50%);
-          z-index: 2;
-        }
         .hero-cta {
           display: inline-flex;
           align-items: center;
@@ -59,21 +73,18 @@ export default function Hero() {
           background: rgba(160,120,48,0.12);
           color: #5a3d10;
         }
+        .hero-cta-wrap {
+          position: absolute;
+          bottom: 8%;
+          left: 25%;
+          transform: translateX(-50%);
+          z-index: 2;
+        }
 
-        /* Móvil: fuera del flujo absoluto, centrado debajo de la imagen */
         @media (max-width: 600px) {
-          .hero-cta-wrap {
-            position: static;
-            transform: none;
-            display: flex;
-            justify-content: center;
-            padding: 20px 24px 28px;
-            background: #e8e0d4;
-          }
-          .hero-cta {
-            font-size: 8px;
-            padding: 12px 24px;
-          }
+          .hero-img-desktop { display: none !important; }
+          .hero-img-mobile  { display: block !important; }
+          .hero-cta-wrap    { display: none !important; }
         }
       `}</style>
     </section>
