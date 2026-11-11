@@ -114,7 +114,7 @@ export default function PreviewColeccion() {
       </div>
 
       {/* CTA */}
-      <div className='cta-row' style={{ width:'min(1320px,90vw)', margin:'36px auto 0', display:'flex', alignItems:'center', justifyContent:'center', gap:'24px' }}>
+      <div className='cta-row' style={{ width:'min(1320px,90vw)', margin:'36px auto 0', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'16px' }}>
         <Link href="https://wa.me/34605764097" target="_blank" className="coleccion-cta">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none"
             stroke="currentColor" strokeWidth="1.5">
