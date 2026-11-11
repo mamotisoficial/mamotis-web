@@ -21,6 +21,8 @@ const BOLSOS = [
   '/bolsos/bolso-014.jpeg',
 ];
 
+const BASE_URL = 'https://mamotiss.com';
+
 const DOUBLE = [...BOLSOS, ...BOLSOS];
 
 export default function PreviewColeccion() {
@@ -60,7 +62,7 @@ export default function PreviewColeccion() {
   };
 
   const waUrl = selected !== null
-    ? `https://wa.me/34605764097?text=${encodeURIComponent(`Hola, me interesa la pieza nº${selected + 1} que vi en la web de MAMOTIS. ¿Está disponible?`)}`
+    ? `https://wa.me/34605764097?text=${encodeURIComponent(`Hola! Vi este bolso en vuestra web y me interesa saber si está disponible:\n${BASE_URL}${BOLSOS[selected]}`)}`
     : '#';
 
   return (
