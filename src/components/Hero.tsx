@@ -10,70 +10,46 @@ export default function Hero() {
       overflow: 'hidden',
       background: '#e8e0d4',
     }}>
-      {/* ── DESKTOP: imagen completa con ratio natural ── */}
-      <div className="hero-desktop" style={{ position:'relative', width:'100%', aspectRatio:'1755/896' }}>
+      {/* La imagen mantiene su ratio natural en todos los dispositivos */}
+      <div style={{ position: 'relative', width: '100%', aspectRatio: '1755 / 896' }}>
         <Image
           src="/fotos/Hero copia.png"
           alt="Un bolso artesano tiene un nombre — MAMOTIS"
-          fill style={{ objectFit:'contain' }} priority
+          fill
+          style={{ objectFit: 'contain' }}
+          priority
         />
       </div>
+
+      {/* Botón desktop — flotando sobre la foto */}
       <div className="hero-cta-wrap">
-        <Link href="#coleccion" className="hero-cta">Descubrir colección →</Link>
+        <Link href="#coleccion" className="hero-cta">
+          Descubrir colección →
+        </Link>
       </div>
 
-      {/* ── MÓVIL: dos columnas — texto izquierda / bolso derecha ── */}
-      <div className="hero-mobile">
-        {/* Columna texto */}
-        <div style={{
-          flex:'0 0 48%', display:'flex', flexDirection:'column',
-          justifyContent:'center', padding:'40px 0 40px 24px',
-          background:'#e8e0d4', zIndex:1,
-        }}>
-          <div style={{ fontSize:7, letterSpacing:'0.3em', textTransform:'uppercase',
-            color:'#a07830', fontFamily:'var(--sans)', marginBottom:16, lineHeight:1.6 }}>
-            Un bolso artesano<br/>tiene un nombre
-          </div>
-          <div style={{ fontFamily:'var(--display)', fontSize:44, fontWeight:400,
-            lineHeight:1.0, color:'#241b12' }}>MAM</div>
-          <div style={{ fontFamily:'var(--serif)', fontSize:44, fontWeight:300,
-            fontStyle:'italic', lineHeight:1.0, color:'#241b12', marginBottom:32 }}>OTIS</div>
-          <Link href="#coleccion" className="hero-cta">Descubrir →</Link>
-        </div>
-
-        {/* Columna foto — recorta solo el bolso */}
-        <div style={{ flex:'0 0 52%', position:'relative', overflow:'hidden' }}>
-          <Image
-            src="/fotos/Hero copia.png"
-            alt="Bolso MAMOTIS"
-            fill
-            style={{ objectFit:'cover', objectPosition:'72% center' }}
-            priority
-          />
-        </div>
+      {/* Botón móvil — debajo de la imagen, centrado */}
+      <div className="hero-cta-mobile">
+        <Link href="#coleccion" className="hero-cta">
+          Descubrir colección →
+        </Link>
       </div>
 
       <style>{`
-        .hero-mobile {
-          display: none;
-          flex-direction: row;
-          width: 100%;
-          min-height: 460px;
-        }
         .hero-cta {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
           border: 1.5px solid #a07830;
-          padding: 12px 20px;
-          font-size: 8px;
-          letter-spacing: 0.28em;
+          padding: 14px 28px;
+          font-size: 9px;
+          letter-spacing: 0.3em;
           text-transform: uppercase;
           color: #7a5520;
           font-family: var(--sans);
           font-weight: 400;
           text-decoration: none;
-          background: rgba(232,224,212,0.6);
+          background: rgba(232,224,212,0.65);
           backdrop-filter: blur(4px);
           transition: background 0.25s, color 0.25s;
           white-space: nowrap;
@@ -82,6 +58,8 @@ export default function Hero() {
           background: rgba(160,120,48,0.12);
           color: #5a3d10;
         }
+
+        /* Desktop: botón sobre la foto */
         .hero-cta-wrap {
           position: absolute;
           bottom: 8%;
@@ -89,10 +67,23 @@ export default function Hero() {
           transform: translateX(-50%);
           z-index: 2;
         }
+        .hero-cta-mobile { display: none; }
+
+        /* Móvil: imagen completa + botón debajo en franja crema */
         @media (max-width: 600px) {
-          .hero-desktop  { display: none !important; }
-          .hero-cta-wrap { display: none !important; }
-          .hero-mobile   { display: flex !important; }
+          .hero-cta-wrap   { display: none !important; }
+          .hero-cta-mobile {
+            display: flex;
+            justify-content: center;
+            padding: 22px 24px 30px;
+            background: #e8e0d4;
+          }
+          .hero-cta-mobile .hero-cta {
+            width: 100%;
+            justify-content: center;
+            font-size: 8px;
+            padding: 15px 20px;
+          }
         }
       `}</style>
     </section>
