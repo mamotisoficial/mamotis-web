@@ -21,7 +21,7 @@ const BOLSOS = [
   '/bolsos/bolso-014.jpeg',
 ];
 
-const BASE_URL = 'https://mamotiss.com';
+const BASE_URL = 'https://mamotis-web.vercel.app';
 
 const DOUBLE = [...BOLSOS, ...BOLSOS];
 
